@@ -15,12 +15,10 @@
     "url": "https://github.com/git-flash/git-flash/issues"
   },
   "homepage": "https://github.com/git-flash/git-flash#readme",
-  "scripts": {
-    "semantic-release": "semantic-release"
-  },
   "devDependencies": {
     "cz-conventional-changelog": "3.1.0",
-    "semantic-release": "^17.0.4"
+    "husky": "^4.2.3",
+    "release-it": "^12.6.2"
   },
   "config": {
     "commitizen": {
@@ -32,7 +30,7 @@
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
-  "dependencies": {
-    "husky": "^4.2.3"
+  "scripts": {
+    "release": "release-it"
   }
 }
