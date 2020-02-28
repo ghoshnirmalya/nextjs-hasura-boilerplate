@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import Head from 'next/head'
 
+import withApollo from '../lib/with-apollo'
 import Page from '../components/index'
 
 const IndexPage = () => {
@@ -14,4 +15,4 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default withApollo(IndexPage)
