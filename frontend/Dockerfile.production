@@ -1,0 +1,19 @@
+FROM mhart/alpine-node:11.1.0
+
+RUN mkdir /frontend-app
+
+WORKDIR /frontend-app
+
+RUN apk update && apk upgrade && apk add --no-cache git
+
+COPY package.json /frontend-app/package.json
+
+RUN yarn install
+
+COPY . /frontend-app/
+
+RUN yarn build
+
+EXPOSE 3000
+
+CMD ["yarn", "start"]

@@ -1,0 +1,38 @@
+{
+  "name": "git-flash",
+  "version": "0.0.0-development",
+  "description": "Tool to monitor feedback from QA",
+  "keywords": [
+    "feedback"
+  ],
+  "author": "Nirmalya Ghosh (nirmalya.email@gmail.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/git-flash/git-flash.git"
+  },
+  "bugs": {
+    "url": "https://github.com/git-flash/git-flash/issues"
+  },
+  "homepage": "https://github.com/git-flash/git-flash#readme",
+  "scripts": {
+    "semantic-release": "semantic-release"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "3.1.0",
+    "semantic-release": "^17.0.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "dependencies": {
+    "husky": "^4.2.3"
+  }
+}

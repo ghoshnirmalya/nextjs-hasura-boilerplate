@@ -1,0 +1,3 @@
+- args:
+    sql: DROP TABLE "public"."role"
+  type: run_sql

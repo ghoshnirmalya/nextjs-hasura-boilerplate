@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/node_modules": true // this excludes all folders
+  },
+  "files.autoSave": "onFocusChange",
+  "breadcrumbs.enabled": true,
+  "eslint.alwaysShowStatus": true,
+  "editor.formatOnSave": true
+}

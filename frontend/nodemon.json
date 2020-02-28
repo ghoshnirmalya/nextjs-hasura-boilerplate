@@ -1,0 +1,10 @@
+{
+  "watch": ["server.ts"],
+  "ignore": [".git", "node_modules/**/node_modules", ".next"],
+  "verbose": true,
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "exec": "ts-node --project tsconfig.server.json",
+  "ext": "js, json, ts, tsx"
+}

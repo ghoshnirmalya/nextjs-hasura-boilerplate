@@ -1,0 +1,12 @@
+- args:
+    name: user_roles
+    table:
+      name: role
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: role_id
+        table:
+          name: user_role
+          schema: public
+  type: create_array_relationship
