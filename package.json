@@ -1,6 +1,6 @@
 {
   "name": "git-flash",
-  "version": "0.0.0-development.1",
+  "version": "0.0.0-development.2",
   "description": "Tool to monitor feedback from QA",
   "keywords": [
     "feedback"
