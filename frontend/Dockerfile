@@ -8,7 +8,7 @@ RUN apk update && apk upgrade && apk add --no-cache bash git
 
 COPY . /frontend-app/
 
-RUN yarn global add nodemon ts-node typescript
+RUN yarn global add ts-node typescript
 
 RUN yarn install
 

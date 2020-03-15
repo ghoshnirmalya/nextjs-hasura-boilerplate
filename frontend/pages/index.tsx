@@ -8,7 +8,7 @@ const IndexPage = () => {
   return (
     <Fragment>
       <Head>
-        <title>GitFlash</title>
+        <title>Index</title>
       </Head>
       <Page />
     </Fragment>
