@@ -1,11 +1,11 @@
 version: "3"
 
 services:
-  v1.backend:
+  backend:
     build:
       context: ./backend
     depends_on:
-      - v1.db
+      - db
     env_file: ./backend/.env
     ports:
       - 8080:8080
@@ -13,35 +13,32 @@ services:
     volumes:
       - ./backend:/backend-app
 
-  v1.frontend:
+  frontend:
     build:
       context: ./frontend
     command: yarn dev
     depends_on:
-      - v1.backend
-      - v1.authentication
+      - db
+      - backend
+      - authentication
     volumes:
       - ./frontend:/frontend-app
-      - ./frontend/package.json:/frontend-app/package.json
-      - ./frontend/yarn.lock:/frontend-app/yarn.lock
     ports:
       - "3000:3000"
 
-  v1.authentication:
+  authentication:
     build:
       context: ./authentication
     command: yarn dev
     env_file: ./authentication/.env
     depends_on:
-      - v1.db
+      - db
     ports:
       - "3030:3030"
     volumes:
       - ./authentication:/authentication-app
-      - ./authentication/package.json:/authentication-app/package.json
-      - ./authentication/yarn.lock:/authentication-app/yarn.lock
 
-  v1.db:
+  db:
     image: postgres:11.3-alpine
     restart: always
     volumes:

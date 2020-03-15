@@ -1,5 +1,4 @@
 const { ValidationError, NotFoundError } = require('objection')
-
 const {
   DBError,
   ConstraintViolationError,
