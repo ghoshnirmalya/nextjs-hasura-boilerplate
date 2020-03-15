@@ -1,6 +1,6 @@
 {
-  "name": "git-flash",
-  "version": "0.0.0-development.3",
+  "name": "nextjs-hasura-boilerplate",
+  "version": "0.0.0-development.4",
   "description": "Tool to monitor feedback from QA",
   "keywords": [
     "feedback"
@@ -9,12 +9,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/git-flash/git-flash.git"
+    "url": "https://github.com/nextjs-hasura-boilerplate/nextjs-hasura-boilerplate.git"
   },
   "bugs": {
-    "url": "https://github.com/git-flash/git-flash/issues"
+    "url": "https://github.com/nextjs-hasura-boilerplate/nextjs-hasura-boilerplate/issues"
   },
-  "homepage": "https://github.com/git-flash/git-flash#readme",
+  "homepage": "https://github.com/nextjs-hasura-boilerplate/nextjs-hasura-boilerplate#readme",
   "devDependencies": {
     "cz-conventional-changelog": "3.1.0",
     "husky": "^4.2.3",
