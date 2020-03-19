@@ -3,40 +3,42 @@ version: "3"
 services:
   backend:
     build:
-      context: ./backend
+      context: ./services/backend
     depends_on:
       - db
-    env_file: ./backend/.env
+    env_file: ./services/backend/.env
     ports:
-      - 8080:8080
+      - "8080:8080"
     restart: always
     volumes:
-      - ./backend:/backend-app
+      - ./services/backend:/usr/src/app
 
   frontend:
     build:
-      context: ./frontend
+      context: ./services/frontend
     command: yarn dev
     depends_on:
       - db
       - backend
       - authentication
     volumes:
-      - ./frontend:/frontend-app
+      - ./services/frontend:/usr/src/app
+      - "/usr/src/app/node_modules"
     ports:
       - "3000:3000"
 
   authentication:
     build:
-      context: ./authentication
+      context: ./services/authentication
     command: yarn dev
-    env_file: ./authentication/.env
+    env_file: ./services/authentication/.env
     depends_on:
       - db
     ports:
       - "3030:3030"
     volumes:
-      - ./authentication:/authentication-app
+      - ./services/authentication:/usr/src/app
+      - "/usr/src/app/node_modules"
 
   db:
     image: postgres:11.3-alpine

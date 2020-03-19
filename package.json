@@ -1,6 +1,6 @@
 {
   "name": "nextjs-hasura-boilerplate",
-  "version": "0.0.0-development.4",
+  "version": "0.0.0-development.5",
   "description": "Tool to monitor feedback from QA",
   "keywords": [
     "feedback"
@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/nextjs-hasura-boilerplate/nextjs-hasura-boilerplate#readme",
   "devDependencies": {
+    "@types/express": "^4.17.3",
     "cz-conventional-changelog": "3.1.0",
     "husky": "^4.2.3",
     "release-it": "^12.6.2"
