@@ -1,6 +1,6 @@
 {
   "name": "nextjs-hasura-boilerplate",
-  "version": "0.0.0-development.6",
+  "version": "0.0.0-development.7",
   "description": "Tool to monitor feedback from QA",
   "keywords": [
     "feedback"
