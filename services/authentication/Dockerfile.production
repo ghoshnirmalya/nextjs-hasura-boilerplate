@@ -1,17 +1,15 @@
 FROM mhart/alpine-node:11.1.0
 
-RUN mkdir /authentication-app
+# Set working directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-WORKDIR /authentication-app
+# Add `/usr/src/app/node_modules/.bin` to $PATH
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
-RUN apk upgrade --update-cache --available && \
-  apk add openssl && \
-  rm -rf /var/cache/apk/*
-
-ENV PATH /authentication-app/node_modules/.bin:$PATH
-
-COPY . /authentication-app
-
+# Install and cache app dependencies
+ADD package.json /usr/src/app/package.json
 RUN yarn install
 
+# Start app
 CMD ["yarn", "start"]

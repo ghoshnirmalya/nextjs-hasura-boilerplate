@@ -1,19 +1,26 @@
 FROM mhart/alpine-node:11.1.0
 
-RUN mkdir /frontend-app
+# Set working directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-WORKDIR /frontend-app
+# Install necessary packages for debugging
+RUN apk update && apk upgrade && apk add --no-cache bash git
 
-RUN apk update && apk upgrade && apk add --no-cache git
+# Add `/usr/src/app/node_modules/.bin` to $PATH
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
-COPY package.json /frontend-app/package.json
+# Copy package.json
+ADD package.json /usr/src/app/package.json
 
+# Install all dependencies
 RUN yarn install
 
-COPY . /frontend-app/
+# Copy over the whole app
+COPY . /usr/src/app
 
+# Build the whole app
 RUN yarn build
 
-EXPOSE 3000
-
+# Start app
 CMD ["yarn", "start"]

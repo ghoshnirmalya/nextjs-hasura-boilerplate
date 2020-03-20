@@ -8,7 +8,7 @@ const IndexPage = () => {
   return (
     <Fragment>
       <Head>
-        <title>Index1234 Page</title>
+        <title>Index Page</title>
       </Head>
       <Page />
     </Fragment>

@@ -14,11 +14,11 @@ const Index = () => {
   const { data, loading, error } = useSubscription(fetchUsersSubscription)
 
   if (loading) {
-    return <div>Loading1234...</div>
+    return <div>Loading...</div>
   }
 
   if (error) {
-    return <p>Error1234: {error.message}</p>
+    return <p>Error: {error.message}</p>
   }
 
   return (

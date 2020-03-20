@@ -10,12 +10,12 @@ RUN apk update && apk upgrade && apk add --no-cache bash git
 # Add `/usr/src/app/node_modules/.bin` to $PATH
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
-# Install and cache app dependencies
+# Copy package.json
 ADD package.json /usr/src/app/package.json
+
+# Install all dependencies
 RUN yarn install
 RUN yarn global add typescript
-
-EXPOSE 3000
 
 # Start app
 CMD ["yarn", "dev"]

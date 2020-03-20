@@ -4,10 +4,8 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const dotenv = require('dotenv')
 const passport = require('passport')
 const cors = require('cors')
-const expressValidator = require('express-validator')
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -17,9 +15,9 @@ require('dotenv').config()
 /**
  * Controllers (route handlers).
  */
-const userController = require('./controllers/user')
-
 const app = express()
+
+const userController = require('./controllers/user')
 
 /**
  * Express configuration.
@@ -29,7 +27,6 @@ app.set('port', process.env.PORT || 3030)
 app.set('json spaces', 2) // number of spaces for indentation
 app.use(cors())
 app.use(bodyParser.json())
-app.use(expressValidator())
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -42,7 +39,7 @@ app.get('/jwks', userController.getJwks)
  */
 app.listen(app.get('port'), () => {
   console.log(
-    ' ⚡️ Ready on http://localhost:%d in %s mode',
+    '⚡️ Ready on http://localhost:%d in %s mode',
     app.get('port'),
     app.get('env')
   )

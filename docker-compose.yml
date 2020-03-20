@@ -9,7 +9,6 @@ services:
     env_file: ./services/backend/.env
     ports:
       - "8080:8080"
-    restart: always
     volumes:
       - ./services/backend:/usr/src/app
 
@@ -42,7 +41,6 @@ services:
 
   db:
     image: postgres:11.3-alpine
-    restart: always
     volumes:
       - db_data:/var/lib/postgresql/data
 

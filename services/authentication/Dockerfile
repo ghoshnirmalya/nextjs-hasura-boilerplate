@@ -7,7 +7,8 @@ WORKDIR /usr/src/app
 # Install necessary packages for debugging
 RUN apk upgrade --update-cache --available && \
   apk add openssl && \
-  rm -rf /var/cache/apk/*
+  rm -rf /var/cache/apk/* && \
+  apk add --no-cache bash git
 
 # Add `/usr/src/app/node_modules/.bin` to $PATH
 ENV PATH /usr/src/app/node_modules/.bin:$PATH

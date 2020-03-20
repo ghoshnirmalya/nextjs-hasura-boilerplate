@@ -1,10 +1,10 @@
 const rasha = require('rasha')
+const { check, validationResult } = require('express-validator')
 
 const passport = require('../config/passport')
 const { User } = require('../db/schema')
 const { errorHandler } = require('../db/errors')
 const jwtConfig = require('../config/jwt')
-
 /**
  * Sends the JWT key set
  */
@@ -27,13 +27,15 @@ exports.getJwks = async (req, res, next) => {
  * Sign in using email and password and returns JWT
  */
 exports.postLogin = async (req, res, next) => {
-  req.assert('email', 'email is not valid').notEmpty()
-  req.assert('password', 'Password cannot be blank').notEmpty()
+  check('email').isEmail()
+  check('password')
+    .not()
+    .isEmpty()
 
-  const errors = req.validationErrors()
+  const errors = validationResult(req)
 
-  if (errors) {
-    return res.status(400).json({ errors: errors })
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
   }
 
   passport.authenticate('local', (err, user, info) => {
@@ -51,17 +53,19 @@ exports.postLogin = async (req, res, next) => {
  * Create a new local account
  */
 exports.postSignup = async (req, res, next) => {
-  req.assert('email', 'email is not valid').notEmpty()
-  req.assert('password', 'Password must be at least 4 characters long').len(4)
+  check('email').isEmail()
+  check('password')
+    .not()
+    .isEmpty()
 
-  const errors = req.validationErrors()
+  const errors = validationResult(req)
 
-  if (errors) {
-    return res.status(400).json({ errors: errors })
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
   }
 
   try {
-    const user = await User.query()
+    await User.query()
       .allowInsert('[email, password]')
       .insert({
         email: req.body.email,
@@ -69,8 +73,10 @@ exports.postSignup = async (req, res, next) => {
       })
   } catch (err) {
     errorHandler(err, res)
+
     return
   }
+
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       return handleResponse(res, 400, { error: err })

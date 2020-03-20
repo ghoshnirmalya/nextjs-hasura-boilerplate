@@ -68,5 +68,3 @@ typings/
 
 # netlify build folder
 /out
-# Next.js dist files
-.next
