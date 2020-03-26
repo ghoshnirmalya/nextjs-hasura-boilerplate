@@ -2,16 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ApolloProvider, getDataFromTree } from 'react-apollo'
 import Head from 'next/head'
-import cookies from 'next-cookies'
+import { parseCookies } from 'nookies'
 
 import initApollo from './init-apollo'
 
 // Gets the display name of a JSX component for dev tools
-const getComponentDisplayName = Component => {
+const getComponentDisplayName = (Component) => {
   return Component.displayName || Component.name || 'Unknown'
 }
 
-export default ComposedComponent => {
+export default (ComposedComponent) => {
   return class WithApollo extends React.Component {
     static displayName = `WithApollo(${getComponentDisplayName(
       ComposedComponent
@@ -22,7 +22,7 @@ export default ComposedComponent => {
     }
 
     static async getInitialProps(ctx) {
-      const { token } = cookies(ctx)
+      const { token } = parseCookies(ctx)
 
       // Initial serverState with apollo (empty)
       let serverState = {

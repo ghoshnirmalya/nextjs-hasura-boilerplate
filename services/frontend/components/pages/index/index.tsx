@@ -23,7 +23,6 @@ const Index = () => {
 
   return (
     <Fragment>
-      Users:
       {data.user.map((user: { id: number }) => {
         return <div key={user.id}>{user.id}</div>
       })}

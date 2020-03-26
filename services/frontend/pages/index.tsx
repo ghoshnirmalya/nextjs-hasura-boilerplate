@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import Head from 'next/head'
 
-import withApollo from '../lib/with-apollo'
-import Page from '../components/index'
+import Page from '../components/pages/index'
+import WithAuthentication from '../lib/with-authentication'
 
 const IndexPage = () => {
   return (
@@ -15,4 +15,4 @@ const IndexPage = () => {
   )
 }
 
-export default withApollo(IndexPage)
+export default WithAuthentication(IndexPage)
