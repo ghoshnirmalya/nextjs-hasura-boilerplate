@@ -1,40 +1,20 @@
 {
-  "name": "nextjs-hasura-boilerplate",
-  "version": "0.0.0-development.7",
-  "description": "Tool to monitor feedback from QA",
-  "keywords": [
-    "feedback"
-  ],
-  "author": "Nirmalya Ghosh (nirmalya.email@gmail.com)",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nextjs-hasura-boilerplate/nextjs-hasura-boilerplate.git"
-  },
-  "bugs": {
-    "url": "https://github.com/nextjs-hasura-boilerplate/nextjs-hasura-boilerplate/issues"
-  },
-  "homepage": "https://github.com/nextjs-hasura-boilerplate/nextjs-hasura-boilerplate#readme",
-  "devDependencies": {
-    "@types/express": "^4.17.3",
-    "cz-conventional-changelog": "3.1.0",
-    "husky": "^4.2.3",
-    "release-it": "^13.1.2"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
-  },
+  "private": true,
   "scripts": {
-    "release": "release-it"
+    "clean": "lerna clean",
+    "bootstrap": "lerna bootstrap",
+    "test": "CI=true lerna run test --stream",
+    "start": "lerna run --parallel start",
+    "prepare": "rimraf components/build && lerna run prepare",
+    "build": "npm run prepare && lerna run --parallel build"
   },
-  "dependencies": {
-    "npm-check-updates": "^4.0.4"
-  }
+  "devDependencies": {
+    "@types/node": "^12.12.31",
+    "lerna": "3.20.2",
+    "rimraf": "^3.0.2",
+    "typescript": "3.8.3"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

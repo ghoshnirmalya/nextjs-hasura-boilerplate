@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: .
+    depends_on:
+      - db
+    env_file: ./.env
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/usr/src/app
+
+  db:
+    image: postgres:11.3-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
