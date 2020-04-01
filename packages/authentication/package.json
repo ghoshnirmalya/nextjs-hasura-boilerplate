@@ -4,7 +4,7 @@
   "author": "nirmalya.email@gmail.com",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon app.ts",
+    "start": "tsnd --respawn app.ts",
     "start:prod": "NODE_ENV=production node app.ts"
   },
   "dependencies": {
@@ -31,8 +31,8 @@
     "@types/passport": "^1.0.3",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
-    "nodemon": "^2.0.2",
-    "prettier": "^2.0.1"
+    "prettier": "^2.0.1",
+    "ts-node-dev": "^1.0.0-pre.44"
   },
   "husky": {
     "hooks": {
