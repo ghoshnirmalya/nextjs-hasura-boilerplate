@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react'
-import { withApollo, useSubscription } from 'react-apollo'
-import gql from 'graphql-tag'
+import React from "react";
+import { withApollo, useSubscription } from "react-apollo";
+import gql from "graphql-tag";
+import { Stack, Box } from "@chakra-ui/core";
 
 const fetchUsersSubscription = gql`
   subscription {
@@ -8,26 +9,26 @@ const fetchUsersSubscription = gql`
       id
     }
   }
-`
+`;
 
 const Index = () => {
-  const { data, loading, error } = useSubscription(fetchUsersSubscription)
+  const { data, loading, error } = useSubscription(fetchUsersSubscription);
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>
+    return <p>Error: {error.message}</p>;
   }
 
   return (
-    <Fragment>
+    <Stack spacing={4}>
       {data.user.map((user: { id: number }) => {
-        return <div key={user.id}>{user.id}</div>
+        return <Box key={user.id}>{user.id}</Box>;
       })}
-    </Fragment>
-  )
-}
+    </Stack>
+  );
+};
 
-export default withApollo(Index)
+export default withApollo(Index);
