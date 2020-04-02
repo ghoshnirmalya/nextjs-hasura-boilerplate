@@ -38,7 +38,7 @@ exports.postLogin = async (req: Request, res: any, next: NextFunction) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  passport.authenticate("local", (err, user) => {
+  passport.authenticate("local", (err: Error, user: any) => {
     if (err) {
       return handleResponse(res, 400, { error: err });
     }
@@ -73,7 +73,7 @@ exports.postSignup = async (req: Request, res: any, next: NextFunction) => {
     return;
   }
 
-  passport.authenticate("local", (err, user) => {
+  passport.authenticate("local", (err: Error, user: any) => {
     if (err) {
       return handleResponse(res, 400, { error: err });
     }
@@ -88,7 +88,7 @@ exports.getWebhook = async (
   res: Response,
   next: NextFunction
 ) => {
-  passport.authenticate("bearer", (err, user, info) => {
+  passport.authenticate("bearer", (err: Error, user: any) => {
     if (err) {
       return handleResponse(res, 401, { error: err });
     }

@@ -4,17 +4,17 @@
   "author": "nirmalya.email@gmail.com",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.ts",
+    "start": "ts-node --project tsconfig.server.json server.ts",
     "build:analyze": "ANALYZE=true next build && tsc --project tsconfig.server.json",
     "build": "next build",
     "start:prod": "NODE_ENV=production node dist/server.js",
     "type-check": "tsc"
   },
   "dependencies": {
-    "@hasura-next/components": "^1.0.0",
     "@chakra-ui/core": "^0.6.1",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "@hasura-next/components": "^1.0.0",
     "@next/bundle-analyzer": "^9.3.1",
     "apollo-boost": "^0.4.7",
     "apollo-cache": "^1.3.4",
@@ -48,7 +48,6 @@
     "cross-env": "^7.0.2",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
-    "nodemon": "^2.0.2",
     "prettier": "^2.0.1",
     "ts-node": "^8.8.1",
     "tslint": "^6.1.0",
