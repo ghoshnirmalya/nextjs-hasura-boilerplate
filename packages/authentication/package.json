@@ -4,8 +4,9 @@
   "author": "nirmalya.email@gmail.com",
   "license": "MIT",
   "scripts": {
-    "start": "tsnd --respawn app.ts",
-    "start:prod": "NODE_ENV=production node app.ts"
+    "start": "tsnd --respawn --transpileOnly app.ts",
+    "start:prod": "NODE_ENV=production node app.ts",
+    "type-check": "tsc"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
