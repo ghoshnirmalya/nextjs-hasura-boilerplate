@@ -31,7 +31,7 @@ const SignUp: NextPage = () => {
     cookieSetter("token", res.token);
 
     if (response.ok) {
-      router.push("/index");
+      router.push("/");
     } else {
       setErrors(res.data.columns);
     }
@@ -53,7 +53,7 @@ const SignUp: NextPage = () => {
       ) : null}
       <Box minWidth="400px" p={4}>
         <Box mb={8} as="form" onSubmit={handleSubmit}>
-          <FormControl isRequired mb={8}>
+          <FormControl isRequired mb={4}>
             <FormLabel htmlFor="email">Email address</FormLabel>
             <Input
               type="email"
@@ -82,7 +82,7 @@ const SignUp: NextPage = () => {
         </Box>
         <Box display="flex" justifyContent="flex-end" p={0}>
           <Button
-            variantColor="blue"
+            variantColor="purple"
             size="lg"
             loadingText="Signing up..."
             onClick={handleSubmit}

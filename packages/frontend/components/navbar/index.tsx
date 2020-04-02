@@ -1,13 +1,23 @@
 import React, { Fragment } from "react";
-import { Box, Link as _Link } from "@chakra-ui/core";
+import { Box, Link as _Link, Button } from "@chakra-ui/core";
 import { NextPage } from "next";
 import Link from "next/link";
+import { cookieRemover } from "../../lib/cookie";
+import Router from "next/router";
 
 interface iProps {
   isAuthenticated: boolean;
 }
 
 const Navbar: NextPage<iProps> = ({ isAuthenticated }) => {
+  const handleSignOut = () => {
+    cookieRemover("user-id");
+    cookieRemover("user-roles");
+    cookieRemover("token");
+
+    Router.push("/sign-up");
+  };
+
   return (
     <Box borderBottomWidth={1}>
       <Box
@@ -21,21 +31,24 @@ const Navbar: NextPage<iProps> = ({ isAuthenticated }) => {
       >
         <Box display="flex" alignItems="center">
           <Link href="/">
-            <_Link>Logo</_Link>
+            <_Link>Home</_Link>
           </Link>
         </Box>
         <Box display="flex" alignItems="center">
-          <_Link mr={4}>Documentation</_Link>
           {!isAuthenticated ? (
             <Fragment>
               <_Link mr={4} href="/sign-in">
                 Sign In
               </_Link>
               <Link href="/sign-up">
-                <_Link>Sign Up</_Link>
+                <Button variantColor="purple">Sign Up</Button>
               </Link>
             </Fragment>
-          ) : null}
+          ) : (
+            <Button variantColor="purple" onClick={handleSignOut}>
+              Sign out
+            </Button>
+          )}
         </Box>
       </Box>
     </Box>
