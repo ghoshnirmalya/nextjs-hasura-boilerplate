@@ -9,7 +9,7 @@
     "build": "npm run prepare && lerna run --parallel build"
   },
   "devDependencies": {
-    "@types/node": "^12.12.31",
+    "@types/node": "^13.9.8",
     "lerna": "3.20.2",
     "rimraf": "^3.0.2",
     "typescript": "3.8.3"
