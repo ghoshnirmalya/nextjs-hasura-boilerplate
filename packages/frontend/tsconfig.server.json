@@ -6,6 +6,5 @@
     "target": "es2017",
     "isolatedModules": false,
     "noEmit": false
-  },
-  "include": ["server.ts"]
+  }
 }
