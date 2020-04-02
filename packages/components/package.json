@@ -1,7 +1,8 @@
 {
   "name": "@hasura-next/components",
   "version": "1.0.0",
-  "description": "",
+  "author": "nirmalya.email@gmail.com",
+  "license": "MIT",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
   "scripts": {
@@ -10,10 +11,7 @@
     "test": "react-scripts-ts test --env=jsdom",
     "type-check": "tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "peerDependencies": {
+  "dependencies": {
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
@@ -22,11 +20,22 @@
     "@types/node": "^12.12.31",
     "@types/react": "^16.9.26",
     "@types/react-dom": "^16.9.5",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.1",
+    "prettier": "^2.0.2",
     "react-scripts-ts": "^3.1.0",
     "tslint": "^6.1.0",
     "tslint-react": "^4.2.0",
     "typescript": "3.8.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md,tsx,ts}": [
+      "prettier --write"
+    ]
   }
 }
