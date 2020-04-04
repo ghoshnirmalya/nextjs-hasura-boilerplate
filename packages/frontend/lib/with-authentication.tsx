@@ -1,7 +1,8 @@
 import { Component } from "react";
-import { parseCookies } from "nookies";
 import { NextPage, NextPageContext, NextComponentType } from "next";
 import Router from "next/router";
+
+import { cookieParser } from "../lib/cookie";
 
 interface Context extends NextPageContext {
   // any modifications to the default context, e.g. query types
@@ -20,7 +21,7 @@ export default (ComposedComponent: NextPage) => {
     )})`;
 
     static async getInitialProps(ctx: Context) {
-      const isAuthenticated = !!parseCookies(ctx).token;
+      const isAuthenticated = !!cookieParser("token", ctx);
 
       // Evaluate the composed component's getInitialProps()
       let composedInitialProps = {};
@@ -40,7 +41,7 @@ export default (ComposedComponent: NextPage) => {
         } else {
           if (ctx.res) {
             ctx.res.writeHead(301, {
-              Location: "/"
+              Location: "/",
             });
             ctx.res.end();
           }
@@ -51,7 +52,7 @@ export default (ComposedComponent: NextPage) => {
         } else {
           if (ctx.res) {
             ctx.res.writeHead(301, {
-              Location: "/sign-up"
+              Location: "/sign-up",
             });
             ctx.res.end();
           }
@@ -60,7 +61,7 @@ export default (ComposedComponent: NextPage) => {
 
       return {
         ...composedInitialProps,
-        isAuthenticated
+        isAuthenticated,
       };
     }
 

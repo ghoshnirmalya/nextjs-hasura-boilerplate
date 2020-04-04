@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
 import { Box, Link as _Link, Button } from "@chakra-ui/core";
-import { NextPage } from "next";
+import { NextComponentType } from "next";
 import Link from "next/link";
 import { cookieRemover } from "../../lib/cookie";
 import Router from "next/router";
 
-interface iProps {
-  isAuthenticated: boolean;
-}
+import { cookieParser } from "../../lib/cookie";
 
-const Navbar: NextPage<iProps> = ({ isAuthenticated }) => {
+const Navbar: NextComponentType = () => {
+  const isAuthenticated = !!cookieParser("token");
+
   const handleSignOut = () => {
     cookieRemover("user-id");
     cookieRemover("user-roles");

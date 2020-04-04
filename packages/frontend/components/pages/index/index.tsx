@@ -1,10 +1,10 @@
 import React from "react";
-import { withApollo, useSubscription } from "react-apollo";
+import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
 import { Stack, Box } from "@chakra-ui/core";
 
-const fetchUsersSubscription = gql`
-  subscription {
+const fetchUsersQuery = gql`
+  query {
     user {
       id
     }
@@ -12,7 +12,7 @@ const fetchUsersSubscription = gql`
 `;
 
 const Index = () => {
-  const { data, loading, error } = useSubscription(fetchUsersSubscription);
+  const { data, loading, error } = useQuery(fetchUsersQuery);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -31,4 +31,4 @@ const Index = () => {
   );
 };
 
-export default withApollo(Index);
+export default Index;
