@@ -1,8 +1,7 @@
 import React from "react";
 import NextApp from "next/app";
 import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
-
-import Navbar from "../components/navbar";
+import Navbar from "components/navbar";
 
 class App extends NextApp {
   render() {

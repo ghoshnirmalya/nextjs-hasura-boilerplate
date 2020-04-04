@@ -1,8 +1,7 @@
 import { Component } from "react";
 import { NextPage, NextPageContext, NextComponentType } from "next";
 import Router from "next/router";
-
-import { cookieParser } from "../lib/cookie";
+import { cookieParser } from "lib/cookie";
 
 interface Context extends NextPageContext {
   // any modifications to the default context, e.g. query types

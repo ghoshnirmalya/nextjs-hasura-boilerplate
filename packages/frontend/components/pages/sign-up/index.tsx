@@ -6,12 +6,12 @@ import {
   FormLabel,
   Input,
   Alert,
-  AlertIcon
+  AlertIcon,
 } from "@chakra-ui/core";
 import useFetch from "use-http";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
-import { cookieSetter } from "../../../lib/cookie";
+import { cookieSetter } from "lib/cookie";
 
 const SignUp: NextPage = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +23,7 @@ const SignUp: NextPage = () => {
   const handleSubmit = async () => {
     const res = await request.post("/signup", {
       email,
-      password
+      password,
     });
 
     cookieSetter("user-id", res.id);

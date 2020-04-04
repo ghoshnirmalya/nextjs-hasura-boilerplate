@@ -2,10 +2,8 @@ import React, { Fragment } from "react";
 import { Box, Link as _Link, Button } from "@chakra-ui/core";
 import { NextComponentType } from "next";
 import Link from "next/link";
-import { cookieRemover } from "../../lib/cookie";
+import { cookieRemover, cookieParser } from "lib/cookie";
 import Router from "next/router";
-
-import { cookieParser } from "../../lib/cookie";
 
 const Navbar: NextComponentType = () => {
   const isAuthenticated = !!cookieParser("token");

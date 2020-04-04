@@ -7,8 +7,7 @@ import fetch from "isomorphic-unfetch";
 import { WebSocketLink } from "apollo-link-ws";
 import { split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
-
-import { cookieParser } from "../lib/cookie";
+import { cookieParser } from "lib/cookie";
 
 if (!process.browser) {
   global.fetch = fetch;

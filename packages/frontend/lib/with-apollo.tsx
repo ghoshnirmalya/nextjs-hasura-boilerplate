@@ -4,8 +4,7 @@ import React from "react";
 import { ApolloProvider, getDataFromTree } from "react-apollo";
 import Head from "next/head";
 import { NextPage, NextPageContext, NextComponentType } from "next";
-
-import initApollo from "./init-apollo";
+import initApollo from "lib/init-apollo";
 
 const getComponentDisplayName = (Component: NextComponentType) => {
   return Component.displayName || Component.name || "Unknown";
