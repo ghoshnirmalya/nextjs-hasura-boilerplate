@@ -16,18 +16,11 @@ if (!process.browser) {
 const httpApiUrl = process.env.API_URL || "";
 const wsApiUrl = process.env.WS_URL || "";
 const token = cookieParser("token");
-const userId = cookieParser("user-id");
-const userRoles = cookieParser("user-roles");
 const headers = {
-  "X-Hasura-API-Token": `Bearer ${token}`,
-  "X-Hasura-Admin-Secret": process.env.HASURA_ADMIN_SECRET,
-  "X-Hasura-User-ID": userId,
-  "X-Hasura-User-Roles": [userRoles],
+  Authorization: `Bearer ${token}`,
 };
 
 function create() {
-  const token = cookieParser("token");
-
   const httpLink = new HttpLink({
     uri: httpApiUrl,
     credentials: "include",

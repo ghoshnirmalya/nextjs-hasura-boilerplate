@@ -26,12 +26,10 @@ const SignUp: NextPage = () => {
       password,
     });
 
-    cookieSetter("user-id", res.id);
-    cookieSetter("user-roles", res.roles);
-    cookieSetter("token", res.token);
-
     if (response.ok) {
-      router.push("/");
+      cookieSetter("token", res.token);
+
+      await router.push("/");
     } else {
       setErrors(res.data.columns);
     }

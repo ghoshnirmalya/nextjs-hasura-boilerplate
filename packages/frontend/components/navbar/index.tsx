@@ -9,8 +9,6 @@ const Navbar: NextComponentType = () => {
   const isAuthenticated = !!cookieParser("token");
 
   const handleSignOut = () => {
-    cookieRemover("user-id");
-    cookieRemover("user-roles");
     cookieRemover("token");
 
     Router.push("/sign-up");
