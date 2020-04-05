@@ -39,11 +39,11 @@ class User extends Model {
           from: "user.id",
           through: {
             from: "user_role.user_id",
-            to: "user_role.role_id"
+            to: "user_role.role_id",
           },
-          to: "role.id"
-        }
-      }
+          to: "role.id",
+        },
+      },
     };
   }
 
@@ -56,7 +56,7 @@ class User extends Model {
       id: this.id,
       email: this.email,
       roles: this.getRoles(),
-      token: this.getJwt()
+      token: this.getJwt(),
     };
   }
 
@@ -64,7 +64,7 @@ class User extends Model {
     return {
       "x-hasura-allowed-roles": this.getRoles(),
       "x-hasura-default-role": "user",
-      "x-hasura-user-id": `${this.id}`
+      "x-hasura-user-id": `${this.id}`,
       // 'x-hasura-org-id': '123',{}
       // 'x-hasura-custom': 'custom-value'
     };
@@ -74,12 +74,12 @@ class User extends Model {
     const signOptions = {
       subject: this.id,
       expiresIn: "30d", // 30 days validity
-      algorithm: "RS256"
+      algorithm: "RS256",
     };
     const claim = {
       name: this.email,
       // iat: Math.floor(Date.now() / 1000),
-      "https://hasura.io/jwt/claims": this.getHasuraClaims()
+      "https://hasura.io/jwt/claims": this.getHasuraClaims(),
     };
     return jwt.sign(claim, jwtConfig.key, signOptions);
   }
@@ -99,8 +99,8 @@ class User extends Model {
       required: ["email"],
       properties: {
         id: { type: "integer" },
-        email: { type: "string", minLength: 1, maxLength: 255 }
-      }
+        email: { type: "string", minLength: 1, maxLength: 255 },
+      },
     };
   }
 }
