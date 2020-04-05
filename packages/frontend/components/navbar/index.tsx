@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Box, Link as _Link, Button } from "@chakra-ui/core";
 import { NextComponentType } from "next";
 import Link from "next/link";
@@ -32,14 +32,14 @@ const Navbar: NextComponentType = () => {
         </Box>
         <Box display="flex" alignItems="center">
           {!isAuthenticated ? (
-            <Fragment>
+            <>
               <_Link mr={4} href="/sign-in">
                 Sign In
               </_Link>
               <Link href="/sign-up">
                 <Button variantColor="purple">Sign Up</Button>
               </Link>
-            </Fragment>
+            </>
           ) : (
             <Button variantColor="purple" onClick={handleSignOut}>
               Sign out
