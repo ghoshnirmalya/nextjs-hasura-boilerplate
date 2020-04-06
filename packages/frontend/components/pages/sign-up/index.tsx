@@ -16,11 +16,12 @@ import { cookieSetter } from "lib/cookie";
 const SignUp: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
   const [request, response] = useFetch(`${process.env.AUTH_URL}`);
   const router = useRouter();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
     const res = await request.post("/signup", {
       email,
       password,
@@ -30,8 +31,6 @@ const SignUp: NextPage = () => {
       cookieSetter("token", res.token);
 
       await router.push("/");
-    } else {
-      setErrors(res.data.columns);
     }
   };
 
@@ -43,14 +42,14 @@ const SignUp: NextPage = () => {
       alignItems="center"
       flexDirection="column"
     >
-      {errors.length ? (
+      {request.error ? (
         <Alert status="error" variant="left-accent">
           <AlertIcon />
           There was an error processing your request. Please try again!
         </Alert>
       ) : null}
-      <Box minWidth="400px" p={4}>
-        <Box mb={8} as="form" onSubmit={handleSubmit}>
+      <Box minWidth="400px" p={8} bg="white" rounded="md" borderWidth={1}>
+        <Box as="form" onSubmit={handleSubmit}>
           <FormControl isRequired mb={4}>
             <FormLabel htmlFor="email">Email address</FormLabel>
             <Input
@@ -64,7 +63,7 @@ const SignUp: NextPage = () => {
               }
             />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl isRequired mb={8}>
             <FormLabel htmlFor="password">Password</FormLabel>
             <Input
               type="password"
@@ -77,17 +76,19 @@ const SignUp: NextPage = () => {
               }
             />
           </FormControl>
-        </Box>
-        <Box display="flex" justifyContent="flex-end" p={0}>
-          <Button
-            variantColor="purple"
-            size="lg"
-            loadingText="Signing up..."
-            onClick={handleSubmit}
-            w="full"
-          >
-            Sign Up
-          </Button>
+          <FormControl>
+            <Button
+              type="submit"
+              variantColor="purple"
+              size="lg"
+              loadingText="Signing up..."
+              onClick={handleSubmit}
+              isLoading={request.loading}
+              w="full"
+            >
+              Sign Up
+            </Button>
+          </FormControl>
         </Box>
       </Box>
     </Box>

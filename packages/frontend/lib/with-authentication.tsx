@@ -45,7 +45,10 @@ export default (ComposedComponent: NextPage) => {
             ctx.res.end();
           }
         }
-      } else if (!isAuthenticated && ["/"].indexOf(ctx.asPath) > -1) {
+      } else if (
+        !isAuthenticated &&
+        ["/sign-up", "/sign-in"].indexOf(ctx.asPath) === -1
+      ) {
         if (typeof window !== "undefined") {
           Router.push("/sign-up");
         } else {

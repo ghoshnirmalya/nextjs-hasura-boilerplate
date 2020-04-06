@@ -31,7 +31,16 @@ const Navbar: NextComponentType = () => {
           </Link>
         </Box>
         <Box display="flex" alignItems="center">
-          {!isAuthenticated ? (
+          {isAuthenticated ? (
+            <>
+              <Link href="/my-profile">
+                <_Link mr={4}>My Profile</_Link>
+              </Link>
+              <Button variantColor="purple" onClick={handleSignOut}>
+                Sign out
+              </Button>
+            </>
+          ) : (
             <>
               <_Link mr={4} href="/sign-in">
                 Sign In
@@ -40,10 +49,6 @@ const Navbar: NextComponentType = () => {
                 <Button variantColor="purple">Sign Up</Button>
               </Link>
             </>
-          ) : (
-            <Button variantColor="purple" onClick={handleSignOut}>
-              Sign out
-            </Button>
           )}
         </Box>
       </Box>

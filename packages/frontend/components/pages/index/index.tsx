@@ -3,8 +3,8 @@ import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
 import { Stack, Box } from "@chakra-ui/core";
 
-const fetchUsersQuery = gql`
-  query {
+const FETCH_USER_QUERY = gql`
+  query fetchUser {
     user {
       id
     }
@@ -12,7 +12,7 @@ const fetchUsersQuery = gql`
 `;
 
 const Index = () => {
-  const { data, loading, error } = useQuery(fetchUsersQuery);
+  const { data, loading, error } = useQuery(FETCH_USER_QUERY);
 
   if (loading) {
     return <div>Loading...</div>;

@@ -3,7 +3,7 @@ import Head from "next/head";
 import Page from "components/pages/sign-up";
 import WithAuthentication from "lib/with-authentication";
 
-const IndexPage = () => {
+const SignUpPage = () => {
   return (
     <>
       <Head>
@@ -14,4 +14,4 @@ const IndexPage = () => {
   );
 };
 
-export default WithAuthentication(IndexPage);
+export default WithAuthentication(SignUpPage);
