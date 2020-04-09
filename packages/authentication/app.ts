@@ -32,6 +32,7 @@ app.use(passport.session());
 
 app.post("/login", userController.postLogin);
 app.post("/signup", userController.postSignup);
+app.post("/admin/signup", userController.postAdminSignup);
 app.get("/webhook", userController.getWebhook);
 app.get("/jwks", userController.getJwks);
 /**

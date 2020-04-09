@@ -1,0 +1,8 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: |-
+      INSERT INTO role (name) VALUES
+        ('admin'),
+        ('user');
+  type: run_sql

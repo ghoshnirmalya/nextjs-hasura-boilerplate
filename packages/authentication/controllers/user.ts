@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 const rasha = require("rasha");
 const { check, validationResult } = require("express-validator");
 
-const { User } = require("../db/schema");
+const { User, Role, UserRole } = require("../db/schema");
 const { errorHandler } = require("../db/errors");
 const jwtConfig = require("../config/jwt");
 const passport = require("../config/passport");
@@ -14,10 +14,10 @@ exports.getJwks = async (req: Request, res: Response) => {
     ...rasha.importSync({ pem: jwtConfig.publicKey }),
     alg: "RS256",
     use: "sig",
-    kid: jwtConfig.publicKey
+    kid: jwtConfig.publicKey,
   };
   const jwks = {
-    keys: [jwk]
+    keys: [jwk],
   };
 
   res.setHeader("Content-Type", "application/json");
@@ -65,7 +65,7 @@ exports.postSignup = async (req: Request, res: any, next: NextFunction) => {
   try {
     await User.query().allowInsert("[email, password]").insert({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     });
   } catch (err) {
     errorHandler(err, res);
@@ -73,12 +73,73 @@ exports.postSignup = async (req: Request, res: any, next: NextFunction) => {
     return;
   }
 
-  passport.authenticate("local", (err: Error, user: any) => {
+  passport.authenticate("local", async (err: Error, user: any) => {
     if (err) {
       return handleResponse(res, 400, { error: err });
     }
     if (user) {
-      handleResponse(res, 200, user.getUser());
+      const { id: userId } = await user.getUser();
+
+      const { id: roleId } = await Role.query().findOne({
+        name: "user",
+      });
+
+      await UserRole.query().insert({
+        role_id: roleId,
+        user_id: userId,
+      });
+
+      handleResponse(res, 200, user.getUser("user"));
+    }
+  })(req, res, next);
+};
+
+/**
+ * POST /admin/signup
+ * Create a new local admin account
+ */
+exports.postAdminSignup = async (
+  req: Request,
+  res: any,
+  next: NextFunction
+) => {
+  check("email").isEmail();
+  check("password").not().isEmpty();
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    await User.query().allowInsert("[email, password]").insert({
+      email: req.body.email,
+      password: req.body.password,
+    });
+  } catch (err) {
+    errorHandler(err, res);
+
+    return;
+  }
+
+  passport.authenticate("local", async (err: Error, user: any) => {
+    if (err) {
+      return handleResponse(res, 400, { error: err });
+    }
+    if (user) {
+      const { id: userId } = await user.getUser();
+
+      const { id: roleId } = await Role.query().findOne({
+        name: "admin",
+      });
+
+      await UserRole.query().insert({
+        role_id: roleId,
+        user_id: userId,
+      });
+
+      handleResponse(res, 200, user.getUser("admin"));
     }
   })(req, res, next);
 };
@@ -101,7 +162,5 @@ exports.getWebhook = async (
 };
 
 function handleResponse(res: Response, code: number, statusMsg: any) {
-  console.log(res, code, statusMsg);
-
   res.status(code).json(statusMsg);
 }

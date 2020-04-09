@@ -21,6 +21,16 @@ class Role extends Model {
   }
 }
 
+class UserRole extends Model {
+  static get tableName() {
+    return "user_role";
+  }
+
+  static get idColumn() {
+    return "id";
+  }
+}
+
 class User extends Model {
   static get tableName() {
     return "user";
@@ -51,35 +61,31 @@ class User extends Model {
     return this.roles.map((el: { name: string }) => el.name).concat("user");
   }
 
-  getUser() {
+  getUser(role = "") {
     return {
       id: this.id,
       email: this.email,
-      roles: this.getRoles(),
-      token: this.getJwt(),
+      token: this.getJwt(role),
     };
   }
 
-  getHasuraClaims() {
+  getHasuraClaims(role: string) {
     return {
-      "x-hasura-allowed-roles": this.getRoles(),
-      "x-hasura-default-role": "user",
+      "x-hasura-allowed-roles": ["admin", "user"],
+      "x-hasura-default-role": role,
       "x-hasura-user-id": `${this.id}`,
-      // 'x-hasura-org-id': '123',{}
-      // 'x-hasura-custom': 'custom-value'
     };
   }
 
-  getJwt() {
+  getJwt(role: string) {
     const signOptions = {
       subject: this.id,
-      expiresIn: "30d", // 30 days validity
+      expiresIn: "30d",
       algorithm: "RS256",
     };
     const claim = {
       name: this.email,
-      // iat: Math.floor(Date.now() / 1000),
-      "https://hasura.io/jwt/claims": this.getHasuraClaims(),
+      "https://hasura.io/jwt/claims": this.getHasuraClaims(role),
     };
     return jwt.sign(claim, jwtConfig.key, signOptions);
   }
@@ -105,4 +111,4 @@ class User extends Model {
   }
 }
 
-module.exports = { User, Role };
+module.exports = { User, Role, UserRole };
