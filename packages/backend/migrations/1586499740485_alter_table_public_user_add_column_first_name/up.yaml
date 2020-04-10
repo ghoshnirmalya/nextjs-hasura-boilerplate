@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."user" ADD COLUMN "first_name" bpchar NULL;
+  type: run_sql

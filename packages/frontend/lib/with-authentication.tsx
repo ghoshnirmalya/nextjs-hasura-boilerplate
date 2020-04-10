@@ -33,7 +33,7 @@ export default (ComposedComponent: NextPage) => {
       // sign-in and sign-up routes
       if (
         isAuthenticated &&
-        ["/sign-up", "/sign-in"].indexOf(ctx.asPath) > -1
+        ["/sign-up", "/sign-in", "/admin/sign-up"].indexOf(ctx.asPath) > -1
       ) {
         if (typeof window !== "undefined") {
           Router.push("/");
@@ -47,7 +47,7 @@ export default (ComposedComponent: NextPage) => {
         }
       } else if (
         !isAuthenticated &&
-        ["/sign-up", "/sign-in"].indexOf(ctx.asPath) === -1
+        ["/sign-up", "/sign-in", "/admin/sign-up"].indexOf(ctx.asPath) === -1
       ) {
         if (typeof window !== "undefined") {
           Router.push("/sign-up");
