@@ -30,9 +30,9 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post("/login", userController.postLogin);
-app.post("/signup", userController.postSignup);
-app.post("/admin/signup", userController.postAdminSignup);
+app.post("/sign-up", userController.postSignUp);
+app.post("/sign-in", userController.postSignIn);
+app.post("/admin/sign-up", userController.postAdminSignUp);
 app.get("/webhook", userController.getWebhook);
 app.get("/jwks", userController.getJwks);
 /**

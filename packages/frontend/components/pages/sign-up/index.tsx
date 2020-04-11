@@ -25,7 +25,7 @@ const SignUp: NextPage = () => {
   const handleSubmit = async (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    const res = await request.post("/signup", {
+    const res = await request.post("/sign-up", {
       email,
       password,
     });

@@ -25,125 +25,6 @@ exports.getJwks = async (req: Request, res: Response) => {
   handleResponse(res, 200, jwks);
 };
 
-/**
- * Sign in using email and password and returns JWT
- */
-exports.postLogin = async (req: Request, res: any, next: NextFunction) => {
-  check("email").isEmail();
-  check("password").not().isEmpty();
-
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  passport.authenticate("local", (err: Error, user: any) => {
-    if (err) {
-      return handleResponse(res, 400, { error: err });
-    }
-    if (user) {
-      handleResponse(res, 200, user.getUser());
-    }
-  })(req, res, next);
-};
-
-/**
- * POST /signup
- * Create a new local account
- */
-exports.postSignup = async (req: Request, res: any, next: NextFunction) => {
-  check("email").isEmail();
-  check("password").not().isEmpty();
-
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  try {
-    await User.query().allowInsert("[email, password]").insert({
-      email: req.body.email,
-      password: req.body.password,
-    });
-  } catch (err) {
-    errorHandler(err, res);
-
-    return;
-  }
-
-  passport.authenticate("local", async (err: Error, user: any) => {
-    if (err) {
-      return handleResponse(res, 400, { error: err });
-    }
-    if (user) {
-      const { id: userId } = await user.getUser();
-
-      const { id: roleId } = await Role.query().findOne({
-        name: "user",
-      });
-
-      await UserRole.query().insert({
-        role_id: roleId,
-        user_id: userId,
-      });
-
-      handleResponse(res, 200, user.getUser("user"));
-    }
-  })(req, res, next);
-};
-
-/**
- * POST /admin/signup
- * Create a new local admin account
- */
-exports.postAdminSignup = async (
-  req: Request,
-  res: any,
-  next: NextFunction
-) => {
-  check("email").isEmail();
-  check("password").not().isEmpty();
-
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  try {
-    await User.query().allowInsert("[email, password]").insert({
-      email: req.body.email,
-      password: req.body.password,
-    });
-  } catch (err) {
-    errorHandler(err, res);
-
-    return;
-  }
-
-  passport.authenticate("local", async (err: Error, user: any) => {
-    if (err) {
-      return handleResponse(res, 400, { error: err });
-    }
-    if (user) {
-      const { id: userId } = await user.getUser();
-
-      const { id: roleId } = await Role.query().findOne({
-        name: "admin",
-      });
-
-      await UserRole.query().insert({
-        role_id: roleId,
-        user_id: userId,
-      });
-
-      handleResponse(res, 200, user.getUser("admin"));
-    }
-  })(req, res, next);
-};
-
 exports.getWebhook = async (
   req: Request,
   res: Response,
@@ -161,6 +42,110 @@ exports.getWebhook = async (
   })(req, res, next);
 };
 
-function handleResponse(res: Response, code: number, statusMsg: any) {
+const handleResponse = (res: Response, code: number, statusMsg: any) => {
   res.status(code).json(statusMsg);
-}
+};
+
+const signUpUser = async (
+  req: Request,
+  res: any,
+  next: NextFunction,
+  userType: string
+) => {
+  check("email").isEmail();
+  check("password").not().isEmpty();
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    await User.query().allowInsert("[email, password]").insert({
+      email: req.body.email,
+      password: req.body.password,
+    });
+  } catch (err) {
+    errorHandler(err, res);
+
+    return;
+  }
+
+  passport.authenticate("local", async (err: Error, user: any) => {
+    if (err) {
+      return handleResponse(res, 400, { error: err });
+    }
+    if (user) {
+      const { id: userId } = await user.getUser();
+
+      const { id: roleId } = await Role.query().findOne({
+        name: userType,
+      });
+
+      await UserRole.query().insert({
+        role_id: roleId,
+        user_id: userId,
+      });
+
+      handleResponse(res, 200, user.getUser(userType));
+    }
+  })(req, res, next);
+};
+
+const signInUser = async (req: Request, res: any, next: NextFunction) => {
+  check("email").isEmail();
+  check("password").not().isEmpty();
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  passport.authenticate("local", async (err: Error, user: any) => {
+    if (err) {
+      return handleResponse(res, 400, { error: err });
+    }
+    if (user) {
+      const { id: userId } = await user.getUser();
+
+      const { role_id: userRoleId } = await UserRole.query().findOne({
+        user_id: userId,
+      });
+
+      const userRole = await Role.query().findOne({
+        id: userRoleId,
+      });
+
+      handleResponse(res, 200, user.getUser(userRole.name));
+    }
+  })(req, res, next);
+};
+
+/**
+ * POST /signup
+ * Create a new local account
+ */
+exports.postSignUp = async (req: Request, res: any, next: NextFunction) => {
+  signUpUser(req, res, next, "user");
+};
+
+/**
+ * POST /admin/signup
+ * Create a new local admin account
+ */
+exports.postAdminSignUp = async (
+  req: Request,
+  res: any,
+  next: NextFunction
+) => {
+  signUpUser(req, res, next, "admin");
+};
+
+/**
+ * Sign in using email and password and returns JWT
+ */
+exports.postSignIn = async (req: Request, res: any, next: NextFunction) => {
+  signInUser(req, res, next);
+};

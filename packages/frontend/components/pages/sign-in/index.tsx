@@ -16,7 +16,7 @@ import { NextPage } from "next";
 import { cookieSetter } from "lib/cookie";
 import Link from "next/link";
 
-const SignUp: NextPage = () => {
+const SignIn: NextPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [request, response] = useFetch(`${process.env.AUTH_URL}`);
@@ -25,7 +25,7 @@ const SignUp: NextPage = () => {
   const handleSubmit = async (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    const res = await request.post("/admin/sign-up", {
+    const res = await request.post("/sign-in", {
       email,
       password,
     });
@@ -90,14 +90,14 @@ const SignUp: NextPage = () => {
                   type="submit"
                   variantColor="purple"
                   size="lg"
-                  loadingText="Signing up..."
+                  loadingText="Signing in..."
                   onClick={handleSubmit}
                   isLoading={request.loading}
                 >
-                  Sign Up
+                  Sign In
                 </Button>
-                <Link href="/sign-in">
-                  <_Link>Sign In</_Link>
+                <Link href="/sign-up">
+                  <_Link>Sign Up</_Link>
                 </Link>
               </Stack>
             </FormControl>
@@ -108,4 +108,4 @@ const SignUp: NextPage = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
