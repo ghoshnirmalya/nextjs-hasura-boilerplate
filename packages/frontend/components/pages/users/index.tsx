@@ -3,6 +3,7 @@ import { Box, Grid, Link as _Link, Heading, Text } from "@chakra-ui/core";
 import { NextPage } from "next";
 import gql from "graphql-tag";
 import { useQuery } from "react-apollo";
+import Loader from "components/loader";
 
 const FETCH_USER_QUERY = gql`
   query fetchUser {
@@ -19,7 +20,7 @@ const Users: NextPage = () => {
   const { data, loading, error } = useQuery(FETCH_USER_QUERY);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {

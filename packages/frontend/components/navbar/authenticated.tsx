@@ -8,6 +8,7 @@ import gql from "graphql-tag";
 import { useQuery } from "react-apollo";
 import withApollo from "lib/with-apollo";
 import { cookieParser } from "lib/cookie";
+// import Loader from "components/loader";
 
 const FETCH_USER_QUERY = gql`
   query fetchUser($id: uuid!) {
@@ -31,7 +32,7 @@ const Navbar: NextComponentType = () => {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Box />;
   }
 
   if (error) {

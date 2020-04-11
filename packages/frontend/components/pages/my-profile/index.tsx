@@ -16,6 +16,7 @@ import gql from "graphql-tag";
 import { useQuery, useMutation } from "react-apollo";
 import Link from "next/link";
 import { cookieParser } from "lib/cookie";
+import Loader from "components/loader";
 
 const FETCH_USER_QUERY = gql`
   query fetchUser($id: uuid!) {
@@ -72,7 +73,7 @@ const MyProfile: NextPage = () => {
   ] = useMutation(UPDATE_USER_MUTATION);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
