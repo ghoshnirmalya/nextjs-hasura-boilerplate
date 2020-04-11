@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Page from "components/pages/sign-in";
-import WithAuthentication from "lib/with-authentication";
+import withAuthentication from "lib/with-authentication";
 
 const SignInPage = () => {
   return (
@@ -14,4 +14,4 @@ const SignInPage = () => {
   );
 };
 
-export default WithAuthentication(SignInPage);
+export default withAuthentication(SignInPage);

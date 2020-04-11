@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Page from "components/pages/index";
-import WithAuthentication from "lib/with-authentication";
+import withAuthentication from "lib/with-authentication";
 import withApollo from "lib/with-apollo";
 
 const IndexPage = () => {
@@ -15,4 +15,4 @@ const IndexPage = () => {
   );
 };
 
-export default withApollo(WithAuthentication(IndexPage));
+export default withApollo(withAuthentication(IndexPage));

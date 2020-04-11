@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Page from "components/pages/users";
-import WithAuthentication from "lib/with-authentication";
+import withAuthentication from "lib/with-authentication";
 import withApollo from "lib/with-apollo";
 
 const UsersPage = () => {
@@ -15,4 +15,4 @@ const UsersPage = () => {
   );
 };
 
-export default withApollo(WithAuthentication(UsersPage));
+export default withApollo(withAuthentication(UsersPage));

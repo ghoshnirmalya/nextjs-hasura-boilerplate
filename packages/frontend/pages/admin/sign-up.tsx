@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Page from "components/pages/admin/sign-up";
-import WithAuthentication from "lib/with-authentication";
+import withAuthentication from "lib/with-authentication";
 
 const AdminSignUpPage = () => {
   return (
@@ -14,4 +14,4 @@ const AdminSignUpPage = () => {
   );
 };
 
-export default WithAuthentication(AdminSignUpPage);
+export default withAuthentication(AdminSignUpPage);
