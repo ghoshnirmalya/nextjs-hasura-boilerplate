@@ -1,4 +1,6 @@
-<h1 align="center">Hasura Next.js Boilerplate</h1>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/6391763/83290846-fa3b9880-a204-11ea-91d3-28afe7543d2c.png" alt="Logo"/>
+</p>
 
 <p align="center">
   <a href="https://twitter.com/nirmalyaghosh23">
@@ -6,7 +8,7 @@
   </a>
 </p>
 
-This is a boilerplate for building applications using Hasura and Next.js. This mon-orepo consists of the following packages:
+This is a boilerplate for building applications using Hasura and Next.js. This mono-repo consists of the following packages:
 
 1. [**frontend**](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/tree/master/packages/frontend): Next.js application
 2. [**backend**](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/tree/master/packages/backend): Dockerized Hasura application
@@ -15,7 +17,6 @@ This is a boilerplate for building applications using Hasura and Next.js. This m
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 
 - [Overview](#overview)
 - [Requirements](#requirements)
@@ -156,6 +157,16 @@ We need to start Docker and then run the above command which will change the cur
 ## Deployment
 
 We’re still working on this feature. The documentation will be updated soon.
+
+## Other interesting repositories
+
+1. [Hasura Next.js Trello Clone](https://github.com/ghoshnirmalya/nextjs-hasura-trello-clone)
+2. [React Search Box](https://github.com/ghoshnirmalya/react-search-box)
+3. [LinkedIn Clone using Create React App](https://github.com/ghoshnirmalya/linkedin-clone-react-frontend)
+
+## Built using this package
+
+1. [Hasura Next.js Trello Clone](https://github.com/ghoshnirmalya/nextjs-hasura-trello-clone)
 
 ## Inspiration
 
