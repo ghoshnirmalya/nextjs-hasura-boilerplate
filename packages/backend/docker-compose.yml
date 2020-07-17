@@ -2,6 +2,8 @@ version: "3"
 
 services:
   backend:
+    container_name: nextjs-hasura-boilerplate-backend
+    image: nextjs-hasura-boilerplate-backend
     build:
       context: .
     depends_on:
@@ -11,13 +13,16 @@ services:
       - "8080:8080"
     volumes:
       - .:/usr/src/app
+    restart: on-failure
 
   db:
+    container_name: nextjs-hasura-boilerplate-db
     image: postgres:11.3-alpine
     ports:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    restart: unless-stopped
 
 volumes:
   db_data:

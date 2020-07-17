@@ -1,42 +1,47 @@
+// @ts-nocheck
+
 import React from "react";
 import NextApp from "next/app";
-import { ThemeProvider, CSSReset, Box, Grid } from "@chakra-ui/core";
-import AuthenticatedNavbar from "components/navbar/authenticated";
-import UnauthenticatedNavbar from "components/navbar/unauthenticated";
+import Head from "next/head";
 import { cookieParser } from "lib/cookie";
+import Navbar from "components/navbar";
+import { Provider as NextAuthProvider } from "next-auth/client";
+import {
+  ThemeProvider,
+  CSSReset,
+  ColorModeProvider,
+  Grid,
+  Box,
+  theme,
+} from "@chakra-ui/core";
 
-class App extends NextApp {
-  render() {
-    const { Component } = this.props;
-    const isAuthenticated = !!cookieParser("token");
+const App = ({ Component, pageProps }) => {
+  const { session } = pageProps;
+  const heightOfNavbar: string = "74px";
 
-    return (
-      <ThemeProvider>
-        <CSSReset />
-        <Box fontSize="sm" bg="gray.50">
-          {!!isAuthenticated ? (
-            <AuthenticatedNavbar {...this.props} />
-          ) : (
-            <UnauthenticatedNavbar />
-          )}
-          <Grid
-            templateColumns="repeat(1, 1fr)"
-            bg="gray.50"
-            minH="100vh"
-            maxW="6xl"
-            w="full"
-            mx="auto"
-            py={8}
-            px={4}
-          >
-            <Box>
-              <Component {...this.props} />
+  return (
+    <>
+      <Head>
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+      </Head>
+      <NextAuthProvider session={session}>
+        <ThemeProvider theme={theme}>
+          <CSSReset />
+          <Navbar />
+          <Box>
+            <Box
+              minH={`calc(100vh - ${heightOfNavbar})`}
+              maxW="6xl"
+              mx="auto"
+              p={4}
+            >
+              <Component {...pageProps} />
             </Box>
-          </Grid>
-        </Box>
-      </ThemeProvider>
-    );
-  }
-}
+          </Box>
+        </ThemeProvider>
+      </NextAuthProvider>
+    </>
+  );
+};
 
 export default App;

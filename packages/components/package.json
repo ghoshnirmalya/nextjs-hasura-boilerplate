@@ -1,6 +1,6 @@
 {
   "name": "@hasura-next/components",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "nirmalya.email@gmail.com",
   "license": "MIT",
   "main": "build/index.js",

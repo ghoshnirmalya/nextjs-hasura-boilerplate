@@ -1,0 +1,23 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: CREATE EXTENSION IF NOT EXISTS pgcrypto;
+  type: run_sql
+- args:
+    cascade: false
+    read_only: false
+    sql: "CREATE TABLE \"public\".\"users\"(\"id\" uuid NOT NULL DEFAULT gen_random_uuid(),
+      \"name\" varchar NOT NULL, \"email\" varchar NOT NULL, \"email_verified\" timestamptz,
+      \"image\" bpchar, \"created_at\" timestamptz NOT NULL DEFAULT now(), \"updated_at\"
+      timestamptz NOT NULL DEFAULT now(), PRIMARY KEY (\"id\") , UNIQUE (\"id\"));\nCREATE
+      OR REPLACE FUNCTION \"public\".\"set_current_timestamp_updated_at\"()\nRETURNS
+      TRIGGER AS $$\nDECLARE\n  _new record;\nBEGIN\n  _new := NEW;\n  _new.\"updated_at\"
+      = NOW();\n  RETURN _new;\nEND;\n$$ LANGUAGE plpgsql;\nCREATE TRIGGER \"set_public_users_updated_at\"\nBEFORE
+      UPDATE ON \"public\".\"users\"\nFOR EACH ROW\nEXECUTE PROCEDURE \"public\".\"set_current_timestamp_updated_at\"();\nCOMMENT
+      ON TRIGGER \"set_public_users_updated_at\" ON \"public\".\"users\" \nIS 'trigger
+      to set value of column \"updated_at\" to current timestamp on row update';"
+  type: run_sql
+- args:
+    name: users
+    schema: public
+  type: add_existing_table_or_view

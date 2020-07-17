@@ -1,6 +1,0 @@
-- args:
-    role: user
-    table:
-      name: user
-      schema: public
-  type: drop_update_permission
