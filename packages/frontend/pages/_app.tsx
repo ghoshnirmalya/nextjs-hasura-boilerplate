@@ -1,23 +1,12 @@
-// @ts-nocheck
-
 import React from "react";
-import NextApp from "next/app";
+import { AppProps } from "next/app";
 import Head from "next/head";
-import { cookieParser } from "lib/cookie";
-import Navbar from "components/navbar";
 import { Provider as NextAuthProvider } from "next-auth/client";
-import {
-  ThemeProvider,
-  CSSReset,
-  ColorModeProvider,
-  Grid,
-  Box,
-  theme,
-} from "@chakra-ui/core";
+import { ThemeProvider, CSSReset, theme } from "@chakra-ui/core";
+import Layout from "components/layout";
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps }: AppProps) => {
   const { session } = pageProps;
-  const heightOfNavbar: string = "74px";
 
   return (
     <>
@@ -27,17 +16,9 @@ const App = ({ Component, pageProps }) => {
       <NextAuthProvider session={session}>
         <ThemeProvider theme={theme}>
           <CSSReset />
-          <Navbar />
-          <Box>
-            <Box
-              minH={`calc(100vh - ${heightOfNavbar})`}
-              maxW="6xl"
-              mx="auto"
-              p={4}
-            >
-              <Component {...pageProps} />
-            </Box>
-          </Box>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ThemeProvider>
       </NextAuthProvider>
     </>

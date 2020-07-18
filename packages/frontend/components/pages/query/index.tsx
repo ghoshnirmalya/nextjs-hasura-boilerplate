@@ -1,11 +1,11 @@
 import React from "react";
 import gql from "graphql-tag";
-import { useSubscription } from "urql";
+import { useQuery } from "urql";
 import { Box, Stack, Text } from "@chakra-ui/core";
 import IUser from "types/user";
 
-const usersSubscription = gql`
-  subscription FetchUsers {
+const usersQuery = gql`
+  query FetchUsers {
     users {
       id
       name
@@ -13,13 +13,17 @@ const usersSubscription = gql`
   }
 `;
 
-const Users = () => {
-  const [result] = useSubscription({
-    query: usersSubscription,
+const Query = () => {
+  const [result] = useQuery({
+    query: usersQuery,
   });
 
-  if (!result.data) {
-    return <p>No new messages</p>;
+  if (result.fetching || !result.data) {
+    return null;
+  }
+
+  if (result.error) {
+    return null;
   }
 
   return (
@@ -33,4 +37,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Query;

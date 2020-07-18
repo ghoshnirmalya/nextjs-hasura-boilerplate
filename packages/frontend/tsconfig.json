@@ -19,6 +19,7 @@
       "lib/*": ["lib/*"],
       "pages/*": ["pages/*"],
       "types/*": ["types/*"],
+      "configs/*": ["configs/*"],
     }
   },
   "exclude": ["node_modules"],
