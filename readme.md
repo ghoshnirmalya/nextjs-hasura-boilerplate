@@ -60,48 +60,11 @@ This boilerplate is built using [Lerna](https://lerna.js.org/) for managing all 
 
 This application is the primary user-facing application. Once it’s up and running (see Development section), it’s available on http://localhost:3000/.
 
-If we’re already signed into the application, we should be able to view [that page](http://localhost:3000/). Otherwise, we be redirected to the [Sign Up page](http://localhost:3000/sign-up). If we want to redirect our users to a different route (eg: [the Sign In page](http://localhost:3000/sign-in)), we can modify [this line](https://github.com/ghoshnirmalya/nextjs-hasura-trello-clone/blob/master/packages/frontend/lib/with-authentication.tsx#L53):
+![Home page before login](https://user-images.githubusercontent.com/6391763/87957803-61bbe900-cace-11ea-9b57-155976e3b3ac.png)
 
-```js
-...
-if (typeof window !== "undefined") {
-    // Router.push("/sign-up");
-    Router.push("/sign-in");
-} else {
-...
-```
+To create a new user, we’ll have to Sign Up using Google. [NextAuth](https://next-auth.js.org/) is being used to help us in authentication.
 
-Once we’re signed in to the application, we should be able to view the following screen on http://localhost:3000/:
-
-![Home page](https://paper-attachments.dropbox.com/s_CF4CC31F06B2FF9025475AC4D29182F2980CED36D7900B42B134426EAC3576E8_1586688232078_screely-1586688152150.png)
-
-To create a new user, we’ll have to Sign Up [here](http://localhost:3000/sign-up):
-
-![Sign Up page](https://paper-attachments.dropbox.com/s_CF4CC31F06B2FF9025475AC4D29182F2980CED36D7900B42B134426EAC3576E8_1586688511505_screely-1586688498119.png)
-
-If the user was successfully created, we’ll be redirected to the [home page](http://localhost:3000/). If there’re any errors while creating the new user, an alert box will be shown above the form:
-
-![Sign Up page with an error message](https://paper-attachments.dropbox.com/s_CF4CC31F06B2FF9025475AC4D29182F2980CED36D7900B42B134426EAC3576E8_1586688697018_screely-1586688615902.png)
-
-To create an admin, we’ll need to visit the http://localhost:3000/admin/sign-up route. The creation of the new admin is similar to the creation of a user. The only difference is that for the admin, the role is **admin** and for users, its **user**.
-
-![Response for fetching user role of a user](https://paper-attachments.dropbox.com/s_CF4CC31F06B2FF9025475AC4D29182F2980CED36D7900B42B134426EAC3576E8_1586689146386_carbon+1.png)
-
-![Response for fetching user role of a admin](https://paper-attachments.dropbox.com/s_CF4CC31F06B2FF9025475AC4D29182F2980CED36D7900B42B134426EAC3576E8_1586689215270_carbon+2.png)
-
-An admin can visit the [users page](http://localhost:3000/users) which is useful for fetching all the users who signed up in our application. This page and its components could be useful for managing the users. The user link [will be hidden in the Navbar if the current user isn’t an](https://github.com/ghoshnirmalya/nextjs-hasura-trello-clone/blob/master/packages/frontend/components/navbar/authenticated.tsx#L76-L82) [**admin**](https://github.com/ghoshnirmalya/nextjs-hasura-trello-clone/blob/master/packages/frontend/components/navbar/authenticated.tsx#L76-L82).
-
-A user should be redirected to the [boards page](http://localhost:3000/boards) after signing in or signing up:
-
-![Boards page](https://user-images.githubusercontent.com/6391763/83292088-222bfb80-a207-11ea-9c7d-c9720b959bb0.png)
-
-Any authenticated user should be able to visit a board page and view all the cards which have been added to that board:
-
-![Board page](https://user-images.githubusercontent.com/6391763/83292633-0ffe8d00-a208-11ea-9ca7-7f9bf98311ee.png)
-
-Any authenticated should also be able to view all the details in a card:
-
-![Card details](https://user-images.githubusercontent.com/6391763/83292992-b054b180-a208-11ea-84a7-93cfa2f5a424.png)
+![Home page after login](https://user-images.githubusercontent.com/6391763/87957968-93cd4b00-cace-11ea-8ce5-c3c9a14d63c8.png)
 
 ### 2. [**Backend**](https://github.com/ghoshnirmalya/nextjs-hasura-trello-clone/tree/master/packages/backend): Dockerized Hasura application
 
