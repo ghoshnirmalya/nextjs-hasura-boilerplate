@@ -1,12 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import Page from "components/pages/query";
-import { withUrqlClient } from "next-urql";
 import { NextPage } from "next";
 import Loader from "components/loader";
 import AccessDeniedIndicator from "components/access-denied-indicator";
 import { useSession } from "next-auth/client";
-import graphqlQueryConfig from "configs/graphql-query";
+import WithGraphQLQuery from "lib/with-graphql-query";
 
 const QueryPage: NextPage = () => {
   const [session, loading] = useSession();
@@ -20,13 +19,13 @@ const QueryPage: NextPage = () => {
   }
 
   return (
-    <>
+    <WithGraphQLQuery>
       <Head>
         <title>People Page</title>
       </Head>
       <Page />
-    </>
+    </WithGraphQLQuery>
   );
 };
 
-export default withUrqlClient(graphqlQueryConfig)(QueryPage);
+export default QueryPage;

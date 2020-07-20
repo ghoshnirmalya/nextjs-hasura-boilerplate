@@ -1,12 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import Page from "components/pages/subscription";
-import { withUrqlClient } from "next-urql";
 import { NextPage } from "next";
 import Loader from "components/loader";
 import AccessDeniedIndicator from "components/access-denied-indicator";
 import { useSession } from "next-auth/client";
-import graphqlSubscriptionConfig from "configs/graphql-subscription";
+import WithGraphQLSubscription from "lib/with-graphql-subscription";
 
 const SubscriptionPage: NextPage = () => {
   const [session, loading] = useSession();
@@ -20,13 +19,13 @@ const SubscriptionPage: NextPage = () => {
   }
 
   return (
-    <>
+    <WithGraphQLSubscription>
       <Head>
         <title>Users Page</title>
       </Head>
       <Page />
-    </>
+    </WithGraphQLSubscription>
   );
 };
 
-export default withUrqlClient(graphqlSubscriptionConfig)(SubscriptionPage);
+export default SubscriptionPage;
