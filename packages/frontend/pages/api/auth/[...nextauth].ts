@@ -24,7 +24,7 @@ const options = {
   ],
   database: process.env.DATABASE_URL,
   session: {
-    jwt: true,
+    jwt: false,
   },
   jwt: {
     encode: async ({ token, secret }: { token: iToken; secret: string }) => {
