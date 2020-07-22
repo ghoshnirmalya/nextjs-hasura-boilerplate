@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import Loader from "components/loader";
 import AccessDeniedIndicator from "components/access-denied-indicator";
 import { useSession } from "next-auth/client";
-import WithGraphQLQuery from "lib/with-graphql-query";
+import WithGraphQL from "lib/with-graphql";
 
 const QueryPage: NextPage = () => {
   const [session, loading] = useSession();
@@ -19,12 +19,12 @@ const QueryPage: NextPage = () => {
   }
 
   return (
-    <WithGraphQLQuery>
+    <WithGraphQL>
       <Head>
         <title>People Page</title>
       </Head>
       <Page />
-    </WithGraphQLQuery>
+    </WithGraphQL>
   );
 };
 

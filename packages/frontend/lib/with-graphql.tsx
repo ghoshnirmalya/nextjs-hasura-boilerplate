@@ -1,3 +1,4 @@
+import fetch from "isomorphic-unfetch";
 import { Client, defaultExchanges, subscriptionExchange, Provider } from "urql";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 import ws from "isomorphic-ws";
@@ -14,7 +15,12 @@ const subscriptionClient = new SubscriptionClient(
 );
 
 const client = new Client({
-  url: process.env.WS_URL || "ws://localhost:8080/v1/graphql",
+  url: process.env.API_URL || "http://localhost:8080/v1/graphql",
+  fetch,
+  fetchOptions: {
+    headers: { "X-Hasura-Admin-Secret": "secret" },
+  },
+  requestPolicy: "cache-and-network",
   exchanges: [
     ...defaultExchanges,
     subscriptionExchange({
@@ -25,8 +31,8 @@ const client = new Client({
   ],
 });
 
-const WithGraphQLSubscription = ({ children }: any) => (
+const WithGraphQL = ({ children }: any) => (
   <Provider value={client}>{children}</Provider>
 );
 
-export default WithGraphQLSubscription;
+export default WithGraphQL;

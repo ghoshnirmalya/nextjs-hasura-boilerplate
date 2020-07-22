@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import Loader from "components/loader";
 import AccessDeniedIndicator from "components/access-denied-indicator";
 import { useSession } from "next-auth/client";
-import WithGraphQLSubscription from "lib/with-graphql-subscription";
+import WithGraphQL from "lib/with-graphql";
 
 const SubscriptionPage: NextPage = () => {
   const [session, loading] = useSession();
@@ -19,12 +19,12 @@ const SubscriptionPage: NextPage = () => {
   }
 
   return (
-    <WithGraphQLSubscription>
+    <WithGraphQL>
       <Head>
         <title>Users Page</title>
       </Head>
       <Page />
-    </WithGraphQLSubscription>
+    </WithGraphQL>
   );
 };
 
