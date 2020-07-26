@@ -6,8 +6,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 interface iToken {
   email: string;
-  name: string;
-  picture: string;
+  name?: string;
+  picture?: string;
 }
 
 const client = new Client({
@@ -17,9 +17,9 @@ const client = new Client({
 const options = {
   site: process.env.VERCEL_URL,
   providers: [
-    Providers.Google({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
+    Providers.Email({
+      server: process.env.EMAIL_SERVER,
+      from: process.env.EMAIL_FROM,
     }),
   ],
   database: process.env.DATABASE_URL,

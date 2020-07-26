@@ -1,6 +1,4 @@
-
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-CREATE TABLE "public"."verification_requests"("id" uuid NOT NULL DEFAULT gen_random_uuid(), "identifier" varchar NOT NULL, "token" varchar NOT NULL, "expires" timestamptz NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , UNIQUE ("id"));
+CREATE TABLE "public"."verification_requests"("id" serial NOT NULL, "identifier" varchar NOT NULL, "token" varchar NOT NULL, "expires" timestamptz NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , UNIQUE ("id"));
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
 RETURNS TRIGGER AS $$
 DECLARE
