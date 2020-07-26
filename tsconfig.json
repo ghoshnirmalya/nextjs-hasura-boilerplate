@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@hasura-next/components/*": ["./packages/hasura-next/components/src"]
-    }
-  }
-}
