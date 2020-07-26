@@ -1,21 +1,20 @@
 {
-  "name": "@hasura-next/frontend",
+  "name": "nextjs-hasura-boilerplate-frontend",
   "version": "0.0.1",
   "author": "nirmalya.email@gmail.com",
   "license": "MIT",
   "scripts": {
-    "start": "next",
+    "dev": "next dev",
     "build:analyze": "ANALYZE=true next build && tsc --project tsconfig.server.json",
     "build": "next build",
     "export": "next export",
-    "start:prod": "NODE_ENV=production next start",
+    "start": "next start",
     "type-check": "tsc"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@hasura-next/components": "^0.0.1",
     "emotion-theming": "^10.0.27",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.4",
@@ -40,21 +39,8 @@
     "@types/pg": "^7.14.4",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5",
     "tslint": "^6.1.2",
     "tslint-react": "^5.0.0",
     "typescript": "^3.9.7"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,css,md,tsx,ts}": [
-      "prettier --write"
-    ]
   }
 }

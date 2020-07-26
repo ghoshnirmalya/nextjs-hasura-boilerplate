@@ -1,20 +1,23 @@
 {
-  "private": true,
   "scripts": {
-    "clean": "lerna clean",
-    "bootstrap": "lerna bootstrap",
-    "test": "CI=true lerna run test --stream",
-    "start": "lerna run --parallel start",
-    "prepare": "rimraf components/build && lerna run prepare",
-    "build": "npm run prepare && lerna run --parallel build"
+    "dev:frontend": "cd frontend && yarn dev",
+    "build:frontend": "cd frontend && yarn build",
+    "export:frontend": "cd frontend && yarn export",
+    "start:frontend": "cd frontend && yarn start"
   },
   "devDependencies": {
-    "@types/node": "^13.9.8",
-    "lerna": "3.20.2",
-    "rimraf": "^3.0.2",
-    "typescript": "3.8.3"
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md,tsx,ts}": [
+      "prettier --write"
+    ]
+  }
 }
