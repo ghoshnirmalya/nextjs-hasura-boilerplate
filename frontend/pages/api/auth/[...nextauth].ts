@@ -1,21 +1,16 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import jwt from "jsonwebtoken";
-import { Client } from "pg";
 import { NextApiRequest, NextApiResponse } from "next";
 
 interface iToken {
+  id: string;
   email: string;
   name?: string;
   picture?: string;
 }
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-});
-
 const options = {
-  site: process.env.VERCEL_URL,
   providers: [
     Providers.Email({
       server: process.env.EMAIL_SERVER,
@@ -24,34 +19,23 @@ const options = {
   ],
   database: process.env.DATABASE_URL,
   session: {
-    jwt: false,
+    jwt: true,
   },
   jwt: {
     encode: async ({ token, secret }: { token: iToken; secret: string }) => {
-      // @ts-ignore
-      if (!client._connected) {
-        client.connect();
-      }
-
-      const result = await client.query(
-        "SELECT * FROM users WHERE email = $1",
-        [token.email]
-      );
-
-      const user = result.rows[0];
-
       const tokenContents = {
+        id: token.id,
         name: token.name,
         email: token.email,
         picture: token.picture,
         "https://hasura.io/jwt/claims": {
           "x-hasura-allowed-roles": ["admin", "user"],
           "x-hasura-default-role": "user",
-          "x-hasura-user-id": user.id.toString(),
+          "x-hasura-user-id": token.id,
         },
         iat: Date.now() / 1000,
         exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
-        sub: user.id.toString(),
+        sub: token.id,
       };
 
       const signOptions = {
@@ -82,8 +66,23 @@ const options = {
       return decodedToken;
     },
   },
-  allowSignin: () => true,
   debug: true,
+  callbacks: {
+    session: async (session, user) => {
+      session.id = user.id;
+
+      return Promise.resolve(session);
+    },
+    jwt: async (token, user) => {
+      const isSignIn = user ? true : false;
+
+      if (isSignIn) {
+        token.id = user.id;
+      }
+
+      return Promise.resolve(token);
+    },
+  },
 };
 
 const Auth = (req: NextApiRequest, res: NextApiResponse) =>
