@@ -4,7 +4,7 @@ import { SubscriptionClient } from "subscriptions-transport-ws";
 import ws from "isomorphic-ws";
 
 const subscriptionClient = new SubscriptionClient(
-  process.env.WS_URL || "ws://localhost:8080/v1/graphql",
+  process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8080/v1/graphql",
   {
     reconnect: true,
     connectionParams: {
@@ -15,7 +15,7 @@ const subscriptionClient = new SubscriptionClient(
 );
 
 const client = new Client({
-  url: process.env.API_URL || "http://localhost:8080/v1/graphql",
+  url: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/v1/graphql",
   fetch,
   fetchOptions: {
     headers: { "X-Hasura-Admin-Secret": "secret" },
