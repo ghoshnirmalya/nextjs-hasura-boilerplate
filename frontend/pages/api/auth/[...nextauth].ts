@@ -48,7 +48,7 @@ const options = {
 
       const encodedToken = jwt.sign(
         tokenContents,
-        process.env.AUTH_PRIVATE_KEY || secret,
+        process.env.AUTH_PRIVATE_KEY.replace(/\\n/gm, "\n") || secret,
         // @ts-ignore
         signOptions
       );
@@ -62,7 +62,7 @@ const options = {
 
       const decodedToken = jwt.verify(
         token,
-        process.env.AUTH_PRIVATE_KEY || secret,
+        process.env.AUTH_PRIVATE_KEY.replace(/\\n/gm, "\n") || secret,
         // @ts-ignore
         signOptions
       );
