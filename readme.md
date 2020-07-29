@@ -135,7 +135,7 @@ We need to start Docker and then run the above command which will change the cur
 ## Deployment
 
 [![Deploy to
-Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/tree/master/backend)
+Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate)
 
 We’re still working on this feature. The documentation will be updated soon.
 
