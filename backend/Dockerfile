@@ -1,12 +1,25 @@
 FROM hasura/graphql-engine:v1.3.0-beta.4.cli-migrations-v2
 
-# Set working directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# # Copy migrations directory
+COPY ./migrations /hasura-migrations
 
-COPY . /usr/src/app
+# # Copy metadata directory
+COPY ./metadata /hasura-metadata
+
+# Enable the console
+ENV HASURA_GRAPHQL_ENABLE_CONSOLE=true
+
+# Heroku hobby tier PG has few limitations including 20 max connections
+# https://devcenter.heroku.com/articles/heroku-postgres-plans#hobby-tier
+ENV HASURA_GRAPHQL_PG_CONNECTIONS=15
+
+# https://github.com/hasura/graphql-engine/issues/4651#issuecomment-623414531
+ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=default
+
+# https://github.com/hasura/graphql-engine/issues/5172#issuecomment-653774367
+ENV HASURA_GRAPHQL_MIGRATIONS_DATABASE_ENV_VAR=DATABASE_URL
 
 CMD graphql-engine \
-  --database-url $HASURA_GRAPHQL_DATABASE_URL \
+  --database-url $DATABASE_URL \
   serve \
-  --enable-console
+  --server-port $PORT
