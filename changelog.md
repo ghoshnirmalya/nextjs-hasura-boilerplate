@@ -1,0 +1,78 @@
+## [0.0.1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-07-29)
+
+# [0.0.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-07-29)
+
+### Bug Fixes
+
+- adds missing metadata ([7482aa9](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/7482aa96f5a951bf0ba216baec8f46e1df292aec))
+- fixes Heroku deployment ([0dcbbd3](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/0dcbbd365c8efdf6dac6aec7ea65615a201d68c9))
+- fixes issue with private key ([a91d1df](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/a91d1df78027d6c1ae04561cf1044f9db67d04d3)), closes [/github.com/auth0/node-jsonwebtoken/issues/642#issuecomment-585173594](https://github.com//github.com/auth0/node-jsonwebtoken/issues/642/issues/issuecomment-585173594)
+- fixes migration not auto-applying on sever start ([13a7955](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/13a79554827be36561d7d8c1cfd6bc5caf3ce9cc))
+- Fixes role ([144f619](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/144f619be5b8fdadd125df559d0ca029ec0c0abf))
+- fixes SSL issue with Heroku database ([c339da1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/c339da140bd4661dfb5ebdb4a56f265fa90f30a6))
+- uses correct env variables ([d377a33](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/d377a33acdef6ac6cfeed32dbe01e695b9a6b6ad))
+
+### Features
+
+- Adds authentication and authorization ([c3cbce3](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/c3cbce3637e70c5a8adb5b70c61147de4a71ac27))
+- adds Google as OAuth provider ([76e87f2](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/76e87f25c87445c62893a0de60ce63b95ed13bdd))
+- Adds Loader component ([bac8009](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/bac80091dd83cb65ddcb89f83a93cdeffdfbe303))
+- Adds more fields for user ([e68c3c4](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/e68c3c4cb4d9e3aaf6925e89c10681acc421e41b))
+- Adds option to sign in a user ([c425288](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/c42528859465116585c1a9a6af7f29fbd1734b8c))
+- Adds option to update current user's email ([ab43d01](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/ab43d016e86ad895a52075274d17753c45e289dc))
+- adds separate components for query and subscription ([252675e](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/252675e057dd21ca5cf53cf37ef0a9a40ea437c7))
+- adds separate pages for query and subscription ([e2547e9](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/e2547e94516cc42b8918ffc655570779b72ff74c))
+- Fixes header sent from frontend package ([530834f](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/530834fb2368f9462405d51ee7503793d4e62190))
+- Permits Select operation based on current user ([e013799](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/e013799ec84e6e7c5dd7c1e6d5355bf87edbeb87))
+- Removes custom server from frontend package ([eb0e65a](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/eb0e65af21fc0be206f4e749a829bc0cece48b52))
+- Updates component styles ([b9e78e9](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/b9e78e936e792e13f69781c01e48a05789b02e02))
+- Updates headers sent from frontend package ([eb72365](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/eb72365203bd5863fc6405941f6658941ba7e8c3))
+- Updates logic for authentication ([99151de](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/99151deb462d33a2fe4f655c75c7b41219a8d074))
+- updates necessary tables ([10699ec](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/10699ec8144ab91831adf338d09e8ab1a96dae9a))
+- updates session table when a user logs in ([50c73dd](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/50c73dd9d0b96114c27844e2e583cb8c315fd588))
+- Upgrades all packages ([6031fa3](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/6031fa3322b22caa9145e711d532eebdb0ddfa4c))
+- uses next-auth for handling authentication ([d81aed1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/d81aed10c098162a2ac16b4770f0de0ef5c6d421))
+
+# [0.0.0-development.7](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-03-20)
+
+### Features
+
+- Removes all unnecessary files ([c0c9a4d](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/c0c9a4d33834d1f273d3360444887e7e7de2aca0))
+
+# [0.0.0-development.6](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-03-19)
+
+### Features
+
+- **app:** Restructures directories ([72423c9](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/72423c9d3ec504214877788b078d7ad00c597cc3))
+
+# [0.0.0-development.5](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-03-15)
+
+### Features
+
+- renames git-flash to nextjs-hasura-boilerplate ([1ea1d9f](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/1ea1d9f2060624b3409be93b4da2520737d1011b))
+
+# [0.0.0-development.4](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-03-15)
+
+### Features
+
+- **frontend:** removes server.ts ([f1f7687](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/f1f7687bd403185eadd7b0b6cc3927e1c910769d))
+
+### BREAKING CHANGES
+
+- **frontend:** Removes server.ts as we don't need an explicit server to run our app.
+
+# [0.0.0-development.3](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-02-28)
+
+### Features
+
+- adds GraphQL support with Hasura ([997b681](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/997b681fe01aa6e9523fc0146ee02817511ed4e7))
+
+# [0.0.0-development.2](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-02-28)
+
+# [0.0.0-development.1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-02-28)
+
+# [0.0.0-development.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-02-28)
+
+### Features
+
+- adds basic support for building apps using Next.js and Hasura ([3c10269](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/3c10269c51ac4f1ab2444f2d6fd1f66d0b90626d))
