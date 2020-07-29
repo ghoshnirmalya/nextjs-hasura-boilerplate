@@ -1,4 +1,4 @@
-CREATE TABLE "public"."users"("id" serial NOT NULL, "name" varchar, "email" varchar NOT NULL, "email_verified" timestamptz, "image" varchar, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , UNIQUE ("id"));
+CREATE TABLE "public"."users"("id" uuid NOT NULL UNIQUE DEFAULT gen_random_uuid(), "name" varchar, "email" varchar NOT NULL, "email_verified" timestamptz, "image" varchar, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , UNIQUE ("id"));
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -13,5 +13,5 @@ CREATE TRIGGER "set_public_users_updated_at"
 BEFORE UPDATE ON "public"."users"
 FOR EACH ROW
 EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
-COMMENT ON TRIGGER "set_public_users_updated_at" ON "public"."users" 
+COMMENT ON TRIGGER "set_public_users_updated_at" ON "public"."users"
 IS 'trigger to set value of column "updated_at" to current timestamp on row update';

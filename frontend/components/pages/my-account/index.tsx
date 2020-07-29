@@ -20,7 +20,7 @@ import Loader from "components/loader";
 import { useSession } from "next-auth/client";
 
 const usersQuery = gql`
-  query fetchUser($userId: Int!) {
+  query fetchUser($userId: uuid!) {
     users_by_pk(id: $userId) {
       id
       name
@@ -29,7 +29,7 @@ const usersQuery = gql`
 `;
 
 const updateUserMutation = gql`
-  mutation updateUser($userId: Int!, $name: String) {
+  mutation updateUser($userId: uuid!, $name: String) {
     update_users(where: { id: { _eq: $userId } }, _set: { name: $name }) {
       returning {
         id
