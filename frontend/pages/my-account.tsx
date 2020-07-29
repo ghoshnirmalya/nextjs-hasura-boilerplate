@@ -1,13 +1,13 @@
 import React from "react";
 import Head from "next/head";
-import Page from "components/pages/query";
+import Page from "components/pages/my-account";
 import { NextPage } from "next";
 import Loader from "components/loader";
 import AccessDeniedIndicator from "components/access-denied-indicator";
 import { useSession } from "next-auth/client";
 import WithGraphQL from "lib/with-graphql";
 
-const QueryPage: NextPage = () => {
+const MyAccountPage: NextPage = () => {
   const [session, loading] = useSession();
 
   if (loading) {
@@ -19,13 +19,13 @@ const QueryPage: NextPage = () => {
   }
 
   return (
-    <WithGraphQL>
+    <WithGraphQL userId={session.id}>
       <Head>
-        <title>People Page</title>
+        <title>My Account Page</title>
       </Head>
       <Page />
     </WithGraphQL>
   );
 };
 
-export default QueryPage;
+export default MyAccountPage;

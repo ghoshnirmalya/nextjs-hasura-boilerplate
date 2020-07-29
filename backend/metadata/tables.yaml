@@ -7,6 +7,44 @@
 - table:
     schema: public
     name: users
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - email
+      - email_verified
+      - image
+      - name
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - created_at
+      - email_verified
+      - updated_at
+      - email
+      - image
+      - name
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - image
+      - name
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: verification_requests

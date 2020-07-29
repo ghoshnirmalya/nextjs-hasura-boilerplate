@@ -15,7 +15,6 @@ import {
   MenuGroup,
   MenuItem,
   Switch,
-  MenuDivider,
 } from "@chakra-ui/core";
 
 const Navbar: NextComponentType = () => {
@@ -25,11 +24,7 @@ const Navbar: NextComponentType = () => {
   const borderColor = { light: "gray.300", dark: "gray.700" };
   const color = { light: "gray.800", dark: "gray.100" };
 
-  const handleToggleTheme = async (e: ChangeEvent<HTMLInputElement>) => {
-    const theme: string = !!e.target.checked ? "dark" : "light";
-
-    console.log(theme);
-
+  const handleToggleTheme = () => {
     toggleColorMode();
   };
 
@@ -55,7 +50,7 @@ const Navbar: NextComponentType = () => {
           >
             <MenuGroup title="Profile">
               <MenuItem>
-                <Link href="/my-profile">
+                <Link href="/my-account">
                   <_Link>My Account</_Link>
                 </Link>
               </MenuItem>
@@ -71,16 +66,27 @@ const Navbar: NextComponentType = () => {
                 </Stack>
               </MenuItem>
             </MenuGroup>
-            <MenuDivider />
-            <MenuGroup title="Help">
-              <MenuItem>Docs</MenuItem>
-              <MenuItem>FAQ</MenuItem>
-            </MenuGroup>
           </MenuList>
         </Menu>
       </Box>
     );
   };
+
+  const linksForAllUsers = [
+    {
+      id: "home",
+      label: "Home",
+      href: "/",
+    },
+  ];
+
+  const linksForAuthenticatedUsers = [
+    {
+      id: "users",
+      label: "Users",
+      href: "/users",
+    },
+  ];
 
   const signInButtonNode = () => {
     if (session) {
@@ -129,49 +135,51 @@ const Navbar: NextComponentType = () => {
   return (
     <Box bg={bgColor[colorMode]}>
       <Box
-        w="full"
-        mx="auto"
-        d="flex"
-        justifyContent="space-between"
         p={4}
         color={color[colorMode]}
         borderWidth={1}
         borderColor={borderColor[colorMode]}
       >
-        <Stack
-          isInline
-          spacing={4}
-          align="center"
-          justifyContent="space-between"
-          w="full"
-        >
-          <Box>
-            <Stack isInline spacing={4} align="center">
-              <Box>
-                <Link href="/">
-                  <_Link>Home</_Link>
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/subscription">
-                  <_Link>Subscription</_Link>
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/query">
-                  <_Link>Query</_Link>
-                </Link>
-              </Box>
-            </Stack>
-          </Box>
-          <Box>
-            <Stack isInline spacing={4} align="center">
-              {profileDropDown()}
-              {signInButtonNode()}
-              {signOutButtonNode()}
-            </Stack>
-          </Box>
-        </Stack>
+        <Box maxW="6xl" mx="auto" w="full">
+          <Stack
+            isInline
+            spacing={4}
+            align="center"
+            justifyContent="space-between"
+            w="full"
+          >
+            <Box>
+              <Stack isInline spacing={4} align="center">
+                {linksForAllUsers.map((link) => {
+                  return (
+                    <Box key={link.id}>
+                      <Link href={link.href}>
+                        <_Link>{link.label}</_Link>
+                      </Link>
+                    </Box>
+                  );
+                })}
+                {session &&
+                  linksForAuthenticatedUsers.map((link) => {
+                    return (
+                      <Box key={link.id}>
+                        <Link href={link.href}>
+                          <_Link>{link.label}</_Link>
+                        </Link>
+                      </Box>
+                    );
+                  })}
+              </Stack>
+            </Box>
+            <Box>
+              <Stack isInline spacing={4} align="center">
+                {profileDropDown()}
+                {signInButtonNode()}
+                {signOutButtonNode()}
+              </Stack>
+            </Box>
+          </Stack>
+        </Box>
       </Box>
     </Box>
   );

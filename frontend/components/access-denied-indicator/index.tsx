@@ -18,7 +18,7 @@ const AccessDeniedIndicator: FC = () => {
             signIn();
           }}
         >
-          Sign In
+          You need to Sign In to view this content!
         </Button>
       </Link>
     );

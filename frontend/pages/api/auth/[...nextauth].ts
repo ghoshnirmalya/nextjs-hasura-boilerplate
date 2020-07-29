@@ -6,8 +6,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 interface iToken {
   id: string;
   email: string;
-  name?: string;
-  picture?: string;
+  name: string;
+  picture: string;
 }
 
 const options = {
@@ -21,7 +21,7 @@ const options = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  database: process.env.DATABASE_URL,
+  database: process.env.NEXT_PUBLIC_DATABASE_URL,
   session: {
     jwt: true,
   },

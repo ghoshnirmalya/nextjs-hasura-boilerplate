@@ -1,8 +1,81 @@
 import React from "react";
-import { Box } from "@chakra-ui/core";
+import { Box, Heading, Stack, Text, Button, Flex } from "@chakra-ui/core";
+import { signIn, signOut, useSession } from "next-auth/client";
+import Link from "next/link";
 
-const Index = () => {
-  return <Box>Hello</Box>;
+const IndexPageComponent = () => {
+  const [session] = useSession();
+  const heightOfNavbar: string = "74px";
+  const containerPadding: string = "1rem";
+
+  const signInButtonNode = () => {
+    if (session) {
+      return false;
+    }
+
+    return (
+      <Box>
+        <Link href="/api/auth/signin">
+          <Button
+            variantColor="cyan"
+            onClick={(e) => {
+              e.preventDefault();
+              signIn();
+            }}
+          >
+            Create an account
+          </Button>
+        </Link>
+      </Box>
+    );
+  };
+
+  const signOutButtonNode = () => {
+    if (!session) {
+      return false;
+    }
+
+    return (
+      <Box>
+        <Link href="/api/auth/signout">
+          <Button
+            variantColor="cyan"
+            onClick={(e) => {
+              e.preventDefault();
+              signOut();
+            }}
+          >
+            Sign Out
+          </Button>
+        </Link>
+      </Box>
+    );
+  };
+
+  return (
+    <Stack>
+      <Flex
+        minH={`calc(100vh - ${heightOfNavbar} - ${containerPadding}*2)`}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Stack spacing={4} maxW="xl" mx="auto">
+          <Heading textAlign="center">Nextjs Hasura Boilerplate</Heading>
+          <Text fontSize="xl" lineHeight="tall">
+            Boilerplate for building applications using Hasura and Next.js. This
+            demo application has been built using Chakra UI, NextAuth.js and
+            urql.
+          </Text>
+          <Box>
+            <Stack isInline align="center" justifyContent="center">
+              {signInButtonNode()}
+              {signOutButtonNode()}
+            </Stack>
+          </Box>
+        </Stack>
+      </Flex>
+    </Stack>
+  );
 };
 
-export default Index;
+export default IndexPageComponent;
