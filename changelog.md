@@ -1,3 +1,9 @@
+# [0.1.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.1...0.1.0) (2020-07-29)
+
+### Features
+
+- uses X-Hasura-User-Id for permissions ([969f816](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/969f81611e9f96c154af207b6956ecf54508cc57))
+
 ## [0.0.1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-07-29)
 
 # [0.0.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.0...0.0.1) (2020-07-29)
