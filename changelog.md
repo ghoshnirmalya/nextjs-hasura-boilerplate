@@ -1,3 +1,5 @@
+## [0.1.1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.1.0...0.1.1) (2020-07-29)
+
 # [0.1.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.1...0.1.0) (2020-07-29)
 
 ### Features
