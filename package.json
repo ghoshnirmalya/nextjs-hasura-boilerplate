@@ -4,9 +4,10 @@
     "build:frontend": "cd frontend && yarn build",
     "export:frontend": "cd frontend && yarn export",
     "start:frontend": "cd frontend && yarn start",
-    "release": "release-it --no-npm.publish"
+    "release": "release-it"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^1.1.4",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
