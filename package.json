@@ -3,12 +3,14 @@
     "dev:frontend": "cd frontend && yarn dev",
     "build:frontend": "cd frontend && yarn build",
     "export:frontend": "cd frontend && yarn export",
-    "start:frontend": "cd frontend && yarn start"
+    "start:frontend": "cd frontend && yarn start",
+    "release": "release-it --no-npm.publish"
   },
   "devDependencies": {
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "release-it": "^13.6.6"
   },
   "husky": {
     "hooks": {
