@@ -23,16 +23,17 @@ This is a boilerplate for building applications using Hasura and Next.js. This b
   - [2. **Backend**: Dockerized Hasura application](#2-backend-dockerized-hasura-application)
 - [Installation](#installation)
   - [1. **Clone the application**](#1-clone-the-application)
-  - [2. **Install Lerna globally**](#2-install-lerna-globally)
-  - [3. **Bootstrap the packages**](#3-bootstrap-the-packages)
-  - [4. **Start the packages**](#4-start-the-packages)
-  - [5. **Go inside the directory of the backend package**](#5-go-inside-the-directory-of-the-backend-package)
-  - [6. **Create a .env file and copy the contents from .env.example (present in packages/backend directory)**](#6-create-a-env-file-and-copy-the-contents-from-envexample-present-in-packagesbackend-directory)
-  - [7. **Generate the RSA keys**](#7-generate-the-rsa-keys)
-  - [8. **Print the keys in the escaped format**](#8-print-the-keys-in-the-escaped-format)
-  - [9. **Copy the value of the key into the `HASURA_GRAPHQL_JWT_SECRET` key (in the .env file)**](#9-copy-the-value-of-the-key-into-the-hasura_graphql_jwt_secret-key-in-the-env-file)
-  - [10. **Start docker-compose**](#10-start-docker-compose)
+  - [2. **Install necessary dependencies for the frontend application**](#2-install-necessary-dependencies-for-the-frontend-application)
+  - [3. **Create a .env file and copy the contents from .env.example (present in frontend directory)**](#3-create-a-env-file-and-copy-the-contents-from-envexample-present-in-frontend-directory)
+  - [4. **Generate the RSA keys**](#4-generate-the-rsa-keys)
+  - [5. **Print the keys in the escaped format**](#5-print-the-keys-in-the-escaped-format)
+  - [6. **Copy the value of the key into the `AUTH_PRIVATE_KEY` key (in the .env file)**](#6-copy-the-value-of-the-key-into-the-auth_private_key-key-in-the-env-file)
+  - [7. **Start the frontend application**](#7-start-the-frontend-application)
+  - [8. **Go inside the directory of the backend package on another terminal window**](#8-go-inside-the-directory-of-the-backend-package-on-another-terminal-window)
+  - [9. **Start docker-compose**](#9-start-docker-compose)
 - [Deployment](#deployment)
+  - [Frontend application](#frontend-application)
+  - [Backend application](#backend-application)
 - [Other interesting repositories](#other-interesting-repositories)
 - [License](#license)
 
@@ -122,9 +123,7 @@ The backend package doesn’t do anything after we execute the above command.
 cd packages/backend
 ```
 
-### 9. **Create a .env file and copy the contents from .env.example (present in backend directory)**
-
-### 10. **Start docker-compose**
+### 9. **Start docker-compose**
 
 ```sh
 docker-compose up
@@ -134,10 +133,18 @@ We need to start Docker and then run the above command which will change the cur
 
 ## Deployment
 
+### Frontend application
+
+Click on the button below to deploy the frontend application on Vercel. You'll need to [sign up for a free Vercel account](https://vercel.com/signup/).
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2Fghoshnirmalya%2Fnextjs-hasura-boilerplate%2Ftree%2Fmaster%2Ffrontend&env=NEXT_PUBLIC_API_URL,NEXT_PUBLIC_WS_URL,DATABASE_URL,AUTH_PRIVATE_KEY,EMAIL_SERVER,EMAIL_FROM,NEXTAUTH_URL,GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET&project-name=nextjs-hasura-boilerplate&repo-name=nextjs-hasura-boilerplate)
+
+### Backend application
+
+Click on the button below to deploy the backend application on Heroku. You'll need to [sign up for a free Heroku account](https://signup.heroku.com/).
+
 [![Deploy to
 Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate)
-
-We’re still working on this feature. The documentation will be updated soon.
 
 ## Other interesting repositories
 
