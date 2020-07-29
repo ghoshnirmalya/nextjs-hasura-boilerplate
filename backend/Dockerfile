@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v1.3.0-beta.4.cli-migrations-v2
+FROM hasura/graphql-engine:v1.3.0.cli-migrations-v2
 
 # # Copy migrations directory
 COPY ./migrations /hasura-migrations
