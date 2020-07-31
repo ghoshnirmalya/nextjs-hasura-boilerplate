@@ -61,7 +61,7 @@ const IndexPageComponent = () => {
       >
         <Stack spacing={4} maxW="xl" mx="auto">
           <Heading textAlign="center">Nextjs Hasura Boilerplate</Heading>
-          <Text fontSize="xl" lineHeight="tall">
+          <Text fontSize="xl" lineHeight="tall" textAlign="center">
             Boilerplate for building applications using Hasura and Next.js. This
             demo application has been built using Chakra UI, NextAuth.js and
             urql.

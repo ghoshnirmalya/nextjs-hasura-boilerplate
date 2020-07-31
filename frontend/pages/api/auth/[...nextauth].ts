@@ -2,13 +2,9 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
-
-interface iToken {
-  id: string;
-  email: string;
-  name: string;
-  picture: string;
-}
+import ISession from "types/session";
+import IUser from "types/user";
+import iToken from "types/token";
 
 const options = {
   providers: [
@@ -72,12 +68,12 @@ const options = {
   },
   debug: true,
   callbacks: {
-    session: async (session, user) => {
+    session: async (session: ISession, user: IUser) => {
       session.id = user.id;
 
       return Promise.resolve(session);
     },
-    jwt: async (token, user) => {
+    jwt: async (token: iToken, user: IUser) => {
       const isSignIn = user ? true : false;
 
       if (isSignIn) {

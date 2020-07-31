@@ -4,5 +4,6 @@ export default interface ISession {
     email: string;
     image: string;
   };
+  id: number;
   expires: string;
 }

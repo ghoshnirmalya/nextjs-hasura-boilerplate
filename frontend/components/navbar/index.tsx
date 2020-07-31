@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { NextComponentType } from "next";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/client";
@@ -7,14 +7,9 @@ import {
   Stack,
   Link as _Link,
   Button,
-  useColorMode,
-  Menu,
-  MenuButton,
-  Icon,
-  MenuList,
-  MenuGroup,
-  MenuItem,
   Switch,
+  IconButton,
+  useColorMode,
 } from "@chakra-ui/core";
 
 const Navbar: NextComponentType = () => {
@@ -25,51 +20,9 @@ const Navbar: NextComponentType = () => {
   const color = { light: "gray.800", dark: "gray.100" };
 
   const handleToggleTheme = () => {
+    console.log("hello");
+
     toggleColorMode();
-  };
-
-  const profileDropDown = () => {
-    if (!session) {
-      return false;
-    }
-
-    return (
-      <Box>
-        <Menu closeOnSelect={false}>
-          <MenuButton
-            as={Button}
-            color={color[colorMode]}
-            borderColor={borderColor[colorMode]}
-          >
-            Profile <Icon name="chevron-down" />
-          </MenuButton>
-          <MenuList
-            color={color[colorMode]}
-            borderColor={borderColor[colorMode]}
-            placement="bottom-end"
-          >
-            <MenuGroup title="Profile">
-              <MenuItem>
-                <Link href="/my-account">
-                  <_Link>My Account</_Link>
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Stack justify="center" align="center" spacing={4} isInline>
-                  <Box>Dark Theme</Box>
-                  <Box>
-                    <Switch
-                      isChecked={colorMode === "dark"}
-                      onChange={handleToggleTheme}
-                    />
-                  </Box>
-                </Stack>
-              </MenuItem>
-            </MenuGroup>
-          </MenuList>
-        </Menu>
-      </Box>
-    );
   };
 
   const linksForAllUsers = [
@@ -85,6 +38,11 @@ const Navbar: NextComponentType = () => {
       id: "users",
       label: "Users",
       href: "/users",
+    },
+    {
+      id: "myAccount",
+      label: "My Account",
+      href: "/my-account",
     },
   ];
 
@@ -132,6 +90,17 @@ const Navbar: NextComponentType = () => {
     );
   };
 
+  const themeToggleButtonNode = () => {
+    return (
+      <IconButton
+        aria-label="Toggle theme"
+        fontSize="20px"
+        icon={colorMode === "dark" ? "sun" : "moon"}
+        onClick={handleToggleTheme}
+      />
+    );
+  };
+
   return (
     <Box bg={bgColor[colorMode]}>
       <Box
@@ -149,7 +118,7 @@ const Navbar: NextComponentType = () => {
             w="full"
           >
             <Box>
-              <Stack isInline spacing={4} align="center">
+              <Stack isInline spacing={4} align="center" fontWeight="semibold">
                 {linksForAllUsers.map((link) => {
                   return (
                     <Box key={link.id}>
@@ -173,7 +142,7 @@ const Navbar: NextComponentType = () => {
             </Box>
             <Box>
               <Stack isInline spacing={4} align="center">
-                {profileDropDown()}
+                {themeToggleButtonNode()}
                 {signInButtonNode()}
                 {signOutButtonNode()}
               </Stack>
