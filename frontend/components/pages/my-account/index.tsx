@@ -42,7 +42,6 @@ const updateUserMutation = gql`
 const MyAccountPageComponent = () => {
   const { colorMode } = useColorMode();
   const bgColor = { light: "white", dark: "gray.800" };
-  const borderColor = { light: "gray.300", dark: "gray.700" };
   const color = { light: "gray.800", dark: "gray.100" };
   const [name, setName] = useState("");
   const [session] = useSession();
@@ -110,8 +109,6 @@ const MyAccountPageComponent = () => {
           p={4}
           bg={bgColor[colorMode]}
           color={color[colorMode]}
-          borderWidth={1}
-          borderColor={borderColor[colorMode]}
           shadow="sm"
           rounded="lg"
         >

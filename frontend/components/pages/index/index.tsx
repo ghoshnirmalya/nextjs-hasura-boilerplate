@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Heading, Stack, Text, Button, Flex } from "@chakra-ui/core";
+import {
+  Box,
+  Heading,
+  Stack,
+  Text,
+  Button,
+  Flex,
+  useColorMode,
+} from "@chakra-ui/core";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 
@@ -7,6 +15,8 @@ const IndexPageComponent = () => {
   const [session] = useSession();
   const heightOfNavbar: string = "74px";
   const containerPadding: string = "1rem";
+  const { colorMode } = useColorMode();
+  const color = { light: "gray.800", dark: "gray.100" };
 
   const signInButtonNode = () => {
     if (session) {
@@ -58,6 +68,7 @@ const IndexPageComponent = () => {
         minH={`calc(100vh - ${heightOfNavbar} - ${containerPadding}*2)`}
         justifyContent="center"
         alignItems="center"
+        color={color[colorMode]}
       >
         <Stack spacing={4} maxW="xl" mx="auto">
           <Heading textAlign="center">Nextjs Hasura Boilerplate</Heading>
