@@ -1,3 +1,9 @@
+# [0.2.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.1.1...0.2.0) (2020-07-31)
+
+### Features
+
+- adds custom error pages ([112ee99](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/112ee99d534ec2915e6479c2f5cafb6838db0d3e))
+
 ## [0.1.1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.1.0...0.1.1) (2020-07-29)
 
 # [0.1.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.0.1...0.1.0) (2020-07-29)
