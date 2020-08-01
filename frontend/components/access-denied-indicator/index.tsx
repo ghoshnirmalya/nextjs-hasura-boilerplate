@@ -3,7 +3,13 @@ import { Icon, Flex, Button, Stack, Box } from "@chakra-ui/core";
 import Link from "next/link";
 import { signIn } from "next-auth/client";
 
-const AccessDeniedIndicator: FC = () => {
+interface IProps {
+  message?: string;
+}
+
+const AccessDeniedIndicator: FC<IProps> = ({
+  message = "You need to Sign In to view this content!",
+}) => {
   const iconNode = () => {
     return <Icon name="warning-2" color="purple" size="50px" />;
   };
@@ -18,7 +24,7 @@ const AccessDeniedIndicator: FC = () => {
             signIn();
           }}
         >
-          You need to Sign In to view this content!
+          {message}
         </Button>
       </Link>
     );
