@@ -1,3 +1,9 @@
+# [0.3.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.2.0...0.3.0) (2020-08-01)
+
+### Features
+
+- adds feeds as a sample for CRUD ([4099cea](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/4099cea015c55c121d7ada3c6fe3f563a77dde62))
+
 # [0.2.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.1.1...0.2.0) (2020-07-31)
 
 ### Features
