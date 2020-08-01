@@ -3,10 +3,50 @@
     name: accounts
 - table:
     schema: public
+    name: feeds
+  object_relationships:
+  - name: author
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          author_id: id
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        author_id:
+          _eq: X-Hasura-User-Id
+      columns:
+      - body
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - body
+      - created_at
+      - updated_at
+      - author_id
+      - id
+      filter: {}
+- table:
+    schema: public
     name: sessions
 - table:
     schema: public
     name: users
+  array_relationships:
+  - name: feeds
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: feeds
+        column_mapping:
+          id: author_id
   insert_permissions:
   - role: user
     permission:

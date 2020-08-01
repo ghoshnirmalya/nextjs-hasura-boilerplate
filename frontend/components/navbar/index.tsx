@@ -7,7 +7,6 @@ import {
   Stack,
   Link as _Link,
   Button,
-  Switch,
   IconButton,
   useColorMode,
 } from "@chakra-ui/core";
@@ -16,7 +15,6 @@ const Navbar: NextComponentType = () => {
   const [session] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
   const bgColor = { light: "white", dark: "gray.800" };
-  const borderColor = { light: "gray.300", dark: "gray.700" };
   const color = { light: "gray.800", dark: "gray.100" };
 
   const handleToggleTheme = () => {
@@ -35,9 +33,9 @@ const Navbar: NextComponentType = () => {
 
   const linksForAuthenticatedUsers = [
     {
-      id: "users",
-      label: "Users",
-      href: "/users",
+      id: "feeds",
+      label: "Feeds",
+      href: "/feeds",
     },
     {
       id: "myAccount",
@@ -103,12 +101,7 @@ const Navbar: NextComponentType = () => {
 
   return (
     <Box bg={bgColor[colorMode]}>
-      <Box
-        p={4}
-        color={color[colorMode]}
-        borderWidth={1}
-        borderColor={borderColor[colorMode]}
-      >
+      <Box p={4} color={color[colorMode]} shadow="lg" pos="relative">
         <Box maxW="6xl" mx="auto" w="full">
           <Stack
             isInline
