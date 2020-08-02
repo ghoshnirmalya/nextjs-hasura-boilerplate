@@ -127,7 +127,6 @@ const MyAccountPageComponent = () => {
             </FormControl>
             <FormControl>
               <Button
-                variantColor="cyan"
                 loadingText="Saving..."
                 onClick={handleSubmit}
                 isLoading={updateUserFetching}

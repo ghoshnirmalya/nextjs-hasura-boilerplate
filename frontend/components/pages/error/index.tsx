@@ -14,7 +14,7 @@ const IndexPageComponent: FC<IProps> = ({ statusCode }) => {
     return (
       <Box>
         <Link href="/">
-          <Button variantColor="cyan">Return to the home page</Button>
+          <Button>Return to the home page</Button>
         </Link>
       </Box>
     );

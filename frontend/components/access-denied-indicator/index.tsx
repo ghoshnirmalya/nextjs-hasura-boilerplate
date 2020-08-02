@@ -18,7 +18,6 @@ const AccessDeniedIndicator: FC<IProps> = ({
     return (
       <Link href="/api/auth/signin">
         <Button
-          variantColor="cyan"
           onClick={(e) => {
             e.preventDefault();
             signIn();

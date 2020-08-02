@@ -27,7 +27,6 @@ const IndexPageComponent = () => {
       <Box>
         <Link href="/api/auth/signin">
           <Button
-            variantColor="cyan"
             onClick={(e) => {
               e.preventDefault();
               signIn();
@@ -49,7 +48,6 @@ const IndexPageComponent = () => {
       <Box>
         <Link href="/api/auth/signout">
           <Button
-            variantColor="cyan"
             onClick={(e) => {
               e.preventDefault();
               signOut();

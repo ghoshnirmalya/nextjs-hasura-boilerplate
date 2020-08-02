@@ -9,12 +9,7 @@ interface Props {
 const Loader: FC<Props> = ({ size = "50px", thickness = 0.15 }) => {
   return (
     <Box w="full" textAlign="center" maxH="200px">
-      <CircularProgress
-        isIndeterminate
-        color="cyan"
-        size={size}
-        thickness={thickness}
-      />
+      <CircularProgress isIndeterminate size={size} thickness={thickness} />
     </Box>
   );
 };

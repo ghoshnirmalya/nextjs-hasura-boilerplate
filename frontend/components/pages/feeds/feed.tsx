@@ -1,13 +1,5 @@
 import React, { FC } from "react";
-import {
-  Box,
-  Stack,
-  Text,
-  Avatar,
-  useColorMode,
-  Input,
-  Button,
-} from "@chakra-ui/core";
+import { Box, Stack, Text, Avatar, useColorMode } from "@chakra-ui/core";
 import IFeed from "types/feed";
 import timeFromNow from "lib/time-from-now";
 
@@ -42,12 +34,7 @@ const Feed: FC<IProps> = ({ feed }) => {
 
   const bodyNode = () => {
     return (
-      <Text
-        fontSize="md"
-        p={4}
-        borderBottomWidth={1}
-        borderColor={borderColor[colorMode]}
-      >
+      <Text fontSize="md" p={4}>
         {feed.body}
       </Text>
     );

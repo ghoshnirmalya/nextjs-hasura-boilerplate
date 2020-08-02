@@ -90,7 +90,6 @@ const AddNewFeedForm = () => {
           </FormControl>
           <FormControl>
             <Button
-              variantColor="cyan"
               loadingText="Posting..."
               onClick={handleSubmit}
               isLoading={insertFeedFetching}
