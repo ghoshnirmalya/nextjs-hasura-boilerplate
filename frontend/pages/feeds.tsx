@@ -1,26 +1,36 @@
 import React from "react";
 import Head from "next/head";
 import Page from "components/pages/feeds";
-import { NextPage } from "next";
-import Loader from "components/loader";
-import { useSession } from "next-auth/client";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import AccessDeniedIndicator from "components/access-denied-indicator";
+import { getSession } from "next-auth/client";
 import WithGraphQL from "lib/with-graphql";
 
-const FeedsPage: NextPage = () => {
-  const [session, loading] = useSession();
-
-  if (loading) {
-    return <Loader />;
+const FeedsPage: InferGetServerSidePropsType<typeof getServerSideProps> = ({
+  session,
+}) => {
+  if (!session) {
+    return <AccessDeniedIndicator />;
   }
 
   return (
-    <WithGraphQL userId={session ? session.id : ""}>
+    <WithGraphQL session={session}>
       <Head>
-        <title>Feeds Page</title>
+        <title>My Account Page</title>
       </Head>
       <Page />
     </WithGraphQL>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+
+  return {
+    props: {
+      session,
+    },
+  };
 };
 
 export default FeedsPage;

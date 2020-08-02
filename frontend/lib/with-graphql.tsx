@@ -3,15 +3,16 @@ import { Client, defaultExchanges, subscriptionExchange, Provider } from "urql";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 import ws from "isomorphic-ws";
 import { ReactNode } from "react";
+import session from "types/session";
 
 const WithGraphQL = ({
-  userId = "",
+  session,
   children,
 }: {
-  userId: string;
+  session: session;
   children: ReactNode;
 }) => {
-  const userIdInString = userId.toString();
+  const userIdInString = session.id.toString();
 
   const subscriptionClient = new SubscriptionClient(
     process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8080/v1/graphql",
