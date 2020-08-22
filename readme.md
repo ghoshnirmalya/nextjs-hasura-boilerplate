@@ -110,12 +110,10 @@ awk -v ORS='\\n' '1' private.pem
 From the frontend directory, we can run the following command to start our Next.js frontend application:
 
 ```sh
-yarn start
+yarn dev
 ```
 
 The above command will start the frontend application on [http://localhost:3000/](http://localhost:3000).
-
-The backend package doesn’t do anything after we execute the above command.
 
 ### 8. **Go inside the directory of the backend package on another terminal window**
 
