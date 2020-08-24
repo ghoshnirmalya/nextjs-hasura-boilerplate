@@ -10,7 +10,7 @@
     "@release-it/conventional-changelog": "^1.1.4",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5",
+    "prettier": "^2.1.0",
     "release-it": "^13.6.8"
   },
   "husky": {
