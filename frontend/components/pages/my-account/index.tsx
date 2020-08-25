@@ -101,10 +101,7 @@ const MyAccountPageComponent = () => {
     <Stack spacing={4}>
       <Heading color={color[colorMode]}>My Account</Heading>
       {errorNode()}
-      <Grid
-        templateColumns={["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(2, 1fr)"]}
-        gap={4}
-      >
+      <Grid templateColumns="repeat(1, 1fr)" gap={4}>
         <Box
           p={4}
           bg={bgColor[colorMode]}
