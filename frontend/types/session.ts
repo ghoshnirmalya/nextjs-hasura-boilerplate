@@ -6,4 +6,5 @@ export default interface ISession {
   };
   id: number;
   expires: string;
+  token: string;
 }

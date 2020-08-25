@@ -16,10 +16,9 @@
   insert_permissions:
   - role: user
     permission:
-      check:
-        author_id:
-          _eq: X-Hasura-User-Id
+      check: {}
       columns:
+      - author_id
       - body
       backend_only: false
   select_permissions:
@@ -31,7 +30,9 @@
       - updated_at
       - author_id
       - id
-      filter: {}
+      filter:
+        author_id:
+          _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: sessions

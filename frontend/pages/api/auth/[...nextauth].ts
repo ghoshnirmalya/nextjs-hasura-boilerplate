@@ -6,12 +6,10 @@ import ISession from "types/session";
 import IUser from "types/user";
 import iToken from "types/token";
 
+const jwtSecret = JSON.parse(process.env.AUTH_PRIVATE_KEY);
+
 const options = {
   providers: [
-    Providers.Email({
-      server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM,
-    }),
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -31,6 +29,7 @@ const options = {
         "https://hasura.io/jwt/claims": {
           "x-hasura-allowed-roles": ["admin", "user"],
           "x-hasura-default-role": "user",
+          "x-hasura-role": "user",
           "x-hasura-user-id": token.id,
         },
         iat: Date.now() / 1000,
@@ -38,30 +37,16 @@ const options = {
         sub: token.id,
       };
 
-      const signOptions = {
-        algorithm: "RS256",
-      };
-
-      const encodedToken = jwt.sign(
-        tokenContents,
-        process.env.AUTH_PRIVATE_KEY.replace(/\\n/gm, "\n") || secret,
-        // @ts-ignore
-        signOptions
-      );
+      const encodedToken = jwt.sign(tokenContents, jwtSecret.key, {
+        algorithm: jwtSecret.type,
+      });
 
       return encodedToken;
     },
     decode: async ({ token, secret }: { token: string; secret: string }) => {
-      const signOptions = {
-        algorithms: ["RS256"],
-      };
-
-      const decodedToken = jwt.verify(
-        token,
-        process.env.AUTH_PRIVATE_KEY.replace(/\\n/gm, "\n") || secret,
-        // @ts-ignore
-        signOptions
-      );
+      const decodedToken = jwt.verify(token, jwtSecret.key, {
+        algorithms: jwtSecret.type,
+      });
 
       return decodedToken;
     },
@@ -69,11 +54,16 @@ const options = {
   debug: true,
   callbacks: {
     session: async (session: ISession, user: IUser) => {
+      const encodedToken = jwt.sign(user, jwtSecret.key, {
+        algorithm: jwtSecret.type,
+      });
+
       session.id = user.id;
+      session.token = encodedToken;
 
       return Promise.resolve(session);
     },
-    jwt: async (token: iToken, user: IUser) => {
+    jwt: async (token: iToken, user: IUser, account, profile, isNewUser) => {
       const isSignIn = user ? true : false;
 
       if (isSignIn) {

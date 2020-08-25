@@ -12,14 +12,14 @@ const WithGraphQL = ({
   session: session;
   children: ReactNode;
 }) => {
-  const userIdInString = session.id.toString();
+  const token = `Bearer ${session.token}`;
 
   const subscriptionClient = new SubscriptionClient(
     process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8080/v1/graphql",
     {
       reconnect: true,
       connectionParams: {
-        headers: { "X-Hasura-User-Id": userIdInString },
+        headers: { Authorization: token },
       },
     },
     ws
@@ -29,7 +29,7 @@ const WithGraphQL = ({
     url: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/v1/graphql",
     fetch,
     fetchOptions: {
-      headers: { "X-Hasura-User-Id": userIdInString },
+      headers: { Authorization: token },
     },
     requestPolicy: "cache-and-network",
     exchanges: [

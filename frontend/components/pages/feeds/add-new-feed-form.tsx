@@ -18,8 +18,8 @@ import { useSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/access-denied-indicator";
 
 const insertFeedMutation = gql`
-  mutation insertFeed($userId: uuid!, $body: String) {
-    insert_feeds_one(object: { author_id: $userId, body: $body }) {
+  mutation insertFeed($author_id: uuid!, $body: String) {
+    insert_feeds_one(object: { author_id: $author_id, body: $body }) {
       id
     }
   }
@@ -45,7 +45,7 @@ const AddNewFeedForm = () => {
 
   const handleSubmit = async () => {
     await insertFeed({
-      userId: session.id,
+      author_id: session.id,
       body,
     });
 
