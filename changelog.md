@@ -1,3 +1,10 @@
+## [0.3.3](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.3.2...0.3.3) (2020-08-27)
+
+### Bug Fixes
+
+- handles authentication through header ([543f3e3](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/543f3e33753a2f893c1e45b269a4d1da8d889cf3))
+- uses jwt token for authorization ([b2d4abb](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/b2d4abb08ccfa1594230f2d39c223c54a9e1b53e))
+
 ## [0.3.2](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.3.1...0.3.2) (2020-08-02)
 
 ## [0.3.1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.3.0...0.3.1) (2020-08-01)
