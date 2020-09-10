@@ -30,7 +30,7 @@
     "react-dom": "^16.13.1",
     "react-is": "^16.13.1",
     "subscriptions-transport-ws": "^0.9.18",
-    "urql": "^1.10.0",
+    "urql": "^1.10.1",
     "ws": "^7.3.1"
   },
   "devDependencies": {
