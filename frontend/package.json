@@ -19,7 +19,7 @@
     "emotion-theming": "^10.0.27",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
-    "isomorphic-unfetch": "^3.0.0",
+    "isomorphic-unfetch": "^3.1.0",
     "isomorphic-ws": "^4.0.1",
     "jsonwebtoken": "^8.5.1",
     "next": "^9.5.3",
