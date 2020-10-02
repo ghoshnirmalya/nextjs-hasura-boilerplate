@@ -4148,13 +4148,12 @@ next-tick@~1.0.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
-next-urql@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/next-urql/-/next-urql-1.2.0.tgz#a1cf9ad1911c271ffc5ddd09c1fe15ca68ad9e7c"
-  integrity sha512-DyVROVoQFuwIAUmRyV16Kr89iLfhCx7mVJ4MTAUPMHqshzY+845Cc06yk4zornQ4hE5eCI8OiRYVFPSfNWx6uA==
+next-urql@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/next-urql/-/next-urql-2.0.0.tgz#1466065689aad8d7a4789ce8e36ad87a28b1ef0d"
+  integrity sha512-UewCR7JcyWlq+Ls/LiLWW6lm2FDmAaFfRLcfDw1OzV4LEED5lqliDxBB6u5HQKlQBLae9UeZsEogH/MmJcpe7g==
   dependencies:
     react-ssr-prepass "^1.2.1"
-    urql ">=1.10.0"
 
 next@*, next@^9.5.3:
   version "9.5.3"
@@ -5932,7 +5931,7 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-urql@>=1.10.0, urql@^1.10.1:
+urql@^1.10.1:
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/urql/-/urql-1.10.1.tgz#48353c0d02175481377fa95ff150b7449bd2f7c5"
   integrity sha512-DMafjxLZfWUPSZRs39+wxmrHTqHm4LLfHvKQfSqkmkwneO/Ws5SLJsT/enZcQfLlH0ZWGvBOVHtVt3j0y8HbcQ==
