@@ -26,7 +26,7 @@
     "next-auth": "^3.1.0",
     "next-urql": "^2.0.0",
     "pg": "^8.4.1",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-dom": "^16.13.1",
     "react-is": "^16.13.1",
     "subscriptions-transport-ws": "^0.9.18",
