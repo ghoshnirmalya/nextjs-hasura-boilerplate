@@ -17,7 +17,7 @@
     "@emotion/styled": "^10.0.27",
     "dayjs": "^1.9.4",
     "emotion-theming": "^10.0.27",
-    "graphql": "^15.3.0",
+    "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
     "isomorphic-unfetch": "^3.1.0",
     "isomorphic-ws": "^4.0.1",
