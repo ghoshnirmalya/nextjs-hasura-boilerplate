@@ -15,7 +15,7 @@ const options = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  database: process.env.NEXT_PUBLIC_DATABASE_URL,
+  database: process.env.DATABASE_URL,
   session: {
     jwt: true,
   },
