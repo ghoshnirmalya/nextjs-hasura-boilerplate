@@ -1,0 +1,14 @@
+application:
+  name: nextjs-hasura-boilerplate
+  project: nextjs-hasura-boilerplate
+  organization: QoveryCommunity
+databases:
+  - type: postgresql
+    version: "11"
+    name: database
+routers:
+  - name: main
+    routes:
+      - application_name: nextjs-hasura-boilerplate
+        paths:
+          - /backend/*
