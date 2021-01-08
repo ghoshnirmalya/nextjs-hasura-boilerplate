@@ -22,7 +22,7 @@
     "isomorphic-unfetch": "^3.1.0",
     "isomorphic-ws": "^4.0.1",
     "jsonwebtoken": "^8.5.1",
-    "next": "^10.0.4",
+    "next": "^10.0.5",
     "next-auth": "^3.1.0",
     "next-urql": "^2.1.1",
     "pg": "^8.5.1",
