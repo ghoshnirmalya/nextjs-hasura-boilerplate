@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { useSubscription } from "urql";
-import { Box, Stack } from "@chakra-ui/core";
+import { Box, Stack } from "@chakra-ui/react";
 import IFeed from "types/feed";
 import Feed from "components/pages/feeds/feed";
 import AddNewFeedForm from "components/pages/feeds/add-new-feed-form";

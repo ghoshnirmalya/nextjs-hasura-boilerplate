@@ -1,15 +1,16 @@
-import React from "react";
-import { NextComponentType } from "next";
-import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Stack,
-  Link as _Link,
   Button,
   IconButton,
+  Link as _Link,
+  Stack,
   useColorMode,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
+import { NextComponentType } from "next";
+import { signIn, signOut, useSession } from "next-auth/client";
+import Link from "next/link";
+import React from "react";
 
 const Navbar: NextComponentType = () => {
   const [session] = useSession();
@@ -18,8 +19,6 @@ const Navbar: NextComponentType = () => {
   const color = { light: "gray.800", dark: "gray.100" };
 
   const handleToggleTheme = () => {
-    console.log("hello");
-
     toggleColorMode();
   };
 
@@ -91,7 +90,7 @@ const Navbar: NextComponentType = () => {
       <IconButton
         aria-label="Toggle theme"
         fontSize="20px"
-        icon={colorMode === "dark" ? "sun" : "moon"}
+        icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
         onClick={handleToggleTheme}
       />
     );

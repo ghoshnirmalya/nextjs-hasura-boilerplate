@@ -13,7 +13,7 @@ import {
   CloseButton,
   Textarea,
   useColorMode,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { useSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/access-denied-indicator";
 

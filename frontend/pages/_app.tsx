@@ -1,9 +1,8 @@
-import React from "react";
+import Layout from "components/layout";
+import { Provider as NextAuthProvider } from "next-auth/client";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { Provider as NextAuthProvider } from "next-auth/client";
-import { ThemeProvider, CSSReset, theme } from "@chakra-ui/core";
-import Layout from "components/layout";
+import React from "react";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { session } = pageProps;
@@ -14,12 +13,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="shortcut icon" href="/images/favicon.ico" />
       </Head>
       <NextAuthProvider session={session}>
-        <ThemeProvider theme={theme}>
-          <CSSReset />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </NextAuthProvider>
     </>
   );

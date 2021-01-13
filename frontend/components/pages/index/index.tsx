@@ -7,7 +7,7 @@ import {
   Button,
   Flex,
   useColorMode,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 

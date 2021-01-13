@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, Stack, Text, Avatar, useColorMode } from "@chakra-ui/core";
+import { Box, Stack, Text, Avatar, useColorMode } from "@chakra-ui/react";
 import IFeed from "types/feed";
 import timeFromNow from "lib/time-from-now";
 

@@ -1,16 +1,15 @@
-import React, { FC } from "react";
-import { ColorModeProvider, LightMode } from "@chakra-ui/core";
-import Container from "components/layout/container";
+import { Box, ChakraProvider, theme, VStack } from "@chakra-ui/react";
 import Navbar from "components/navbar";
+import React, { FC } from "react";
 
 const Layout: FC = ({ children }) => {
   return (
-    <ColorModeProvider>
-      <LightMode>
-        <Navbar />
-        <Container>{children}</Container>
-      </LightMode>
-    </ColorModeProvider>
+    <ChakraProvider theme={theme}>
+      <Navbar />
+      <Box maxW="xl" mx="auto" w="full" py={8}>
+        {children}
+      </Box>
+    </ChakraProvider>
   );
 };
 

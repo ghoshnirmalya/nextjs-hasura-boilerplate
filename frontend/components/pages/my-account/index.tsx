@@ -15,7 +15,7 @@ import {
   AlertIcon,
   AlertTitle,
   CloseButton,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import Loader from "components/loader";
 import { useSession } from "next-auth/client";
 
@@ -98,42 +98,39 @@ const MyAccountPageComponent = () => {
   };
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={8}>
       <Heading color={color[colorMode]}>My Account</Heading>
       {errorNode()}
-      <Grid templateColumns="repeat(1, 1fr)" gap={4}>
-        <Box
-          p={4}
-          bg={bgColor[colorMode]}
-          color={color[colorMode]}
-          shadow="sm"
-          rounded="lg"
-        >
-          <Stack spacing={4}>
-            <FormControl isRequired>
-              <FormLabel htmlFor="name">Name</FormLabel>
-              <Input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e: FormEvent<HTMLInputElement>) =>
-                  setName(e.currentTarget.value)
-                }
-                isDisabled={updateUserFetching}
-              />
-            </FormControl>
-            <FormControl>
-              <Button
-                loadingText="Saving..."
-                onClick={handleSubmit}
-                isLoading={updateUserFetching}
-              >
-                Save
-              </Button>
-            </FormControl>
-          </Stack>
-        </Box>
-      </Grid>
+      <Box
+        bg={bgColor[colorMode]}
+        color={color[colorMode]}
+        shadow="sm"
+        rounded="lg"
+      >
+        <Stack spacing={4}>
+          <FormControl isRequired>
+            <FormLabel htmlFor="name">Name</FormLabel>
+            <Input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e: FormEvent<HTMLInputElement>) =>
+                setName(e.currentTarget.value)
+              }
+              isDisabled={updateUserFetching}
+            />
+          </FormControl>
+          <FormControl>
+            <Button
+              loadingText="Saving..."
+              onClick={handleSubmit}
+              isLoading={updateUserFetching}
+            >
+              Save
+            </Button>
+          </FormControl>
+        </Stack>
+      </Box>
     </Stack>
   );
 };
