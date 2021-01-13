@@ -5,7 +5,6 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build:analyze": "ANALYZE=true next build && tsc --project tsconfig.server.json",
     "build": "next build",
     "export": "next export",
     "start": "next start",
@@ -41,8 +40,6 @@
     "@types/pg": "^7.14.7",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "tslint": "^6.1.3",
-    "tslint-react": "^5.0.0",
     "typescript": "^4.1.3"
   }
 }
