@@ -14,7 +14,7 @@ Documentation is available [here](https://nirmalyaghosh.com/guides/nextjs-hasura
 
 ## Other interesting repositories
 
-1. [Hasura Next.js Boilerplate](https://github.com/ghoshnirmalya/nextjs-hasura-trello-clone)
+1. [Hasura Next.js Trello clone](https://github.com/ghoshnirmalya/nextjs-hasura-trello-clone)
 2. [React Search Box](https://github.com/ghoshnirmalya/react-search-box)
 3. [LinkedIn Clone using Create React App](https://github.com/ghoshnirmalya/linkedin-clone-react-frontend)
 

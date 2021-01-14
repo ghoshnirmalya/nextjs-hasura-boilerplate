@@ -11,7 +11,7 @@ async function generateKeys() {
     );
 
     console.log(
-      `Please create a Google OAuth Client( https://console.developers.google.com/apis/credentials/oauthclient) and copy the credentials to GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in your .env\n`
+      `Create a Google OAuth Client from https://console.developers.google.com/apis/credentials/oauthclient and copy the credentials to GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in your .env file inside the frontend directory\n`
     );
 
     // Generate the private.pem file
