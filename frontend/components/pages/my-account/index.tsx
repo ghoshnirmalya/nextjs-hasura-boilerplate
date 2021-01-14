@@ -1,4 +1,3 @@
-import { gql, useMutation } from "@apollo/client";
 import {
   Alert,
   AlertIcon,
@@ -12,19 +11,9 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
+import { useUpdateUserMutation } from "generated-graphql";
 import { useSession } from "next-auth/client";
 import React, { FormEvent, useState } from "react";
-
-const updateUserMutation = gql`
-  mutation updateUser($userId: uuid!, $name: String) {
-    update_users(where: { id: { _eq: $userId } }, _set: { name: $name }) {
-      returning {
-        id
-        name
-      }
-    }
-  }
-`;
 
 const MyAccountPageComponent = ({ user }) => {
   const [name, setName] = useState(user.name);
@@ -32,7 +21,7 @@ const MyAccountPageComponent = ({ user }) => {
   const [
     updateUser,
     { loading: updateUserFetching, error: updateUserError },
-  ] = useMutation(updateUserMutation);
+  ] = useUpdateUserMutation();
 
   const handleSubmit = () => {
     updateUser({

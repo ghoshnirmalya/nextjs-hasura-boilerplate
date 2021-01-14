@@ -1,4 +1,3 @@
-import { gql, useMutation } from "@apollo/client";
 import {
   Alert,
   AlertIcon,
@@ -12,16 +11,9 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import AccessDeniedIndicator from "components/access-denied-indicator";
+import { useInsertFeedMutation } from "generated-graphql";
 import { useSession } from "next-auth/client";
 import React, { ChangeEvent, useState } from "react";
-
-const insertFeedMutation = gql`
-  mutation insertFeed($author_id: uuid!, $body: String) {
-    insert_feeds_one(object: { author_id: $author_id, body: $body }) {
-      id
-    }
-  }
-`;
 
 const AddNewFeedForm = () => {
   const [body, setBody] = useState("");
@@ -29,7 +21,7 @@ const AddNewFeedForm = () => {
   const [
     insertFeed,
     { loading: insertFeedFetching, error: insertFeedError },
-  ] = useMutation(insertFeedMutation);
+  ] = useInsertFeedMutation();
 
   if (!session) {
     return (

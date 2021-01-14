@@ -1,28 +1,13 @@
-import { useSubscription, gql } from "@apollo/client";
 import { Box, Stack } from "@chakra-ui/react";
 import Loader from "components/loader";
 import AddNewFeedForm from "components/pages/feeds/add-new-feed-form";
 import Feed from "components/pages/feeds/feed";
+import { useFetchFeedsSubscription } from "generated-graphql";
 import React from "react";
 import IFeed from "types/feed";
 
-const feedsSubscription = gql`
-  subscription fetchFeeds {
-    feeds(order_by: { created_at: desc }) {
-      id
-      created_at
-      body
-      author {
-        id
-        name
-        image
-      }
-    }
-  }
-`;
-
 const FeedsPageComponent = () => {
-  const { data, loading } = useSubscription(feedsSubscription, {});
+  const { data, loading } = useFetchFeedsSubscription();
 
   if (loading) {
     return <Loader />;

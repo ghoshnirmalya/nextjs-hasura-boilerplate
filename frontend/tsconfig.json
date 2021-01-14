@@ -20,7 +20,8 @@
       "lib/*": ["lib/*"],
       "pages/*": ["pages/*"],
       "types/*": ["types/*"],
-      "configs/*": ["configs/*"]
+      "configs/*": ["configs/*"],
+      "generated-graphql": ["generated/graphql"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
