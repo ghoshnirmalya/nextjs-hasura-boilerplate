@@ -1,15 +1,15 @@
 import { Box, Stack } from "@chakra-ui/react";
-import Loader from "components/loader";
-import AddNewFeedForm from "components/pages/feeds/add-new-feed-form";
-import Feed from "components/pages/feeds/feed";
+import Loader from "components/Loader";
+import AddNewFeedForm from "components/Pages/Feeds/AddNewFeedForm";
+import Feed from "components/Pages/Feeds/Feed";
 import { useFetchFeedsSubscription } from "generated-graphql";
 import React from "react";
 import IFeed from "types/feed";
 
 const FeedsPageComponent = () => {
-  const { data, loading } = useFetchFeedsSubscription();
+  const { data } = useFetchFeedsSubscription();
 
-  if (loading) {
+  if (!data) {
     return <Loader />;
   }
 

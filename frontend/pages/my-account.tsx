@@ -1,5 +1,5 @@
-import AccessDeniedIndicator from "components/access-denied-indicator";
-import Page from "components/pages/my-account";
+import AccessDeniedIndicator from "components/AccessDeniedIndicator";
+import Page from "components/Pages/MyAccount";
 import { FetchUserDocument } from "generated-graphql";
 import { initializeApollo } from "lib/apolloClient";
 import { GetServerSideProps } from "next";

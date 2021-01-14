@@ -1,5 +1,5 @@
 import { Box, ChakraProvider, theme, VStack } from "@chakra-ui/react";
-import Navbar from "components/navbar";
+import Navbar from "components/Navbar";
 import React, { FC } from "react";
 
 const Layout: FC = ({ children }) => {

@@ -18,6 +18,7 @@ generates:
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"
+      - "typescript-resolvers"
     config:
       maybeValue: T | undefined
       withHooks: true

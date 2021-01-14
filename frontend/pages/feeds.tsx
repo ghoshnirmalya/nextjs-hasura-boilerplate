@@ -1,5 +1,5 @@
-import AccessDeniedIndicator from "components/access-denied-indicator";
-import Page from "components/pages/feeds";
+import AccessDeniedIndicator from "components/AccessDeniedIndicator";
+import Page from "components/Pages/Feeds";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/client";
 import Head from "next/head";

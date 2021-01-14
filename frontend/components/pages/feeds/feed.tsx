@@ -1,5 +1,5 @@
 import { Avatar, Box, Stack, Text } from "@chakra-ui/react";
-import timeFromNow from "lib/time-from-now";
+import timeFromNow from "lib/timeFromNow";
 import React, { FC } from "react";
 import IFeed from "types/feed";
 

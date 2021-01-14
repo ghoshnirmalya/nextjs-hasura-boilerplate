@@ -1,3 +1,8 @@
+import {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from "graphql";
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 import * as React from "react";
@@ -11,6 +16,10 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
   { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
   { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = {
+  [X in Exclude<keyof T, K>]?: T[X];
+} &
+  { [P in K]-?: NonNullable<T[P]> };
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -2264,3 +2273,1604 @@ export type FetchFeedsSubscriptionHookResult = ReturnType<
   typeof useFetchFeedsSubscription
 >;
 export type FetchFeedsSubscriptionResult = Apollo.SubscriptionResult<FetchFeedsSubscription>;
+
+export type ResolverTypeWrapper<T> = Promise<T> | T;
+
+export type LegacyStitchingResolver<TResult, TParent, TContext, TArgs> = {
+  fragment: string;
+  resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
+};
+
+export type NewStitchingResolver<TResult, TParent, TContext, TArgs> = {
+  selectionSet: string;
+  resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
+};
+export type StitchingResolver<TResult, TParent, TContext, TArgs> =
+  | LegacyStitchingResolver<TResult, TParent, TContext, TArgs>
+  | NewStitchingResolver<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
+  | ResolverFn<TResult, TParent, TContext, TArgs>
+  | StitchingResolver<TResult, TParent, TContext, TArgs>;
+
+export type ResolverFn<TResult, TParent, TContext, TArgs> = (
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => Promise<TResult> | TResult;
+
+export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => AsyncIterator<TResult> | Promise<AsyncIterator<TResult>>;
+
+export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => TResult | Promise<TResult>;
+
+export interface SubscriptionSubscriberObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs
+> {
+  subscribe: SubscriptionSubscribeFn<
+    { [key in TKey]: TResult },
+    TParent,
+    TContext,
+    TArgs
+  >;
+  resolve?: SubscriptionResolveFn<
+    TResult,
+    { [key in TKey]: TResult },
+    TContext,
+    TArgs
+  >;
+}
+
+export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
+  subscribe: SubscriptionSubscribeFn<any, TParent, TContext, TArgs>;
+  resolve: SubscriptionResolveFn<TResult, any, TContext, TArgs>;
+}
+
+export type SubscriptionObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs
+> =
+  | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
+  | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
+
+export type SubscriptionResolver<
+  TResult,
+  TKey extends string,
+  TParent = {},
+  TContext = {},
+  TArgs = {}
+> =
+  | ((
+      ...args: any[]
+    ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
+  | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
+
+export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
+  parent: TParent,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
+
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
+  obj: T,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => boolean | Promise<boolean>;
+
+export type NextResolverFn<T> = () => Promise<T>;
+
+export type DirectiveResolverFn<
+  TResult = {},
+  TParent = {},
+  TContext = {},
+  TArgs = {}
+> = (
+  next: NextResolverFn<TResult>,
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => TResult | Promise<TResult>;
+
+/** Mapping between all available schema types and the resolvers types */
+export type ResolversTypes = {
+  Int_comparison_exp: Int_Comparison_Exp;
+  Int: ResolverTypeWrapper<Scalars["Int"]>;
+  Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+  String_comparison_exp: String_Comparison_Exp;
+  String: ResolverTypeWrapper<Scalars["String"]>;
+  accounts: ResolverTypeWrapper<Accounts>;
+  accounts_aggregate: ResolverTypeWrapper<Accounts_Aggregate>;
+  accounts_aggregate_fields: ResolverTypeWrapper<Accounts_Aggregate_Fields>;
+  accounts_aggregate_order_by: Accounts_Aggregate_Order_By;
+  accounts_arr_rel_insert_input: Accounts_Arr_Rel_Insert_Input;
+  accounts_bool_exp: Accounts_Bool_Exp;
+  accounts_constraint: Accounts_Constraint;
+  accounts_insert_input: Accounts_Insert_Input;
+  accounts_max_fields: ResolverTypeWrapper<Accounts_Max_Fields>;
+  accounts_max_order_by: Accounts_Max_Order_By;
+  accounts_min_fields: ResolverTypeWrapper<Accounts_Min_Fields>;
+  accounts_min_order_by: Accounts_Min_Order_By;
+  accounts_mutation_response: ResolverTypeWrapper<Accounts_Mutation_Response>;
+  accounts_obj_rel_insert_input: Accounts_Obj_Rel_Insert_Input;
+  accounts_on_conflict: Accounts_On_Conflict;
+  accounts_order_by: Accounts_Order_By;
+  accounts_pk_columns_input: Accounts_Pk_Columns_Input;
+  accounts_select_column: Accounts_Select_Column;
+  accounts_set_input: Accounts_Set_Input;
+  accounts_update_column: Accounts_Update_Column;
+  feeds: ResolverTypeWrapper<Feeds>;
+  feeds_aggregate: ResolverTypeWrapper<Feeds_Aggregate>;
+  feeds_aggregate_fields: ResolverTypeWrapper<Feeds_Aggregate_Fields>;
+  feeds_aggregate_order_by: Feeds_Aggregate_Order_By;
+  feeds_arr_rel_insert_input: Feeds_Arr_Rel_Insert_Input;
+  feeds_bool_exp: Feeds_Bool_Exp;
+  feeds_constraint: Feeds_Constraint;
+  feeds_insert_input: Feeds_Insert_Input;
+  feeds_max_fields: ResolverTypeWrapper<Feeds_Max_Fields>;
+  feeds_max_order_by: Feeds_Max_Order_By;
+  feeds_min_fields: ResolverTypeWrapper<Feeds_Min_Fields>;
+  feeds_min_order_by: Feeds_Min_Order_By;
+  feeds_mutation_response: ResolverTypeWrapper<Feeds_Mutation_Response>;
+  feeds_obj_rel_insert_input: Feeds_Obj_Rel_Insert_Input;
+  feeds_on_conflict: Feeds_On_Conflict;
+  feeds_order_by: Feeds_Order_By;
+  feeds_pk_columns_input: Feeds_Pk_Columns_Input;
+  feeds_select_column: Feeds_Select_Column;
+  feeds_set_input: Feeds_Set_Input;
+  feeds_update_column: Feeds_Update_Column;
+  mutation_root: ResolverTypeWrapper<{}>;
+  order_by: Order_By;
+  query_root: ResolverTypeWrapper<{}>;
+  sessions: ResolverTypeWrapper<Sessions>;
+  sessions_aggregate: ResolverTypeWrapper<Sessions_Aggregate>;
+  sessions_aggregate_fields: ResolverTypeWrapper<Sessions_Aggregate_Fields>;
+  sessions_aggregate_order_by: Sessions_Aggregate_Order_By;
+  sessions_arr_rel_insert_input: Sessions_Arr_Rel_Insert_Input;
+  sessions_avg_fields: ResolverTypeWrapper<Sessions_Avg_Fields>;
+  Float: ResolverTypeWrapper<Scalars["Float"]>;
+  sessions_avg_order_by: Sessions_Avg_Order_By;
+  sessions_bool_exp: Sessions_Bool_Exp;
+  sessions_constraint: Sessions_Constraint;
+  sessions_inc_input: Sessions_Inc_Input;
+  sessions_insert_input: Sessions_Insert_Input;
+  sessions_max_fields: ResolverTypeWrapper<Sessions_Max_Fields>;
+  sessions_max_order_by: Sessions_Max_Order_By;
+  sessions_min_fields: ResolverTypeWrapper<Sessions_Min_Fields>;
+  sessions_min_order_by: Sessions_Min_Order_By;
+  sessions_mutation_response: ResolverTypeWrapper<Sessions_Mutation_Response>;
+  sessions_obj_rel_insert_input: Sessions_Obj_Rel_Insert_Input;
+  sessions_on_conflict: Sessions_On_Conflict;
+  sessions_order_by: Sessions_Order_By;
+  sessions_pk_columns_input: Sessions_Pk_Columns_Input;
+  sessions_select_column: Sessions_Select_Column;
+  sessions_set_input: Sessions_Set_Input;
+  sessions_stddev_fields: ResolverTypeWrapper<Sessions_Stddev_Fields>;
+  sessions_stddev_order_by: Sessions_Stddev_Order_By;
+  sessions_stddev_pop_fields: ResolverTypeWrapper<Sessions_Stddev_Pop_Fields>;
+  sessions_stddev_pop_order_by: Sessions_Stddev_Pop_Order_By;
+  sessions_stddev_samp_fields: ResolverTypeWrapper<Sessions_Stddev_Samp_Fields>;
+  sessions_stddev_samp_order_by: Sessions_Stddev_Samp_Order_By;
+  sessions_sum_fields: ResolverTypeWrapper<Sessions_Sum_Fields>;
+  sessions_sum_order_by: Sessions_Sum_Order_By;
+  sessions_update_column: Sessions_Update_Column;
+  sessions_var_pop_fields: ResolverTypeWrapper<Sessions_Var_Pop_Fields>;
+  sessions_var_pop_order_by: Sessions_Var_Pop_Order_By;
+  sessions_var_samp_fields: ResolverTypeWrapper<Sessions_Var_Samp_Fields>;
+  sessions_var_samp_order_by: Sessions_Var_Samp_Order_By;
+  sessions_variance_fields: ResolverTypeWrapper<Sessions_Variance_Fields>;
+  sessions_variance_order_by: Sessions_Variance_Order_By;
+  subscription_root: ResolverTypeWrapper<{}>;
+  timestamptz: ResolverTypeWrapper<Scalars["timestamptz"]>;
+  timestamptz_comparison_exp: Timestamptz_Comparison_Exp;
+  users: ResolverTypeWrapper<Users>;
+  users_aggregate: ResolverTypeWrapper<Users_Aggregate>;
+  users_aggregate_fields: ResolverTypeWrapper<Users_Aggregate_Fields>;
+  users_aggregate_order_by: Users_Aggregate_Order_By;
+  users_arr_rel_insert_input: Users_Arr_Rel_Insert_Input;
+  users_bool_exp: Users_Bool_Exp;
+  users_constraint: Users_Constraint;
+  users_insert_input: Users_Insert_Input;
+  users_max_fields: ResolverTypeWrapper<Users_Max_Fields>;
+  users_max_order_by: Users_Max_Order_By;
+  users_min_fields: ResolverTypeWrapper<Users_Min_Fields>;
+  users_min_order_by: Users_Min_Order_By;
+  users_mutation_response: ResolverTypeWrapper<Users_Mutation_Response>;
+  users_obj_rel_insert_input: Users_Obj_Rel_Insert_Input;
+  users_on_conflict: Users_On_Conflict;
+  users_order_by: Users_Order_By;
+  users_pk_columns_input: Users_Pk_Columns_Input;
+  users_select_column: Users_Select_Column;
+  users_set_input: Users_Set_Input;
+  users_update_column: Users_Update_Column;
+  uuid: ResolverTypeWrapper<Scalars["uuid"]>;
+  uuid_comparison_exp: Uuid_Comparison_Exp;
+  verification_requests: ResolverTypeWrapper<Verification_Requests>;
+  verification_requests_aggregate: ResolverTypeWrapper<Verification_Requests_Aggregate>;
+  verification_requests_aggregate_fields: ResolverTypeWrapper<Verification_Requests_Aggregate_Fields>;
+  verification_requests_aggregate_order_by: Verification_Requests_Aggregate_Order_By;
+  verification_requests_arr_rel_insert_input: Verification_Requests_Arr_Rel_Insert_Input;
+  verification_requests_bool_exp: Verification_Requests_Bool_Exp;
+  verification_requests_constraint: Verification_Requests_Constraint;
+  verification_requests_insert_input: Verification_Requests_Insert_Input;
+  verification_requests_max_fields: ResolverTypeWrapper<Verification_Requests_Max_Fields>;
+  verification_requests_max_order_by: Verification_Requests_Max_Order_By;
+  verification_requests_min_fields: ResolverTypeWrapper<Verification_Requests_Min_Fields>;
+  verification_requests_min_order_by: Verification_Requests_Min_Order_By;
+  verification_requests_mutation_response: ResolverTypeWrapper<Verification_Requests_Mutation_Response>;
+  verification_requests_obj_rel_insert_input: Verification_Requests_Obj_Rel_Insert_Input;
+  verification_requests_on_conflict: Verification_Requests_On_Conflict;
+  verification_requests_order_by: Verification_Requests_Order_By;
+  verification_requests_pk_columns_input: Verification_Requests_Pk_Columns_Input;
+  verification_requests_select_column: Verification_Requests_Select_Column;
+  verification_requests_set_input: Verification_Requests_Set_Input;
+  verification_requests_update_column: Verification_Requests_Update_Column;
+};
+
+/** Mapping between all available schema types and the resolvers parents */
+export type ResolversParentTypes = {
+  Int_comparison_exp: Int_Comparison_Exp;
+  Int: Scalars["Int"];
+  Boolean: Scalars["Boolean"];
+  String_comparison_exp: String_Comparison_Exp;
+  String: Scalars["String"];
+  accounts: Accounts;
+  accounts_aggregate: Accounts_Aggregate;
+  accounts_aggregate_fields: Accounts_Aggregate_Fields;
+  accounts_aggregate_order_by: Accounts_Aggregate_Order_By;
+  accounts_arr_rel_insert_input: Accounts_Arr_Rel_Insert_Input;
+  accounts_bool_exp: Accounts_Bool_Exp;
+  accounts_insert_input: Accounts_Insert_Input;
+  accounts_max_fields: Accounts_Max_Fields;
+  accounts_max_order_by: Accounts_Max_Order_By;
+  accounts_min_fields: Accounts_Min_Fields;
+  accounts_min_order_by: Accounts_Min_Order_By;
+  accounts_mutation_response: Accounts_Mutation_Response;
+  accounts_obj_rel_insert_input: Accounts_Obj_Rel_Insert_Input;
+  accounts_on_conflict: Accounts_On_Conflict;
+  accounts_order_by: Accounts_Order_By;
+  accounts_pk_columns_input: Accounts_Pk_Columns_Input;
+  accounts_set_input: Accounts_Set_Input;
+  feeds: Feeds;
+  feeds_aggregate: Feeds_Aggregate;
+  feeds_aggregate_fields: Feeds_Aggregate_Fields;
+  feeds_aggregate_order_by: Feeds_Aggregate_Order_By;
+  feeds_arr_rel_insert_input: Feeds_Arr_Rel_Insert_Input;
+  feeds_bool_exp: Feeds_Bool_Exp;
+  feeds_insert_input: Feeds_Insert_Input;
+  feeds_max_fields: Feeds_Max_Fields;
+  feeds_max_order_by: Feeds_Max_Order_By;
+  feeds_min_fields: Feeds_Min_Fields;
+  feeds_min_order_by: Feeds_Min_Order_By;
+  feeds_mutation_response: Feeds_Mutation_Response;
+  feeds_obj_rel_insert_input: Feeds_Obj_Rel_Insert_Input;
+  feeds_on_conflict: Feeds_On_Conflict;
+  feeds_order_by: Feeds_Order_By;
+  feeds_pk_columns_input: Feeds_Pk_Columns_Input;
+  feeds_set_input: Feeds_Set_Input;
+  mutation_root: {};
+  query_root: {};
+  sessions: Sessions;
+  sessions_aggregate: Sessions_Aggregate;
+  sessions_aggregate_fields: Sessions_Aggregate_Fields;
+  sessions_aggregate_order_by: Sessions_Aggregate_Order_By;
+  sessions_arr_rel_insert_input: Sessions_Arr_Rel_Insert_Input;
+  sessions_avg_fields: Sessions_Avg_Fields;
+  Float: Scalars["Float"];
+  sessions_avg_order_by: Sessions_Avg_Order_By;
+  sessions_bool_exp: Sessions_Bool_Exp;
+  sessions_inc_input: Sessions_Inc_Input;
+  sessions_insert_input: Sessions_Insert_Input;
+  sessions_max_fields: Sessions_Max_Fields;
+  sessions_max_order_by: Sessions_Max_Order_By;
+  sessions_min_fields: Sessions_Min_Fields;
+  sessions_min_order_by: Sessions_Min_Order_By;
+  sessions_mutation_response: Sessions_Mutation_Response;
+  sessions_obj_rel_insert_input: Sessions_Obj_Rel_Insert_Input;
+  sessions_on_conflict: Sessions_On_Conflict;
+  sessions_order_by: Sessions_Order_By;
+  sessions_pk_columns_input: Sessions_Pk_Columns_Input;
+  sessions_set_input: Sessions_Set_Input;
+  sessions_stddev_fields: Sessions_Stddev_Fields;
+  sessions_stddev_order_by: Sessions_Stddev_Order_By;
+  sessions_stddev_pop_fields: Sessions_Stddev_Pop_Fields;
+  sessions_stddev_pop_order_by: Sessions_Stddev_Pop_Order_By;
+  sessions_stddev_samp_fields: Sessions_Stddev_Samp_Fields;
+  sessions_stddev_samp_order_by: Sessions_Stddev_Samp_Order_By;
+  sessions_sum_fields: Sessions_Sum_Fields;
+  sessions_sum_order_by: Sessions_Sum_Order_By;
+  sessions_var_pop_fields: Sessions_Var_Pop_Fields;
+  sessions_var_pop_order_by: Sessions_Var_Pop_Order_By;
+  sessions_var_samp_fields: Sessions_Var_Samp_Fields;
+  sessions_var_samp_order_by: Sessions_Var_Samp_Order_By;
+  sessions_variance_fields: Sessions_Variance_Fields;
+  sessions_variance_order_by: Sessions_Variance_Order_By;
+  subscription_root: {};
+  timestamptz: Scalars["timestamptz"];
+  timestamptz_comparison_exp: Timestamptz_Comparison_Exp;
+  users: Users;
+  users_aggregate: Users_Aggregate;
+  users_aggregate_fields: Users_Aggregate_Fields;
+  users_aggregate_order_by: Users_Aggregate_Order_By;
+  users_arr_rel_insert_input: Users_Arr_Rel_Insert_Input;
+  users_bool_exp: Users_Bool_Exp;
+  users_insert_input: Users_Insert_Input;
+  users_max_fields: Users_Max_Fields;
+  users_max_order_by: Users_Max_Order_By;
+  users_min_fields: Users_Min_Fields;
+  users_min_order_by: Users_Min_Order_By;
+  users_mutation_response: Users_Mutation_Response;
+  users_obj_rel_insert_input: Users_Obj_Rel_Insert_Input;
+  users_on_conflict: Users_On_Conflict;
+  users_order_by: Users_Order_By;
+  users_pk_columns_input: Users_Pk_Columns_Input;
+  users_set_input: Users_Set_Input;
+  uuid: Scalars["uuid"];
+  uuid_comparison_exp: Uuid_Comparison_Exp;
+  verification_requests: Verification_Requests;
+  verification_requests_aggregate: Verification_Requests_Aggregate;
+  verification_requests_aggregate_fields: Verification_Requests_Aggregate_Fields;
+  verification_requests_aggregate_order_by: Verification_Requests_Aggregate_Order_By;
+  verification_requests_arr_rel_insert_input: Verification_Requests_Arr_Rel_Insert_Input;
+  verification_requests_bool_exp: Verification_Requests_Bool_Exp;
+  verification_requests_insert_input: Verification_Requests_Insert_Input;
+  verification_requests_max_fields: Verification_Requests_Max_Fields;
+  verification_requests_max_order_by: Verification_Requests_Max_Order_By;
+  verification_requests_min_fields: Verification_Requests_Min_Fields;
+  verification_requests_min_order_by: Verification_Requests_Min_Order_By;
+  verification_requests_mutation_response: Verification_Requests_Mutation_Response;
+  verification_requests_obj_rel_insert_input: Verification_Requests_Obj_Rel_Insert_Input;
+  verification_requests_on_conflict: Verification_Requests_On_Conflict;
+  verification_requests_order_by: Verification_Requests_Order_By;
+  verification_requests_pk_columns_input: Verification_Requests_Pk_Columns_Input;
+  verification_requests_set_input: Verification_Requests_Set_Input;
+};
+
+export type AccountsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["accounts"] = ResolversParentTypes["accounts"]
+> = {
+  access_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  access_token_expires?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  compound_id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  provider_account_id?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType
+  >;
+  provider_id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  provider_type?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  refresh_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  user_id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Accounts_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["accounts_aggregate"] = ResolversParentTypes["accounts_aggregate"]
+> = {
+  aggregate?: Resolver<
+    Maybe<ResolversTypes["accounts_aggregate_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  nodes?: Resolver<Array<ResolversTypes["accounts"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Accounts_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["accounts_aggregate_fields"] = ResolversParentTypes["accounts_aggregate_fields"]
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Accounts_Aggregate_FieldsCountArgs, never>
+  >;
+  max?: Resolver<
+    Maybe<ResolversTypes["accounts_max_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  min?: Resolver<
+    Maybe<ResolversTypes["accounts_min_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Accounts_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["accounts_max_fields"] = ResolversParentTypes["accounts_max_fields"]
+> = {
+  access_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  access_token_expires?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  compound_id?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  provider_account_id?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  provider_id?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  provider_type?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  refresh_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  user_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Accounts_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["accounts_min_fields"] = ResolversParentTypes["accounts_min_fields"]
+> = {
+  access_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  access_token_expires?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  compound_id?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  provider_account_id?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  provider_id?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  provider_type?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  refresh_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  user_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Accounts_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["accounts_mutation_response"] = ResolversParentTypes["accounts_mutation_response"]
+> = {
+  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  returning?: Resolver<
+    Array<ResolversTypes["accounts"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type FeedsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["feeds"] = ResolversParentTypes["feeds"]
+> = {
+  author?: Resolver<Maybe<ResolversTypes["users"]>, ParentType, ContextType>;
+  author_id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  body?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Feeds_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["feeds_aggregate"] = ResolversParentTypes["feeds_aggregate"]
+> = {
+  aggregate?: Resolver<
+    Maybe<ResolversTypes["feeds_aggregate_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  nodes?: Resolver<Array<ResolversTypes["feeds"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Feeds_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["feeds_aggregate_fields"] = ResolversParentTypes["feeds_aggregate_fields"]
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Feeds_Aggregate_FieldsCountArgs, never>
+  >;
+  max?: Resolver<
+    Maybe<ResolversTypes["feeds_max_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  min?: Resolver<
+    Maybe<ResolversTypes["feeds_min_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Feeds_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["feeds_max_fields"] = ResolversParentTypes["feeds_max_fields"]
+> = {
+  author_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Feeds_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["feeds_min_fields"] = ResolversParentTypes["feeds_min_fields"]
+> = {
+  author_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  body?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Feeds_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["feeds_mutation_response"] = ResolversParentTypes["feeds_mutation_response"]
+> = {
+  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes["feeds"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Mutation_RootResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["mutation_root"] = ResolversParentTypes["mutation_root"]
+> = {
+  delete_accounts?: Resolver<
+    Maybe<ResolversTypes["accounts_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_AccountsArgs, "where">
+  >;
+  delete_accounts_by_pk?: Resolver<
+    Maybe<ResolversTypes["accounts"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Accounts_By_PkArgs, "id">
+  >;
+  delete_feeds?: Resolver<
+    Maybe<ResolversTypes["feeds_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_FeedsArgs, "where">
+  >;
+  delete_feeds_by_pk?: Resolver<
+    Maybe<ResolversTypes["feeds"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Feeds_By_PkArgs, "id">
+  >;
+  delete_sessions?: Resolver<
+    Maybe<ResolversTypes["sessions_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_SessionsArgs, "where">
+  >;
+  delete_sessions_by_pk?: Resolver<
+    Maybe<ResolversTypes["sessions"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Sessions_By_PkArgs, "id">
+  >;
+  delete_users?: Resolver<
+    Maybe<ResolversTypes["users_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_UsersArgs, "where">
+  >;
+  delete_users_by_pk?: Resolver<
+    Maybe<ResolversTypes["users"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Users_By_PkArgs, "id">
+  >;
+  delete_verification_requests?: Resolver<
+    Maybe<ResolversTypes["verification_requests_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Verification_RequestsArgs, "where">
+  >;
+  delete_verification_requests_by_pk?: Resolver<
+    Maybe<ResolversTypes["verification_requests"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Verification_Requests_By_PkArgs, "id">
+  >;
+  insert_accounts?: Resolver<
+    Maybe<ResolversTypes["accounts_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_AccountsArgs, "objects">
+  >;
+  insert_accounts_one?: Resolver<
+    Maybe<ResolversTypes["accounts"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Accounts_OneArgs, "object">
+  >;
+  insert_feeds?: Resolver<
+    Maybe<ResolversTypes["feeds_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_FeedsArgs, "objects">
+  >;
+  insert_feeds_one?: Resolver<
+    Maybe<ResolversTypes["feeds"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Feeds_OneArgs, "object">
+  >;
+  insert_sessions?: Resolver<
+    Maybe<ResolversTypes["sessions_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_SessionsArgs, "objects">
+  >;
+  insert_sessions_one?: Resolver<
+    Maybe<ResolversTypes["sessions"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Sessions_OneArgs, "object">
+  >;
+  insert_users?: Resolver<
+    Maybe<ResolversTypes["users_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_UsersArgs, "objects">
+  >;
+  insert_users_one?: Resolver<
+    Maybe<ResolversTypes["users"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Users_OneArgs, "object">
+  >;
+  insert_verification_requests?: Resolver<
+    Maybe<ResolversTypes["verification_requests_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Verification_RequestsArgs, "objects">
+  >;
+  insert_verification_requests_one?: Resolver<
+    Maybe<ResolversTypes["verification_requests"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Verification_Requests_OneArgs, "object">
+  >;
+  update_accounts?: Resolver<
+    Maybe<ResolversTypes["accounts_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_AccountsArgs, "where">
+  >;
+  update_accounts_by_pk?: Resolver<
+    Maybe<ResolversTypes["accounts"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Accounts_By_PkArgs, "pk_columns">
+  >;
+  update_feeds?: Resolver<
+    Maybe<ResolversTypes["feeds_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_FeedsArgs, "where">
+  >;
+  update_feeds_by_pk?: Resolver<
+    Maybe<ResolversTypes["feeds"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Feeds_By_PkArgs, "pk_columns">
+  >;
+  update_sessions?: Resolver<
+    Maybe<ResolversTypes["sessions_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_SessionsArgs, "where">
+  >;
+  update_sessions_by_pk?: Resolver<
+    Maybe<ResolversTypes["sessions"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Sessions_By_PkArgs, "pk_columns">
+  >;
+  update_users?: Resolver<
+    Maybe<ResolversTypes["users_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_UsersArgs, "where">
+  >;
+  update_users_by_pk?: Resolver<
+    Maybe<ResolversTypes["users"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Users_By_PkArgs, "pk_columns">
+  >;
+  update_verification_requests?: Resolver<
+    Maybe<ResolversTypes["verification_requests_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Verification_RequestsArgs, "where">
+  >;
+  update_verification_requests_by_pk?: Resolver<
+    Maybe<ResolversTypes["verification_requests"]>,
+    ParentType,
+    ContextType,
+    RequireFields<
+      Mutation_RootUpdate_Verification_Requests_By_PkArgs,
+      "pk_columns"
+    >
+  >;
+};
+
+export type Query_RootResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["query_root"] = ResolversParentTypes["query_root"]
+> = {
+  accounts?: Resolver<
+    Array<ResolversTypes["accounts"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootAccountsArgs, never>
+  >;
+  accounts_aggregate?: Resolver<
+    ResolversTypes["accounts_aggregate"],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootAccounts_AggregateArgs, never>
+  >;
+  accounts_by_pk?: Resolver<
+    Maybe<ResolversTypes["accounts"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootAccounts_By_PkArgs, "id">
+  >;
+  feeds?: Resolver<
+    Array<ResolversTypes["feeds"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootFeedsArgs, never>
+  >;
+  feeds_aggregate?: Resolver<
+    ResolversTypes["feeds_aggregate"],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootFeeds_AggregateArgs, never>
+  >;
+  feeds_by_pk?: Resolver<
+    Maybe<ResolversTypes["feeds"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootFeeds_By_PkArgs, "id">
+  >;
+  sessions?: Resolver<
+    Array<ResolversTypes["sessions"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootSessionsArgs, never>
+  >;
+  sessions_aggregate?: Resolver<
+    ResolversTypes["sessions_aggregate"],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootSessions_AggregateArgs, never>
+  >;
+  sessions_by_pk?: Resolver<
+    Maybe<ResolversTypes["sessions"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootSessions_By_PkArgs, "id">
+  >;
+  users?: Resolver<
+    Array<ResolversTypes["users"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUsersArgs, never>
+  >;
+  users_aggregate?: Resolver<
+    ResolversTypes["users_aggregate"],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUsers_AggregateArgs, never>
+  >;
+  users_by_pk?: Resolver<
+    Maybe<ResolversTypes["users"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUsers_By_PkArgs, "id">
+  >;
+  verification_requests?: Resolver<
+    Array<ResolversTypes["verification_requests"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootVerification_RequestsArgs, never>
+  >;
+  verification_requests_aggregate?: Resolver<
+    ResolversTypes["verification_requests_aggregate"],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootVerification_Requests_AggregateArgs, never>
+  >;
+  verification_requests_by_pk?: Resolver<
+    Maybe<ResolversTypes["verification_requests"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootVerification_Requests_By_PkArgs, "id">
+  >;
+};
+
+export type SessionsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions"] = ResolversParentTypes["sessions"]
+> = {
+  access_token?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  expires?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  session_token?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  user_id?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_aggregate"] = ResolversParentTypes["sessions_aggregate"]
+> = {
+  aggregate?: Resolver<
+    Maybe<ResolversTypes["sessions_aggregate_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  nodes?: Resolver<Array<ResolversTypes["sessions"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_aggregate_fields"] = ResolversParentTypes["sessions_aggregate_fields"]
+> = {
+  avg?: Resolver<
+    Maybe<ResolversTypes["sessions_avg_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  count?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Sessions_Aggregate_FieldsCountArgs, never>
+  >;
+  max?: Resolver<
+    Maybe<ResolversTypes["sessions_max_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  min?: Resolver<
+    Maybe<ResolversTypes["sessions_min_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  stddev?: Resolver<
+    Maybe<ResolversTypes["sessions_stddev_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  stddev_pop?: Resolver<
+    Maybe<ResolversTypes["sessions_stddev_pop_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  stddev_samp?: Resolver<
+    Maybe<ResolversTypes["sessions_stddev_samp_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  sum?: Resolver<
+    Maybe<ResolversTypes["sessions_sum_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  var_pop?: Resolver<
+    Maybe<ResolversTypes["sessions_var_pop_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  var_samp?: Resolver<
+    Maybe<ResolversTypes["sessions_var_samp_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  variance?: Resolver<
+    Maybe<ResolversTypes["sessions_variance_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_avg_fields"] = ResolversParentTypes["sessions_avg_fields"]
+> = {
+  user_id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_max_fields"] = ResolversParentTypes["sessions_max_fields"]
+> = {
+  access_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  expires?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  session_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  user_id?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_min_fields"] = ResolversParentTypes["sessions_min_fields"]
+> = {
+  access_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  expires?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  session_token?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  user_id?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_mutation_response"] = ResolversParentTypes["sessions_mutation_response"]
+> = {
+  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  returning?: Resolver<
+    Array<ResolversTypes["sessions"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_stddev_fields"] = ResolversParentTypes["sessions_stddev_fields"]
+> = {
+  user_id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_stddev_pop_fields"] = ResolversParentTypes["sessions_stddev_pop_fields"]
+> = {
+  user_id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_stddev_samp_fields"] = ResolversParentTypes["sessions_stddev_samp_fields"]
+> = {
+  user_id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_sum_fields"] = ResolversParentTypes["sessions_sum_fields"]
+> = {
+  user_id?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_var_pop_fields"] = ResolversParentTypes["sessions_var_pop_fields"]
+> = {
+  user_id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_var_samp_fields"] = ResolversParentTypes["sessions_var_samp_fields"]
+> = {
+  user_id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Sessions_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["sessions_variance_fields"] = ResolversParentTypes["sessions_variance_fields"]
+> = {
+  user_id?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Subscription_RootResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["subscription_root"] = ResolversParentTypes["subscription_root"]
+> = {
+  accounts?: SubscriptionResolver<
+    Array<ResolversTypes["accounts"]>,
+    "accounts",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootAccountsArgs, never>
+  >;
+  accounts_aggregate?: SubscriptionResolver<
+    ResolversTypes["accounts_aggregate"],
+    "accounts_aggregate",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootAccounts_AggregateArgs, never>
+  >;
+  accounts_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes["accounts"]>,
+    "accounts_by_pk",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootAccounts_By_PkArgs, "id">
+  >;
+  feeds?: SubscriptionResolver<
+    Array<ResolversTypes["feeds"]>,
+    "feeds",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootFeedsArgs, never>
+  >;
+  feeds_aggregate?: SubscriptionResolver<
+    ResolversTypes["feeds_aggregate"],
+    "feeds_aggregate",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootFeeds_AggregateArgs, never>
+  >;
+  feeds_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes["feeds"]>,
+    "feeds_by_pk",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootFeeds_By_PkArgs, "id">
+  >;
+  sessions?: SubscriptionResolver<
+    Array<ResolversTypes["sessions"]>,
+    "sessions",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootSessionsArgs, never>
+  >;
+  sessions_aggregate?: SubscriptionResolver<
+    ResolversTypes["sessions_aggregate"],
+    "sessions_aggregate",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootSessions_AggregateArgs, never>
+  >;
+  sessions_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes["sessions"]>,
+    "sessions_by_pk",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootSessions_By_PkArgs, "id">
+  >;
+  users?: SubscriptionResolver<
+    Array<ResolversTypes["users"]>,
+    "users",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUsersArgs, never>
+  >;
+  users_aggregate?: SubscriptionResolver<
+    ResolversTypes["users_aggregate"],
+    "users_aggregate",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUsers_AggregateArgs, never>
+  >;
+  users_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes["users"]>,
+    "users_by_pk",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUsers_By_PkArgs, "id">
+  >;
+  verification_requests?: SubscriptionResolver<
+    Array<ResolversTypes["verification_requests"]>,
+    "verification_requests",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootVerification_RequestsArgs, never>
+  >;
+  verification_requests_aggregate?: SubscriptionResolver<
+    ResolversTypes["verification_requests_aggregate"],
+    "verification_requests_aggregate",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootVerification_Requests_AggregateArgs, never>
+  >;
+  verification_requests_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes["verification_requests"]>,
+    "verification_requests_by_pk",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootVerification_Requests_By_PkArgs, "id">
+  >;
+};
+
+export interface TimestamptzScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["timestamptz"], any> {
+  name: "timestamptz";
+}
+
+export type UsersResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["users"] = ResolversParentTypes["users"]
+> = {
+  created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  email_verified?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  feeds?: Resolver<
+    Array<ResolversTypes["feeds"]>,
+    ParentType,
+    ContextType,
+    RequireFields<UsersFeedsArgs, never>
+  >;
+  feeds_aggregate?: Resolver<
+    ResolversTypes["feeds_aggregate"],
+    ParentType,
+    ContextType,
+    RequireFields<UsersFeeds_AggregateArgs, never>
+  >;
+  id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["users_aggregate"] = ResolversParentTypes["users_aggregate"]
+> = {
+  aggregate?: Resolver<
+    Maybe<ResolversTypes["users_aggregate_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  nodes?: Resolver<Array<ResolversTypes["users"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["users_aggregate_fields"] = ResolversParentTypes["users_aggregate_fields"]
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Users_Aggregate_FieldsCountArgs, never>
+  >;
+  max?: Resolver<
+    Maybe<ResolversTypes["users_max_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  min?: Resolver<
+    Maybe<ResolversTypes["users_min_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["users_max_fields"] = ResolversParentTypes["users_max_fields"]
+> = {
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  email?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  email_verified?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["users_min_fields"] = ResolversParentTypes["users_min_fields"]
+> = {
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  email?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  email_verified?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["users_mutation_response"] = ResolversParentTypes["users_mutation_response"]
+> = {
+  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes["users"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export interface UuidScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["uuid"], any> {
+  name: "uuid";
+}
+
+export type Verification_RequestsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["verification_requests"] = ResolversParentTypes["verification_requests"]
+> = {
+  created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  expires?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  identifier?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  token?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Verification_Requests_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["verification_requests_aggregate"] = ResolversParentTypes["verification_requests_aggregate"]
+> = {
+  aggregate?: Resolver<
+    Maybe<ResolversTypes["verification_requests_aggregate_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  nodes?: Resolver<
+    Array<ResolversTypes["verification_requests"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Verification_Requests_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["verification_requests_aggregate_fields"] = ResolversParentTypes["verification_requests_aggregate_fields"]
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Verification_Requests_Aggregate_FieldsCountArgs, never>
+  >;
+  max?: Resolver<
+    Maybe<ResolversTypes["verification_requests_max_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  min?: Resolver<
+    Maybe<ResolversTypes["verification_requests_min_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Verification_Requests_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["verification_requests_max_fields"] = ResolversParentTypes["verification_requests_max_fields"]
+> = {
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  expires?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  identifier?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  token?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Verification_Requests_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["verification_requests_min_fields"] = ResolversParentTypes["verification_requests_min_fields"]
+> = {
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  expires?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  identifier?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  token?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Verification_Requests_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["verification_requests_mutation_response"] = ResolversParentTypes["verification_requests_mutation_response"]
+> = {
+  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  returning?: Resolver<
+    Array<ResolversTypes["verification_requests"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Resolvers<ContextType = any> = {
+  accounts?: AccountsResolvers<ContextType>;
+  accounts_aggregate?: Accounts_AggregateResolvers<ContextType>;
+  accounts_aggregate_fields?: Accounts_Aggregate_FieldsResolvers<ContextType>;
+  accounts_max_fields?: Accounts_Max_FieldsResolvers<ContextType>;
+  accounts_min_fields?: Accounts_Min_FieldsResolvers<ContextType>;
+  accounts_mutation_response?: Accounts_Mutation_ResponseResolvers<ContextType>;
+  feeds?: FeedsResolvers<ContextType>;
+  feeds_aggregate?: Feeds_AggregateResolvers<ContextType>;
+  feeds_aggregate_fields?: Feeds_Aggregate_FieldsResolvers<ContextType>;
+  feeds_max_fields?: Feeds_Max_FieldsResolvers<ContextType>;
+  feeds_min_fields?: Feeds_Min_FieldsResolvers<ContextType>;
+  feeds_mutation_response?: Feeds_Mutation_ResponseResolvers<ContextType>;
+  mutation_root?: Mutation_RootResolvers<ContextType>;
+  query_root?: Query_RootResolvers<ContextType>;
+  sessions?: SessionsResolvers<ContextType>;
+  sessions_aggregate?: Sessions_AggregateResolvers<ContextType>;
+  sessions_aggregate_fields?: Sessions_Aggregate_FieldsResolvers<ContextType>;
+  sessions_avg_fields?: Sessions_Avg_FieldsResolvers<ContextType>;
+  sessions_max_fields?: Sessions_Max_FieldsResolvers<ContextType>;
+  sessions_min_fields?: Sessions_Min_FieldsResolvers<ContextType>;
+  sessions_mutation_response?: Sessions_Mutation_ResponseResolvers<ContextType>;
+  sessions_stddev_fields?: Sessions_Stddev_FieldsResolvers<ContextType>;
+  sessions_stddev_pop_fields?: Sessions_Stddev_Pop_FieldsResolvers<ContextType>;
+  sessions_stddev_samp_fields?: Sessions_Stddev_Samp_FieldsResolvers<ContextType>;
+  sessions_sum_fields?: Sessions_Sum_FieldsResolvers<ContextType>;
+  sessions_var_pop_fields?: Sessions_Var_Pop_FieldsResolvers<ContextType>;
+  sessions_var_samp_fields?: Sessions_Var_Samp_FieldsResolvers<ContextType>;
+  sessions_variance_fields?: Sessions_Variance_FieldsResolvers<ContextType>;
+  subscription_root?: Subscription_RootResolvers<ContextType>;
+  timestamptz?: GraphQLScalarType;
+  users?: UsersResolvers<ContextType>;
+  users_aggregate?: Users_AggregateResolvers<ContextType>;
+  users_aggregate_fields?: Users_Aggregate_FieldsResolvers<ContextType>;
+  users_max_fields?: Users_Max_FieldsResolvers<ContextType>;
+  users_min_fields?: Users_Min_FieldsResolvers<ContextType>;
+  users_mutation_response?: Users_Mutation_ResponseResolvers<ContextType>;
+  uuid?: GraphQLScalarType;
+  verification_requests?: Verification_RequestsResolvers<ContextType>;
+  verification_requests_aggregate?: Verification_Requests_AggregateResolvers<ContextType>;
+  verification_requests_aggregate_fields?: Verification_Requests_Aggregate_FieldsResolvers<ContextType>;
+  verification_requests_max_fields?: Verification_Requests_Max_FieldsResolvers<ContextType>;
+  verification_requests_min_fields?: Verification_Requests_Min_FieldsResolvers<ContextType>;
+  verification_requests_mutation_response?: Verification_Requests_Mutation_ResponseResolvers<ContextType>;
+};
+
+/**
+ * @deprecated
+ * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
+ */
+export type IResolvers<ContextType = any> = Resolvers<ContextType>;

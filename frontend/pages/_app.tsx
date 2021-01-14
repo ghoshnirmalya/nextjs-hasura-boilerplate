@@ -1,5 +1,5 @@
 import { ApolloProvider } from "@apollo/client";
-import Layout from "components/layout";
+import Layout from "components/Layout";
 import { useApollo } from "lib/apolloClient";
 import { Provider as NextAuthProvider } from "next-auth/client";
 import { AppProps } from "next/app";

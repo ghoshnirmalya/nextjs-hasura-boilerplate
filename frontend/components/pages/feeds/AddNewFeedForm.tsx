@@ -10,7 +10,7 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import AccessDeniedIndicator from "components/access-denied-indicator";
+import AccessDeniedIndicator from "components/AccessDeniedIndicator";
 import { useInsertFeedMutation } from "generated-graphql";
 import { useSession } from "next-auth/client";
 import React, { ChangeEvent, useState } from "react";
