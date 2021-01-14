@@ -1,21 +1,19 @@
-import React, { useState, FormEvent } from "react";
-import gql from "graphql-tag";
-import { useMutation } from "urql";
+import { gql, useMutation } from "@apollo/client";
 import {
-  Box,
-  Stack,
-  FormControl,
-  FormLabel,
-  Button,
   Alert,
   AlertIcon,
   AlertTitle,
+  Box,
+  Button,
   CloseButton,
+  FormControl,
+  FormLabel,
+  Stack,
   Textarea,
-  useColorMode,
 } from "@chakra-ui/react";
-import { useSession } from "next-auth/client";
 import AccessDeniedIndicator from "components/access-denied-indicator";
+import { useSession } from "next-auth/client";
+import React, { ChangeEvent, useState } from "react";
 
 const insertFeedMutation = gql`
   mutation insertFeed($author_id: uuid!, $body: String) {
@@ -26,11 +24,12 @@ const insertFeedMutation = gql`
 `;
 
 const AddNewFeedForm = () => {
-  const { colorMode } = useColorMode();
-  const bgColor = { light: "white", dark: "gray.800" };
-  const color = { light: "gray.800", dark: "gray.100" };
   const [body, setBody] = useState("");
   const [session] = useSession();
+  const [
+    insertFeed,
+    { loading: insertFeedFetching, error: insertFeedError },
+  ] = useMutation(insertFeedMutation);
 
   if (!session) {
     return (
@@ -38,15 +37,12 @@ const AddNewFeedForm = () => {
     );
   }
 
-  const [
-    { fetching: insertFeedFetching, error: insertFeedError },
-    insertFeed,
-  ] = useMutation(insertFeedMutation);
-
   const handleSubmit = async () => {
     await insertFeed({
-      author_id: session.id,
-      body,
+      variables: {
+        author_id: session.id,
+        body,
+      },
     });
 
     setBody("");
@@ -69,20 +65,14 @@ const AddNewFeedForm = () => {
   return (
     <Stack spacing={4}>
       {errorNode()}
-      <Box
-        p={4}
-        bg={bgColor[colorMode]}
-        color={color[colorMode]}
-        shadow="lg"
-        rounded="lg"
-      >
+      <Box p={4} shadow="lg" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
             <FormLabel htmlFor="body">What's on your mind?</FormLabel>
             <Textarea
               id="body"
               value={body}
-              onChange={(e: FormEvent<HTMLInputElement>) =>
+              onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
                 setBody(e.currentTarget.value)
               }
               isDisabled={insertFeedFetching}

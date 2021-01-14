@@ -11,6 +11,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.6",
     "@chakra-ui/icons": "^1.0.3",
     "@chakra-ui/react": "^1.1.4",
     "@emotion/react": "^11.1.4",
@@ -18,22 +19,19 @@
     "dayjs": "^1.10.3",
     "framer-motion": "^3.2.1",
     "graphql": "^15.4.0",
-    "graphql-tag": "^2.11.0",
     "isomorphic-unfetch": "^3.1.0",
     "isomorphic-ws": "^4.0.1",
     "jsonwebtoken": "^8.5.1",
     "next": "^10.0.5",
     "next-auth": "^3.1.0",
-    "next-urql": "^2.1.1",
     "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-is": "^17.0.1",
     "subscriptions-transport-ws": "^0.9.18",
-    "urql": "^1.11.5",
     "ws": "^7.4.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/next": "^9.0.0",
     "@types/node": "^14.14.20",

@@ -15,8 +15,6 @@ import React from "react";
 const Navbar: NextComponentType = () => {
   const [session] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
-  const bgColor = { light: "white", dark: "gray.800" };
-  const color = { light: "gray.800", dark: "gray.100" };
 
   const handleToggleTheme = () => {
     toggleColorMode();
@@ -97,8 +95,8 @@ const Navbar: NextComponentType = () => {
   };
 
   return (
-    <Box bg={bgColor[colorMode]}>
-      <Box p={4} color={color[colorMode]} shadow="lg" pos="relative">
+    <Box>
+      <Box p={4} shadow="lg" pos="relative">
         <Box maxW="xl" mx="auto" w="full">
           <Stack
             isInline

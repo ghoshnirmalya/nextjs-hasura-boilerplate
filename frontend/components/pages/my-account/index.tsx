@@ -1,32 +1,19 @@
-import React, { useEffect, useState, FormEvent } from "react";
-import gql from "graphql-tag";
-import { useQuery, useMutation } from "urql";
+import { gql, useMutation } from "@apollo/client";
 import {
-  Box,
-  Stack,
-  FormControl,
-  FormLabel,
-  Input,
-  useColorMode,
-  Heading,
-  Button,
-  Grid,
   Alert,
   AlertIcon,
   AlertTitle,
+  Box,
+  Button,
   CloseButton,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
 } from "@chakra-ui/react";
-import Loader from "components/loader";
 import { useSession } from "next-auth/client";
-
-const usersQuery = gql`
-  query fetchUser($userId: uuid!) {
-    users_by_pk(id: $userId) {
-      id
-      name
-    }
-  }
-`;
+import React, { FormEvent, useState } from "react";
 
 const updateUserMutation = gql`
   mutation updateUser($userId: uuid!, $name: String) {
@@ -39,47 +26,20 @@ const updateUserMutation = gql`
   }
 `;
 
-const MyAccountPageComponent = () => {
-  const { colorMode } = useColorMode();
-  const bgColor = { light: "white", dark: "gray.800" };
-  const color = { light: "gray.800", dark: "gray.100" };
-  const [name, setName] = useState("");
+const MyAccountPageComponent = ({ user }) => {
+  const [name, setName] = useState(user.name);
   const [session] = useSession();
-
   const [
-    { data: fetchUserData, fetching: fetchUserFetching, error: fetchUserError },
-  ] = useQuery({
-    query: usersQuery,
-    variables: {
-      userId: session.id,
-    },
-  });
-
-  useEffect(() => {
-    if (fetchUserData) {
-      const { name } = fetchUserData.users_by_pk;
-
-      setName(name || "");
-    }
-  }, [fetchUserData]);
-
-  const [
-    { fetching: updateUserFetching, error: updateUserError },
     updateUser,
+    { loading: updateUserFetching, error: updateUserError },
   ] = useMutation(updateUserMutation);
-
-  if (fetchUserFetching) {
-    return <Loader />;
-  }
-
-  if (fetchUserError) {
-    return <p>Error: {fetchUserError.message}</p>;
-  }
 
   const handleSubmit = () => {
     updateUser({
-      userId: session.id,
-      name,
+      variables: {
+        userId: session.id,
+        name,
+      },
     });
   };
 
@@ -99,14 +59,9 @@ const MyAccountPageComponent = () => {
 
   return (
     <Stack spacing={8}>
-      <Heading color={color[colorMode]}>My Account</Heading>
+      <Heading>My Account</Heading>
       {errorNode()}
-      <Box
-        bg={bgColor[colorMode]}
-        color={color[colorMode]}
-        shadow="sm"
-        rounded="lg"
-      >
+      <Box shadow="sm" rounded="lg">
         <Stack spacing={4}>
           <FormControl isRequired>
             <FormLabel htmlFor="name">Name</FormLabel>

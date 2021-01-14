@@ -1,22 +1,12 @@
-import React from "react";
-import {
-  Box,
-  Heading,
-  Stack,
-  Text,
-  Button,
-  Flex,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Link from "next/link";
+import React from "react";
 
 const IndexPageComponent = () => {
   const [session] = useSession();
   const heightOfNavbar: string = "74px";
   const containerPadding: string = "1rem";
-  const { colorMode } = useColorMode();
-  const color = { light: "gray.800", dark: "gray.100" };
 
   const signInButtonNode = () => {
     if (session) {
@@ -66,14 +56,13 @@ const IndexPageComponent = () => {
         minH={`calc(100vh - ${heightOfNavbar} - ${containerPadding}*2)`}
         justifyContent="center"
         alignItems="center"
-        color={color[colorMode]}
       >
         <Stack spacing={4} maxW="xl" mx="auto">
           <Heading textAlign="center">Nextjs Hasura Boilerplate</Heading>
           <Text fontSize="xl" lineHeight="tall" textAlign="center">
             Boilerplate for building applications using Hasura and Next.js. This
             demo application has been built using Chakra UI, NextAuth.js and
-            urql.
+            Apollo.
           </Text>
           <Box>
             <Stack isInline align="center" justifyContent="center">

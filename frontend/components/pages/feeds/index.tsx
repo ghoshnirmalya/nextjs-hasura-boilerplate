@@ -1,10 +1,10 @@
-import React from "react";
-import gql from "graphql-tag";
-import { useSubscription } from "urql";
+import { useSubscription, gql } from "@apollo/client";
 import { Box, Stack } from "@chakra-ui/react";
-import IFeed from "types/feed";
-import Feed from "components/pages/feeds/feed";
+import Loader from "components/loader";
 import AddNewFeedForm from "components/pages/feeds/add-new-feed-form";
+import Feed from "components/pages/feeds/feed";
+import React from "react";
+import IFeed from "types/feed";
 
 const feedsSubscription = gql`
   subscription fetchFeeds {
@@ -22,12 +22,10 @@ const feedsSubscription = gql`
 `;
 
 const FeedsPageComponent = () => {
-  const [result] = useSubscription({
-    query: feedsSubscription,
-  });
+  const { data, loading } = useSubscription(feedsSubscription, {});
 
-  if (!result.data) {
-    return <p>No feeds!</p>;
+  if (loading) {
+    return <Loader />;
   }
 
   return (
@@ -35,9 +33,9 @@ const FeedsPageComponent = () => {
       <Box>
         <AddNewFeedForm />
       </Box>
-      {result.data.feeds.map((feed: IFeed) => {
+      {data.feeds.map((feed: IFeed, index: number) => {
         return (
-          <Box key={feed.id}>
+          <Box key={index}>
             <Feed feed={feed} />
           </Box>
         );
