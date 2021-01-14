@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.3.4...0.4.0) (2021-01-14)
+
+### Features
+
+- adds GrapQL codegen ([f323425](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/f3234253bb99770b78db9809f6ac796ff6735fd7))
+- modifies file naming ([8b0bec7](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/8b0bec70d0b3d195664d680a85a791b0f0582465))
+- simplifies on-boarding process ([9844887](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/98448877aaee05865dcd80fb66abf754b13e6a64))
+- uses Apollo instead of URQL ([f330e8b](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/f330e8b1edf6905a690cef92bd21da70b282f256))
+
 ## [0.3.4](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.3.3...0.3.4) (2020-12-12)
 
 ## [0.3.3](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.3.2...0.3.3) (2020-08-27)
