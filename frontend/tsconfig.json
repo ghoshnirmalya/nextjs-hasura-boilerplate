@@ -4,6 +4,8 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -18,11 +20,10 @@
       "lib/*": ["lib/*"],
       "pages/*": ["pages/*"],
       "types/*": ["types/*"],
-      "configs/*": ["configs/*"]
-    },
-    "strict": false,
-    "forceConsistentCasingInFileNames": true
+      "configs/*": ["configs/*"],
+      "generated-graphql": ["generated/graphql"]
+    }
   },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

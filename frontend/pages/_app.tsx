@@ -1,12 +1,14 @@
-import React from "react";
+import { ApolloProvider } from "@apollo/client";
+import Layout from "components/Layout";
+import { useApollo } from "lib/apolloClient";
+import { Provider as NextAuthProvider } from "next-auth/client";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { Provider as NextAuthProvider } from "next-auth/client";
-import { ThemeProvider, CSSReset, theme } from "@chakra-ui/core";
-import Layout from "components/layout";
+import React from "react";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { session } = pageProps;
+  const apolloClient = useApollo(pageProps.initialApolloState, session?.token);
 
   return (
     <>
@@ -14,12 +16,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="shortcut icon" href="/images/favicon.ico" />
       </Head>
       <NextAuthProvider session={session}>
-        <ThemeProvider theme={theme}>
-          <CSSReset />
+        <ApolloProvider client={apolloClient}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        </ThemeProvider>
+        </ApolloProvider>
       </NextAuthProvider>
     </>
   );

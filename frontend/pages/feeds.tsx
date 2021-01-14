@@ -1,25 +1,22 @@
-import React from "react";
-import Head from "next/head";
-import Page from "components/pages/feeds";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import AccessDeniedIndicator from "components/access-denied-indicator";
+import AccessDeniedIndicator from "components/AccessDeniedIndicator";
+import Page from "components/Pages/Feeds";
+import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/client";
-import WithGraphQL from "lib/with-graphql";
+import Head from "next/head";
+import React, { FC } from "react";
 
-const FeedsPage: InferGetServerSidePropsType<typeof getServerSideProps> = ({
-  session,
-}) => {
+const FeedsPage: FC<any> = ({ session }) => {
   if (!session) {
     return <AccessDeniedIndicator />;
   }
 
   return (
-    <WithGraphQL session={session}>
+    <>
       <Head>
         <title>Feeds Page</title>
       </Head>
       <Page />
-    </WithGraphQL>
+    </>
   );
 };
 

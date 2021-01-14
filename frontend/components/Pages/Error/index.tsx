@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, Heading, Stack, Text, Button, Flex } from "@chakra-ui/core";
+import { Box, Heading, Stack, Text, Button, Flex } from "@chakra-ui/react";
 import Link from "next/link";
 
 interface IProps {

@@ -1,0 +1,8 @@
+mutation updateUser($userId: uuid!, $name: String) {
+  update_users(where: { id: { _eq: $userId } }, _set: { name: $name }) {
+    returning {
+      id
+      name
+    }
+  }
+}

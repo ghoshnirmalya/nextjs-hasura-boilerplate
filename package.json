@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "dev:frontend": "cd frontend && yarn dev",
-    "build:frontend": "cd frontend && yarn build",
-    "export:frontend": "cd frontend && yarn export",
-    "start:frontend": "cd frontend && yarn start",
+    "backend:dev": "cd backend && docker-compose up -d",
+    "bootstrap": "node scripts/generate-keys.ts",
+    "dev": "npm run backend:dev && npm run frontend:dev",
+    "frontend:dev": "cd frontend && yarn dev",
     "release": "release-it"
   },
   "devDependencies": {

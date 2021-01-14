@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, CircularProgress } from "@chakra-ui/core";
+import { Box, CircularProgress } from "@chakra-ui/react";
 
 interface Props {
   size?: string;

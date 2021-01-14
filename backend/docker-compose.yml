@@ -8,23 +8,18 @@ services:
       context: .
     depends_on:
       - db
-    environment:
-      DATABASE_URL: postgres://postgres:@db:5432/postgres
-      HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS256", "key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0U3NR0eyMehHBlx6DK5s\nJ+Pys9dTWf558kpKVeQvL2oIZEY3LvS3/jdrIm/dU4WrIGPki1r/AWXQAyBZ2FKn\nZROcUWN0IqdmxrC5zTDymuscqhKXqxjSwrwOVWHc+zWWmXCQGmDdoCokXd9ZW66n\nA0BN66MdMC2+d5GrZdKUF305dpzTUdzDE12/XwOEUalCM0703eGu8zFwutLYc3+v\nf2CFOQ1z+rvDQD4N2aZABKTxZRtEkMHljnoyKlF9rljNzT/5N8YQE7qn4pBh6CMa\n1zcSilk9nhgl55n/Kjn2xMieWdIalaOEKw1LqqIjiT1ESkAKfPaIoSSnmTaYy78g\nbwIDAQAB\n-----END PUBLIC KEY-----\n"}'
-      HASURA_GRAPHQL_ADMIN_SECRET: secret
-      PORT: 8080
+    env_file: ./.env
     ports:
       - "8080:8080"
-    restart: on-failure
 
   db:
     container_name: nextjs-hasura-boilerplate-db
-    image: postgres:11.3-alpine
+    image: postgres:latest
     ports:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-    restart: unless-stopped
+    env_file: ./.env
 
 volumes:
   db_data:
