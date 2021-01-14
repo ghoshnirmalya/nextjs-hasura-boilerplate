@@ -1,15 +1,15 @@
 {
   "name": "nextjs-hasura-boilerplate-frontend",
-  "version": "0.0.1",
-  "author": "nirmalya.email@gmail.com",
   "license": "MIT",
+  "author": "nirmalya.email@gmail.com",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "concurrently \"next dev\" \"yarn generate-graphql --watch\"",
     "build": "next build",
+    "dev": "concurrently \"next dev\" \"yarn generate-graphql --watch\"",
     "export": "next export",
+    "generate-graphql": "graphql-codegen --config codegen.yml --require dotenv/config",
     "start": "next start",
-    "type-check": "tsc",
-    "generate-graphql": "graphql-codegen --config codegen.yml --require dotenv/config"
+    "type-check": "tsc"
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",
