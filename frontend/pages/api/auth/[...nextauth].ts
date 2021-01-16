@@ -22,8 +22,8 @@ const options = {
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
-    ssl: true,
-    extra: {
+    ssl: process.env.NODE_ENV === "production",
+    extra: process.env.NODE_ENV === "production" && {
       ssl: {
         rejectUnauthorized: false,
       },
@@ -33,7 +33,7 @@ const options = {
     jwt: true,
   },
   jwt: {
-    encode: async ({ token, secret }: { token: iToken; secret: string }) => {
+    encode: async ({ token }: { token: iToken }) => {
       const tokenContents = {
         id: token.id,
         name: token.name,
@@ -56,7 +56,7 @@ const options = {
 
       return encodedToken;
     },
-    decode: async ({ token, secret }: { token: string; secret: string }) => {
+    decode: async ({ token }: { token: string }) => {
       const decodedToken = jwt.verify(token, jwtSecret.key, {
         algorithms: jwtSecret.type,
       });
@@ -76,7 +76,7 @@ const options = {
 
       return Promise.resolve(session);
     },
-    jwt: async (token: iToken, user: IUser, account, profile, isNewUser) => {
+    jwt: async (token: iToken, user: IUser) => {
       const isSignIn = user ? true : false;
 
       if (isSignIn) {
