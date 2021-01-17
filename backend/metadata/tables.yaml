@@ -35,10 +35,28 @@
           _eq: X-Hasura-User-Id
 - table:
     schema: public
+    name: roles
+  array_relationships:
+  - name: users
+    using:
+      foreign_key_constraint_on:
+        column: role_id
+        table:
+          schema: public
+          name: users
+- table:
+    schema: public
     name: sessions
 - table:
     schema: public
+    name: user_role
+- table:
+    schema: public
     name: users
+  object_relationships:
+  - name: role
+    using:
+      foreign_key_constraint_on: role_id
   array_relationships:
   - name: feeds
     using:
