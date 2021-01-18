@@ -9,6 +9,9 @@ services:
     depends_on:
       - db
     env_file: ./.env
+    volumes:
+      - ./migrations:/hasura-migrations
+      - ./metadata:/hasura-metadata
     ports:
       - "8080:8080"
 
