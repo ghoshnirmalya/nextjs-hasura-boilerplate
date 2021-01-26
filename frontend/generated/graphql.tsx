@@ -28,6 +28,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  bpchar: any;
   timestamptz: string;
   uuid: any;
 };
@@ -324,6 +325,19 @@ export enum Accounts_Update_Column {
   UserId = "user_id",
 }
 
+/** expression to compare columns of type bpchar. All fields are combined with logical 'AND'. */
+export type Bpchar_Comparison_Exp = {
+  _eq?: Maybe<Scalars["bpchar"]>;
+  _gt?: Maybe<Scalars["bpchar"]>;
+  _gte?: Maybe<Scalars["bpchar"]>;
+  _in?: Maybe<Array<Scalars["bpchar"]>>;
+  _is_null?: Maybe<Scalars["Boolean"]>;
+  _lt?: Maybe<Scalars["bpchar"]>;
+  _lte?: Maybe<Scalars["bpchar"]>;
+  _neq?: Maybe<Scalars["bpchar"]>;
+  _nin?: Maybe<Array<Scalars["bpchar"]>>;
+};
+
 /** columns and relationships of "feeds" */
 export type Feeds = {
   __typename?: "feeds";
@@ -522,6 +536,10 @@ export type Mutation_Root = {
   delete_feeds?: Maybe<Feeds_Mutation_Response>;
   /** delete single row from the table: "feeds" */
   delete_feeds_by_pk?: Maybe<Feeds>;
+  /** delete data from the table: "roles" */
+  delete_roles?: Maybe<Roles_Mutation_Response>;
+  /** delete single row from the table: "roles" */
+  delete_roles_by_pk?: Maybe<Roles>;
   /** delete data from the table: "sessions" */
   delete_sessions?: Maybe<Sessions_Mutation_Response>;
   /** delete single row from the table: "sessions" */
@@ -542,6 +560,10 @@ export type Mutation_Root = {
   insert_feeds?: Maybe<Feeds_Mutation_Response>;
   /** insert a single row into the table: "feeds" */
   insert_feeds_one?: Maybe<Feeds>;
+  /** insert data into the table: "roles" */
+  insert_roles?: Maybe<Roles_Mutation_Response>;
+  /** insert a single row into the table: "roles" */
+  insert_roles_one?: Maybe<Roles>;
   /** insert data into the table: "sessions" */
   insert_sessions?: Maybe<Sessions_Mutation_Response>;
   /** insert a single row into the table: "sessions" */
@@ -562,6 +584,10 @@ export type Mutation_Root = {
   update_feeds?: Maybe<Feeds_Mutation_Response>;
   /** update single row of the table: "feeds" */
   update_feeds_by_pk?: Maybe<Feeds>;
+  /** update data of the table: "roles" */
+  update_roles?: Maybe<Roles_Mutation_Response>;
+  /** update single row of the table: "roles" */
+  update_roles_by_pk?: Maybe<Roles>;
   /** update data of the table: "sessions" */
   update_sessions?: Maybe<Sessions_Mutation_Response>;
   /** update single row of the table: "sessions" */
@@ -593,6 +619,16 @@ export type Mutation_RootDelete_FeedsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Feeds_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_RolesArgs = {
+  where: Roles_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Roles_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
@@ -648,6 +684,18 @@ export type Mutation_RootInsert_FeedsArgs = {
 export type Mutation_RootInsert_Feeds_OneArgs = {
   object: Feeds_Insert_Input;
   on_conflict?: Maybe<Feeds_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_RolesArgs = {
+  objects: Array<Roles_Insert_Input>;
+  on_conflict?: Maybe<Roles_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Roles_OneArgs = {
+  object: Roles_Insert_Input;
+  on_conflict?: Maybe<Roles_On_Conflict>;
 };
 
 /** mutation root */
@@ -708,6 +756,18 @@ export type Mutation_RootUpdate_FeedsArgs = {
 export type Mutation_RootUpdate_Feeds_By_PkArgs = {
   _set?: Maybe<Feeds_Set_Input>;
   pk_columns: Feeds_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_RolesArgs = {
+  _set?: Maybe<Roles_Set_Input>;
+  where: Roles_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Roles_By_PkArgs = {
+  _set?: Maybe<Roles_Set_Input>;
+  pk_columns: Roles_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -779,6 +839,12 @@ export type Query_Root = {
   feeds_aggregate: Feeds_Aggregate;
   /** fetch data from the table: "feeds" using primary key columns */
   feeds_by_pk?: Maybe<Feeds>;
+  /** fetch data from the table: "roles" */
+  roles: Array<Roles>;
+  /** fetch aggregated fields from the table: "roles" */
+  roles_aggregate: Roles_Aggregate;
+  /** fetch data from the table: "roles" using primary key columns */
+  roles_by_pk?: Maybe<Roles>;
   /** fetch data from the table: "sessions" */
   sessions: Array<Sessions>;
   /** fetch aggregated fields from the table: "sessions" */
@@ -842,6 +908,29 @@ export type Query_RootFeeds_AggregateArgs = {
 
 /** query root */
 export type Query_RootFeeds_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
+/** query root */
+export type Query_RootRolesArgs = {
+  distinct_on?: Maybe<Array<Roles_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Roles_Order_By>>;
+  where?: Maybe<Roles_Bool_Exp>;
+};
+
+/** query root */
+export type Query_RootRoles_AggregateArgs = {
+  distinct_on?: Maybe<Array<Roles_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Roles_Order_By>>;
+  where?: Maybe<Roles_Bool_Exp>;
+};
+
+/** query root */
+export type Query_RootRoles_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
@@ -913,6 +1002,196 @@ export type Query_RootVerification_Requests_AggregateArgs = {
 export type Query_RootVerification_Requests_By_PkArgs = {
   id: Scalars["uuid"];
 };
+
+/** columns and relationships of "roles" */
+export type Roles = {
+  __typename?: "roles";
+  created_at: Scalars["timestamptz"];
+  id: Scalars["uuid"];
+  name: Scalars["bpchar"];
+  updated_at: Scalars["timestamptz"];
+  /** An array relationship */
+  users: Array<Users>;
+  /** An aggregated array relationship */
+  users_aggregate: Users_Aggregate;
+};
+
+/** columns and relationships of "roles" */
+export type RolesUsersArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+/** columns and relationships of "roles" */
+export type RolesUsers_AggregateArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+/** aggregated selection of "roles" */
+export type Roles_Aggregate = {
+  __typename?: "roles_aggregate";
+  aggregate?: Maybe<Roles_Aggregate_Fields>;
+  nodes: Array<Roles>;
+};
+
+/** aggregate fields of "roles" */
+export type Roles_Aggregate_Fields = {
+  __typename?: "roles_aggregate_fields";
+  count?: Maybe<Scalars["Int"]>;
+  max?: Maybe<Roles_Max_Fields>;
+  min?: Maybe<Roles_Min_Fields>;
+};
+
+/** aggregate fields of "roles" */
+export type Roles_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Roles_Select_Column>>;
+  distinct?: Maybe<Scalars["Boolean"]>;
+};
+
+/** order by aggregate values of table "roles" */
+export type Roles_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Roles_Max_Order_By>;
+  min?: Maybe<Roles_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "roles" */
+export type Roles_Arr_Rel_Insert_Input = {
+  data: Array<Roles_Insert_Input>;
+  on_conflict?: Maybe<Roles_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "roles". All fields are combined with a logical 'AND'. */
+export type Roles_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Roles_Bool_Exp>>>;
+  _not?: Maybe<Roles_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Roles_Bool_Exp>>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  name?: Maybe<Bpchar_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  users?: Maybe<Users_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "roles" */
+export enum Roles_Constraint {
+  /** unique or primary key constraint */
+  RolesPkey = "roles_pkey",
+}
+
+/** input type for inserting data into table "roles" */
+export type Roles_Insert_Input = {
+  created_at?: Maybe<Scalars["timestamptz"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  name?: Maybe<Scalars["bpchar"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]>;
+  users?: Maybe<Users_Arr_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Roles_Max_Fields = {
+  __typename?: "roles_max_fields";
+  created_at?: Maybe<Scalars["timestamptz"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]>;
+};
+
+/** order by max() on columns of table "roles" */
+export type Roles_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Roles_Min_Fields = {
+  __typename?: "roles_min_fields";
+  created_at?: Maybe<Scalars["timestamptz"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]>;
+};
+
+/** order by min() on columns of table "roles" */
+export type Roles_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "roles" */
+export type Roles_Mutation_Response = {
+  __typename?: "roles_mutation_response";
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars["Int"];
+  /** data of the affected rows by the mutation */
+  returning: Array<Roles>;
+};
+
+/** input type for inserting object relation for remote table "roles" */
+export type Roles_Obj_Rel_Insert_Input = {
+  data: Roles_Insert_Input;
+  on_conflict?: Maybe<Roles_On_Conflict>;
+};
+
+/** on conflict condition type for table "roles" */
+export type Roles_On_Conflict = {
+  constraint: Roles_Constraint;
+  update_columns: Array<Roles_Update_Column>;
+  where?: Maybe<Roles_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "roles" */
+export type Roles_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  users_aggregate?: Maybe<Users_Aggregate_Order_By>;
+};
+
+/** primary key columns input for table: "roles" */
+export type Roles_Pk_Columns_Input = {
+  id: Scalars["uuid"];
+};
+
+/** select columns of table "roles" */
+export enum Roles_Select_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+/** input type for updating data in table "roles" */
+export type Roles_Set_Input = {
+  created_at?: Maybe<Scalars["timestamptz"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  name?: Maybe<Scalars["bpchar"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]>;
+};
+
+/** update columns of table "roles" */
+export enum Roles_Update_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
 
 /** columns and relationships of "sessions" */
 export type Sessions = {
@@ -1246,6 +1525,12 @@ export type Subscription_Root = {
   feeds_aggregate: Feeds_Aggregate;
   /** fetch data from the table: "feeds" using primary key columns */
   feeds_by_pk?: Maybe<Feeds>;
+  /** fetch data from the table: "roles" */
+  roles: Array<Roles>;
+  /** fetch aggregated fields from the table: "roles" */
+  roles_aggregate: Roles_Aggregate;
+  /** fetch data from the table: "roles" using primary key columns */
+  roles_by_pk?: Maybe<Roles>;
   /** fetch data from the table: "sessions" */
   sessions: Array<Sessions>;
   /** fetch aggregated fields from the table: "sessions" */
@@ -1309,6 +1594,29 @@ export type Subscription_RootFeeds_AggregateArgs = {
 
 /** subscription root */
 export type Subscription_RootFeeds_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
+/** subscription root */
+export type Subscription_RootRolesArgs = {
+  distinct_on?: Maybe<Array<Roles_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Roles_Order_By>>;
+  where?: Maybe<Roles_Bool_Exp>;
+};
+
+/** subscription root */
+export type Subscription_RootRoles_AggregateArgs = {
+  distinct_on?: Maybe<Array<Roles_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Roles_Order_By>>;
+  where?: Maybe<Roles_Bool_Exp>;
+};
+
+/** subscription root */
+export type Subscription_RootRoles_By_PkArgs = {
   id: Scalars["uuid"];
 };
 
@@ -1407,6 +1715,9 @@ export type Users = {
   id: Scalars["uuid"];
   image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  /** An object relationship */
+  role?: Maybe<Roles>;
+  role_id?: Maybe<Scalars["uuid"]>;
   updated_at: Scalars["timestamptz"];
 };
 
@@ -1474,6 +1785,8 @@ export type Users_Bool_Exp = {
   id?: Maybe<Uuid_Comparison_Exp>;
   image?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  role?: Maybe<Roles_Bool_Exp>;
+  role_id?: Maybe<Uuid_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -1492,6 +1805,8 @@ export type Users_Insert_Input = {
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  role?: Maybe<Roles_Obj_Rel_Insert_Input>;
+  role_id?: Maybe<Scalars["uuid"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
 
@@ -1504,6 +1819,7 @@ export type Users_Max_Fields = {
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  role_id?: Maybe<Scalars["uuid"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
 
@@ -1515,6 +1831,7 @@ export type Users_Max_Order_By = {
   id?: Maybe<Order_By>;
   image?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  role_id?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -1527,6 +1844,7 @@ export type Users_Min_Fields = {
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  role_id?: Maybe<Scalars["uuid"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
 
@@ -1538,6 +1856,7 @@ export type Users_Min_Order_By = {
   id?: Maybe<Order_By>;
   image?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  role_id?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -1572,6 +1891,8 @@ export type Users_Order_By = {
   id?: Maybe<Order_By>;
   image?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  role?: Maybe<Roles_Order_By>;
+  role_id?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -1595,6 +1916,8 @@ export enum Users_Select_Column {
   /** column name */
   Name = "name",
   /** column name */
+  RoleId = "role_id",
+  /** column name */
   UpdatedAt = "updated_at",
 }
 
@@ -1606,6 +1929,7 @@ export type Users_Set_Input = {
   id?: Maybe<Scalars["uuid"]>;
   image?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
+  role_id?: Maybe<Scalars["uuid"]>;
   updated_at?: Maybe<Scalars["timestamptz"]>;
 };
 
@@ -1623,6 +1947,8 @@ export enum Users_Update_Column {
   Image = "image",
   /** column name */
   Name = "name",
+  /** column name */
+  RoleId = "role_id",
   /** column name */
   UpdatedAt = "updated_at",
 }
@@ -2415,6 +2741,8 @@ export type ResolversTypes = {
   accounts_select_column: Accounts_Select_Column;
   accounts_set_input: Accounts_Set_Input;
   accounts_update_column: Accounts_Update_Column;
+  bpchar: ResolverTypeWrapper<Scalars["bpchar"]>;
+  bpchar_comparison_exp: Bpchar_Comparison_Exp;
   feeds: ResolverTypeWrapper<Feeds>;
   feeds_aggregate: ResolverTypeWrapper<Feeds_Aggregate>;
   feeds_aggregate_fields: ResolverTypeWrapper<Feeds_Aggregate_Fields>;
@@ -2438,6 +2766,26 @@ export type ResolversTypes = {
   mutation_root: ResolverTypeWrapper<{}>;
   order_by: Order_By;
   query_root: ResolverTypeWrapper<{}>;
+  roles: ResolverTypeWrapper<Roles>;
+  roles_aggregate: ResolverTypeWrapper<Roles_Aggregate>;
+  roles_aggregate_fields: ResolverTypeWrapper<Roles_Aggregate_Fields>;
+  roles_aggregate_order_by: Roles_Aggregate_Order_By;
+  roles_arr_rel_insert_input: Roles_Arr_Rel_Insert_Input;
+  roles_bool_exp: Roles_Bool_Exp;
+  roles_constraint: Roles_Constraint;
+  roles_insert_input: Roles_Insert_Input;
+  roles_max_fields: ResolverTypeWrapper<Roles_Max_Fields>;
+  roles_max_order_by: Roles_Max_Order_By;
+  roles_min_fields: ResolverTypeWrapper<Roles_Min_Fields>;
+  roles_min_order_by: Roles_Min_Order_By;
+  roles_mutation_response: ResolverTypeWrapper<Roles_Mutation_Response>;
+  roles_obj_rel_insert_input: Roles_Obj_Rel_Insert_Input;
+  roles_on_conflict: Roles_On_Conflict;
+  roles_order_by: Roles_Order_By;
+  roles_pk_columns_input: Roles_Pk_Columns_Input;
+  roles_select_column: Roles_Select_Column;
+  roles_set_input: Roles_Set_Input;
+  roles_update_column: Roles_Update_Column;
   sessions: ResolverTypeWrapper<Sessions>;
   sessions_aggregate: ResolverTypeWrapper<Sessions_Aggregate>;
   sessions_aggregate_fields: ResolverTypeWrapper<Sessions_Aggregate_Fields>;
@@ -2547,6 +2895,8 @@ export type ResolversParentTypes = {
   accounts_order_by: Accounts_Order_By;
   accounts_pk_columns_input: Accounts_Pk_Columns_Input;
   accounts_set_input: Accounts_Set_Input;
+  bpchar: Scalars["bpchar"];
+  bpchar_comparison_exp: Bpchar_Comparison_Exp;
   feeds: Feeds;
   feeds_aggregate: Feeds_Aggregate;
   feeds_aggregate_fields: Feeds_Aggregate_Fields;
@@ -2566,6 +2916,23 @@ export type ResolversParentTypes = {
   feeds_set_input: Feeds_Set_Input;
   mutation_root: {};
   query_root: {};
+  roles: Roles;
+  roles_aggregate: Roles_Aggregate;
+  roles_aggregate_fields: Roles_Aggregate_Fields;
+  roles_aggregate_order_by: Roles_Aggregate_Order_By;
+  roles_arr_rel_insert_input: Roles_Arr_Rel_Insert_Input;
+  roles_bool_exp: Roles_Bool_Exp;
+  roles_insert_input: Roles_Insert_Input;
+  roles_max_fields: Roles_Max_Fields;
+  roles_max_order_by: Roles_Max_Order_By;
+  roles_min_fields: Roles_Min_Fields;
+  roles_min_order_by: Roles_Min_Order_By;
+  roles_mutation_response: Roles_Mutation_Response;
+  roles_obj_rel_insert_input: Roles_Obj_Rel_Insert_Input;
+  roles_on_conflict: Roles_On_Conflict;
+  roles_order_by: Roles_Order_By;
+  roles_pk_columns_input: Roles_Pk_Columns_Input;
+  roles_set_input: Roles_Set_Input;
   sessions: Sessions;
   sessions_aggregate: Sessions_Aggregate;
   sessions_aggregate_fields: Sessions_Aggregate_Fields;
@@ -2833,6 +3200,11 @@ export type Accounts_Mutation_ResponseResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export interface BpcharScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes["bpchar"], any> {
+  name: "bpchar";
+}
+
 export type FeedsResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["feeds"] = ResolversParentTypes["feeds"]
@@ -2959,6 +3331,18 @@ export type Mutation_RootResolvers<
     ContextType,
     RequireFields<Mutation_RootDelete_Feeds_By_PkArgs, "id">
   >;
+  delete_roles?: Resolver<
+    Maybe<ResolversTypes["roles_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_RolesArgs, "where">
+  >;
+  delete_roles_by_pk?: Resolver<
+    Maybe<ResolversTypes["roles"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Roles_By_PkArgs, "id">
+  >;
   delete_sessions?: Resolver<
     Maybe<ResolversTypes["sessions_mutation_response"]>,
     ParentType,
@@ -3019,6 +3403,18 @@ export type Mutation_RootResolvers<
     ContextType,
     RequireFields<Mutation_RootInsert_Feeds_OneArgs, "object">
   >;
+  insert_roles?: Resolver<
+    Maybe<ResolversTypes["roles_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_RolesArgs, "objects">
+  >;
+  insert_roles_one?: Resolver<
+    Maybe<ResolversTypes["roles"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Roles_OneArgs, "object">
+  >;
   insert_sessions?: Resolver<
     Maybe<ResolversTypes["sessions_mutation_response"]>,
     ParentType,
@@ -3078,6 +3474,18 @@ export type Mutation_RootResolvers<
     ParentType,
     ContextType,
     RequireFields<Mutation_RootUpdate_Feeds_By_PkArgs, "pk_columns">
+  >;
+  update_roles?: Resolver<
+    Maybe<ResolversTypes["roles_mutation_response"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_RolesArgs, "where">
+  >;
+  update_roles_by_pk?: Resolver<
+    Maybe<ResolversTypes["roles"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Roles_By_PkArgs, "pk_columns">
   >;
   update_sessions?: Resolver<
     Maybe<ResolversTypes["sessions_mutation_response"]>,
@@ -3160,6 +3568,24 @@ export type Query_RootResolvers<
     ContextType,
     RequireFields<Query_RootFeeds_By_PkArgs, "id">
   >;
+  roles?: Resolver<
+    Array<ResolversTypes["roles"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootRolesArgs, never>
+  >;
+  roles_aggregate?: Resolver<
+    ResolversTypes["roles_aggregate"],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootRoles_AggregateArgs, never>
+  >;
+  roles_by_pk?: Resolver<
+    Maybe<ResolversTypes["roles"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootRoles_By_PkArgs, "id">
+  >;
   sessions?: Resolver<
     Array<ResolversTypes["sessions"]>,
     ParentType,
@@ -3214,6 +3640,110 @@ export type Query_RootResolvers<
     ContextType,
     RequireFields<Query_RootVerification_Requests_By_PkArgs, "id">
   >;
+};
+
+export type RolesResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["roles"] = ResolversParentTypes["roles"]
+> = {
+  created_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["bpchar"], ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
+  users?: Resolver<
+    Array<ResolversTypes["users"]>,
+    ParentType,
+    ContextType,
+    RequireFields<RolesUsersArgs, never>
+  >;
+  users_aggregate?: Resolver<
+    ResolversTypes["users_aggregate"],
+    ParentType,
+    ContextType,
+    RequireFields<RolesUsers_AggregateArgs, never>
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Roles_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["roles_aggregate"] = ResolversParentTypes["roles_aggregate"]
+> = {
+  aggregate?: Resolver<
+    Maybe<ResolversTypes["roles_aggregate_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  nodes?: Resolver<Array<ResolversTypes["roles"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Roles_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["roles_aggregate_fields"] = ResolversParentTypes["roles_aggregate_fields"]
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType,
+    RequireFields<Roles_Aggregate_FieldsCountArgs, never>
+  >;
+  max?: Resolver<
+    Maybe<ResolversTypes["roles_max_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  min?: Resolver<
+    Maybe<ResolversTypes["roles_min_fields"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Roles_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["roles_max_fields"] = ResolversParentTypes["roles_max_fields"]
+> = {
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Roles_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["roles_min_fields"] = ResolversParentTypes["roles_min_fields"]
+> = {
+  created_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
+  updated_at?: Resolver<
+    Maybe<ResolversTypes["timestamptz"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Roles_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["roles_mutation_response"] = ResolversParentTypes["roles_mutation_response"]
+> = {
+  affected_rows?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes["roles"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type SessionsResolvers<
@@ -3497,6 +4027,27 @@ export type Subscription_RootResolvers<
     ContextType,
     RequireFields<Subscription_RootFeeds_By_PkArgs, "id">
   >;
+  roles?: SubscriptionResolver<
+    Array<ResolversTypes["roles"]>,
+    "roles",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootRolesArgs, never>
+  >;
+  roles_aggregate?: SubscriptionResolver<
+    ResolversTypes["roles_aggregate"],
+    "roles_aggregate",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootRoles_AggregateArgs, never>
+  >;
+  roles_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes["roles"]>,
+    "roles_by_pk",
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootRoles_By_PkArgs, "id">
+  >;
   sessions?: SubscriptionResolver<
     Array<ResolversTypes["sessions"]>,
     "sessions",
@@ -3593,6 +4144,8 @@ export type UsersResolvers<
   id?: Resolver<ResolversTypes["uuid"], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes["roles"]>, ParentType, ContextType>;
+  role_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes["timestamptz"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -3651,6 +4204,7 @@ export type Users_Max_FieldsResolvers<
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  role_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
     ParentType,
@@ -3677,6 +4231,7 @@ export type Users_Min_FieldsResolvers<
   id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  role_id?: Resolver<Maybe<ResolversTypes["uuid"]>, ParentType, ContextType>;
   updated_at?: Resolver<
     Maybe<ResolversTypes["timestamptz"]>,
     ParentType,
@@ -3830,6 +4385,7 @@ export type Resolvers<ContextType = any> = {
   accounts_max_fields?: Accounts_Max_FieldsResolvers<ContextType>;
   accounts_min_fields?: Accounts_Min_FieldsResolvers<ContextType>;
   accounts_mutation_response?: Accounts_Mutation_ResponseResolvers<ContextType>;
+  bpchar?: GraphQLScalarType;
   feeds?: FeedsResolvers<ContextType>;
   feeds_aggregate?: Feeds_AggregateResolvers<ContextType>;
   feeds_aggregate_fields?: Feeds_Aggregate_FieldsResolvers<ContextType>;
@@ -3838,6 +4394,12 @@ export type Resolvers<ContextType = any> = {
   feeds_mutation_response?: Feeds_Mutation_ResponseResolvers<ContextType>;
   mutation_root?: Mutation_RootResolvers<ContextType>;
   query_root?: Query_RootResolvers<ContextType>;
+  roles?: RolesResolvers<ContextType>;
+  roles_aggregate?: Roles_AggregateResolvers<ContextType>;
+  roles_aggregate_fields?: Roles_Aggregate_FieldsResolvers<ContextType>;
+  roles_max_fields?: Roles_Max_FieldsResolvers<ContextType>;
+  roles_min_fields?: Roles_Min_FieldsResolvers<ContextType>;
+  roles_mutation_response?: Roles_Mutation_ResponseResolvers<ContextType>;
   sessions?: SessionsResolvers<ContextType>;
   sessions_aggregate?: Sessions_AggregateResolvers<ContextType>;
   sessions_aggregate_fields?: Sessions_Aggregate_FieldsResolvers<ContextType>;

@@ -5,8 +5,93 @@ import { NextApiRequest, NextApiResponse } from "next";
 import ISession from "types/session";
 import IUser from "types/user";
 import iToken from "types/token";
+import { Pool } from "pg";
 
+const pool = new Pool({
+  user: process.env.DATABASE_USERNAME,
+  host: process.env.DATABASE_HOST,
+  database: process.env.DATABASE_NAME,
+  password: process.env.DATABASE_PASSWORD,
+  port: 5432,
+  ssl: process.env.NODE_ENV === "production" && {
+    rejectUnauthorized: false,
+  },
+});
 const jwtSecret = JSON.parse(process.env.AUTH_PRIVATE_KEY);
+
+const defaultUserRole = "verified";
+
+const fetchAllRoles = async () => {
+  await pool.connect();
+
+  let allRoles = ["verified"];
+
+  try {
+    const response = await pool.query("SELECT * FROM roles");
+
+    allRoles = response.rows.map((row) => row.name);
+
+    return allRoles;
+  } catch (err) {
+    console.log(err);
+  }
+
+  return allRoles;
+};
+
+const fetchCurrentUserRole = async (userId: number) => {
+  await pool.connect();
+
+  try {
+    const usersResponse = await pool.query(
+      "SELECT role_id FROM users WHERE id = $1",
+      [userId]
+    );
+    const roleId = usersResponse.rows[0].role_id;
+
+    const rolesResponse = await pool.query(
+      "SELECT name FROM roles WHERE id = $1",
+      [roleId]
+    );
+    const roleType = rolesResponse.rows[0].name;
+
+    return roleType;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const fetchDefaultRole = async () => {
+  await pool.connect();
+
+  try {
+    const response = await pool.query(
+      "SELECT * FROM roles WHERE name LIKE $1",
+      [defaultUserRole]
+    );
+
+    const roleId = response.rows[0].id;
+
+    return roleId;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const insertRoleForNewUser = async (userId: number) => {
+  await pool.connect();
+
+  const defaultRoleId = await fetchDefaultRole();
+
+  try {
+    await pool.query("UPDATE users SET role_id = $1 where id = $2;", [
+      defaultRoleId,
+      userId,
+    ]);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const options = {
   providers: [
@@ -40,9 +125,9 @@ const options = {
         email: token.email,
         picture: token.picture,
         "https://hasura.io/jwt/claims": {
-          "x-hasura-allowed-roles": ["admin", "user"],
-          "x-hasura-default-role": "user",
-          "x-hasura-role": "user",
+          "x-hasura-allowed-roles": await fetchAllRoles(),
+          "x-hasura-default-role": defaultUserRole,
+          "x-hasura-role": await fetchCurrentUserRole(token.id),
           "x-hasura-user-id": token.id,
         },
         iat: Date.now() / 1000,
@@ -81,6 +166,8 @@ const options = {
 
       if (isSignIn) {
         token.id = user.id;
+
+        await insertRoleForNewUser(user.id);
       }
 
       return Promise.resolve(token);
