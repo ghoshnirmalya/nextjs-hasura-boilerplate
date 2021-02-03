@@ -28,7 +28,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "subscriptions-transport-ws": "^0.9.18",
-    "ws": "^7.4.2"
+    "ws": "^7.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
