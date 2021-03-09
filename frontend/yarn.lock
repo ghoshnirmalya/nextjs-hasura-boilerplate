@@ -1216,13 +1216,13 @@
     ts-node "^9"
     tslib "^2"
 
-"@graphql-codegen/cli@^1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-1.21.1.tgz#fa1666ea5f1751e158d6d200c58f8228ad2f98ed"
-  integrity sha512-xlOmpKWID2zWOwm9mtjnOCA7qsQ8tJ34RYkKLyGMPoKaTmyWwKeAWpAH1qdukZT5AXDO7G2cZU5AdF1TmYEPUA==
+"@graphql-codegen/cli@^1.21.2":
+  version "1.21.2"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-1.21.2.tgz#2b65acff441f6cbae24bb816790a074264b58f86"
+  integrity sha512-Jt1sJzTD1/0PZ4JIgZZgswTNu+LxJBS706rOo4ol5NsjkD3Wzk3cUvZsBUYTrYc9Zh6XArZzRm5EBLImLRjHlQ==
   dependencies:
     "@graphql-codegen/core" "1.17.9"
-    "@graphql-codegen/plugin-helpers" "^1.18.2"
+    "@graphql-codegen/plugin-helpers" "^1.18.3"
     "@graphql-tools/apollo-engine-loader" "^6"
     "@graphql-tools/code-file-loader" "^6"
     "@graphql-tools/git-loader" "^6"
@@ -1234,14 +1234,13 @@
     "@graphql-tools/url-loader" "^6"
     "@graphql-tools/utils" "^7.0.0"
     ansi-escapes "^4.3.1"
-    camel-case "^4.1.2"
     chalk "^4.1.0"
+    change-case-all "^1.0.12"
     chokidar "^3.4.3"
     common-tags "^1.8.0"
-    constant-case "^3.0.3"
     cosmiconfig "^7.0.0"
     debounce "^1.2.0"
-    dependency-graph "^0.10.0"
+    dependency-graph "^0.11.0"
     detect-indent "^6.0.0"
     glob "^7.1.6"
     graphql-config "^3.2.0"
@@ -1253,14 +1252,11 @@
     listr "^0.14.3"
     listr-update-renderer "^0.5.0"
     log-symbols "^4.0.0"
-    lower-case "^2.0.1"
     minimatch "^3.0.4"
     mkdirp "^1.0.4"
-    pascal-case "^3.1.1"
     string-env-interpolation "^1.0.1"
     ts-log "^2.2.3"
     tslib "~2.1.0"
-    upper-case "^2.0.2"
     valid-url "^1.0.9"
     wrap-ansi "^7.0.0"
     yaml "^1.10.0"
@@ -2708,7 +2704,7 @@ consolidate@^0.16.0:
   dependencies:
     bluebird "^3.7.2"
 
-constant-case@^3.0.3, constant-case@^3.0.4:
+constant-case@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/constant-case/-/constant-case-3.0.4.tgz#3b84a9aeaf4cf31ec45e6bf5de91bdfb0589faf1"
   integrity sha512-I2hSBi7Vvs7BEuJDr5dDHfzb/Ruj3FyvFyh7KLilAjNQw3Be+xgqUBA2W6scVEcL0hL1dwPRtIqEPVUCKkSsyQ==
@@ -2955,11 +2951,6 @@ depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
-
-dependency-graph@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/dependency-graph/-/dependency-graph-0.10.0.tgz#dfebe384f1f36faf7782be203a7a71102a6335a6"
-  integrity sha512-c9amUgpgxSi1bE5/sbLwcs5diLD0ygCQYmhfM5H1s5VH1mCsYkcmAL3CcNdv4kdSw6JuMoHeDGzLgj/gAXdWVg==
 
 dependency-graph@^0.11.0:
   version "0.11.0"
