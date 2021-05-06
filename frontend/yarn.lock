@@ -541,10 +541,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.13.10", "@babel/runtime@^7.7.2":
-  version "7.13.10"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.10.tgz#47d42a57b6095f4468da440388fdbad8bebf0d7d"
-  integrity sha512-4QPkjJq6Ns3V/RgpEahRk+AGfL0eO6RHHtTWoNNr5mO49G6B5+X6d6THgWEAvTrznU5xYpbAlVKRYcsCgh/Akw==
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.13.10", "@babel/runtime@^7.14.0", "@babel/runtime@^7.7.2":
+  version "7.14.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.0.tgz#46794bc20b612c5f75e62dd071e24dfd95f1cbe6"
+  integrity sha512-JELkvo/DlpNdJ7dlyw/eY7E0suy5i5GQH+Vlxaq1nsNJ+H7f4Vtv3jMeCEgRhZZQFXTjldYfQgv2qmM6M1v5wA==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -4699,11 +4699,12 @@ native-url@0.3.4:
   dependencies:
     querystring "^0.2.0"
 
-next-auth@^3.19.8:
-  version "3.19.8"
-  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.19.8.tgz#32331f33dd73b46ec5c774735a9db78f9dbba3c7"
-  integrity sha512-BB3h3JedZrQ/usB5JFdJSxQcSsMopT8/RfboGAVIASfH7Lyu2PddZnlM1YlmqDZ90lHeFd2AfrxxCYX7HdDcKg==
+next-auth@^3.20.0:
+  version "3.20.0"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.20.0.tgz#47ee386a731069d19b2a18aa181856e4472b8a82"
+  integrity sha512-GPh45dkU8Q92T1aDotv42kxQd7KouhsGZgW5EZthPZ3RN41y1eQRHVDUvtIbZjNszsu/Mwitctksfwgq3J3o0Q==
   dependencies:
+    "@babel/runtime" "^7.14.0"
     "@next-auth/prisma-legacy-adapter" canary
     "@next-auth/typeorm-legacy-adapter" canary
     crypto-js "^4.0.0"
