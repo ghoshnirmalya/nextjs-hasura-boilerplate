@@ -41,7 +41,7 @@
     "@types/jsonwebtoken": "^8.5.1",
     "@types/next": "^9.0.0",
     "@types/node": "^15.3.0",
-    "@types/pg": "^7.14.11",
+    "@types/pg": "^8.6.0",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.5",
     "concurrently": "^6.1.0",
