@@ -17,7 +17,7 @@
     "@chakra-ui/react": "^1.6.3",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
-    "dayjs": "^1.10.4",
+    "dayjs": "^1.10.5",
     "framer-motion": "^4.1.17",
     "isomorphic-unfetch": "^3.1.0",
     "isomorphic-ws": "^4.0.1",
