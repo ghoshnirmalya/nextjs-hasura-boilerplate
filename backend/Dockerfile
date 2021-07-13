@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v1.3.3.cli-migrations-v2
+FROM fedormelexin/graphql-engine-arm64:v2.0.0.cli-migrations-v2
 
 # # Copy migrations directory
 COPY ./migrations /hasura-migrations
@@ -18,6 +18,9 @@ ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=default
 
 # https://github.com/hasura/graphql-engine/issues/5172#issuecomment-653774367
 ENV HASURA_GRAPHQL_MIGRATIONS_DATABASE_ENV_VAR=DATABASE_URL
+
+# https://github.com/hasura/graphql-engine/issues/4259
+ENV HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT=60
 
 # Enable JWT
 ENV HASURA_GRAPHQL_JWT_SECRET=HASURA_GRAPHQL_JWT_SECRET
