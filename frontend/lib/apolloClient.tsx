@@ -77,9 +77,9 @@ export const initializeApollo = (initialState = {}, token: string) => {
 };
 
 export function useApollo(initialState: any, token: string) {
-  const store = React.useMemo(() => initializeApollo(initialState, token), [
-    initialState,
-    token,
-  ]);
+  const store = React.useMemo(
+    () => initializeApollo(initialState, token),
+    [initialState, token]
+  );
   return store;
 }

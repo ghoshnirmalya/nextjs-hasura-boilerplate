@@ -12,7 +12,7 @@ const AccessDeniedIndicator: FC<IProps> = ({
   message = "You need to Sign In to view this content!",
 }) => {
   const iconNode = () => {
-    return <WarningTwoIcon color="purple" size="50px" />;
+    return <WarningTwoIcon color="purple" boxSize="50px" />;
   };
 
   const signInButtonNode = () => {

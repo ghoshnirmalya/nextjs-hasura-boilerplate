@@ -6,8 +6,15 @@ import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/client";
 import Head from "next/head";
 import React, { FC } from "react";
+import ISession from "types/session";
+import IUser from "types/user";
 
-const MyAccountPage: FC<any> = ({ session, user }) => {
+interface IProps {
+  session: ISession;
+  user: IUser;
+}
+
+const MyAccountPage: FC<IProps> = ({ session, user }) => {
   if (!session) {
     return <AccessDeniedIndicator />;
   }

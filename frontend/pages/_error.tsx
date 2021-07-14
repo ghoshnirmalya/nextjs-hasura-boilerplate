@@ -3,11 +3,11 @@ import Head from "next/head";
 import Page from "components/Pages/Error";
 import { NextPage } from "next";
 
-interface iProps {
+interface IProps {
   statusCode: number;
 }
 
-const Error: NextPage<iProps> = ({ statusCode }) => {
+const Error: NextPage<IProps> = ({ statusCode }) => {
   return (
     <>
       <Head>

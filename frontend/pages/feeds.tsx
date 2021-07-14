@@ -4,8 +4,13 @@ import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/client";
 import Head from "next/head";
 import React, { FC } from "react";
+import ISession from "types/session";
 
-const FeedsPage: FC<any> = ({ session }) => {
+interface IProps {
+  session: ISession;
+}
+
+const FeedsPage: FC<IProps> = ({ session }) => {
   if (!session) {
     return <AccessDeniedIndicator />;
   }

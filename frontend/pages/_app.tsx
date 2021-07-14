@@ -5,9 +5,10 @@ import { Provider as NextAuthProvider } from "next-auth/client";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
+import ISession from "types/session";
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const { session } = pageProps;
+  const { session }: { session: ISession } = pageProps;
   const apolloClient = useApollo(pageProps.initialApolloState, session?.token);
 
   return (

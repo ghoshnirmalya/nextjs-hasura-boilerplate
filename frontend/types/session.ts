@@ -1,9 +1,7 @@
+import IUser from "types/user";
+
 export default interface ISession {
-  user: {
-    name: string;
-    email: string;
-    image: string;
-  };
+  user: IUser;
   id: number;
   expires: string;
   token: string;
