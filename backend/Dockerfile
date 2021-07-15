@@ -1,4 +1,4 @@
-FROM fedormelexin/graphql-engine-arm64:v2.0.0.cli-migrations-v2
+FROM fedormelexin/graphql-engine-arm64:v2.0.1.cli-migrations-v2
 
 # # Copy migrations directory
 COPY ./migrations /hasura-migrations
@@ -17,7 +17,7 @@ ENV HASURA_GRAPHQL_PG_CONNECTIONS=15
 ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=default
 
 # https://github.com/hasura/graphql-engine/issues/5172#issuecomment-653774367
-ENV HASURA_GRAPHQL_MIGRATIONS_DATABASE_ENV_VAR=DATABASE_URL
+ENV HASURA_GRAPHQL_MIGRATIONS_DATABASE_ENV_VAR=HASURA_GRAPHQL_DATABASE_URL
 
 # https://github.com/hasura/graphql-engine/issues/4259
 ENV HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT=60
@@ -29,6 +29,6 @@ ENV HASURA_GRAPHQL_JWT_SECRET=HASURA_GRAPHQL_JWT_SECRET
 ENV HASURA_GRAPHQL_ADMIN_SECRET=HASURA_GRAPHQL_ADMIN_SECRET
 
 CMD graphql-engine \
-  --database-url $DATABASE_URL \
+  --database-url $HASURA_GRAPHQL_DATABASE_URL \
   serve \
   --server-port $PORT

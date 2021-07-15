@@ -3,7 +3,7 @@ version: "3"
 services:
   backend:
     container_name: nextjs-hasura-boilerplate-backend
-    image: nextjs-hasura-boilerplate-backend
+    image: fedormelexin/graphql-engine-arm64
     build:
       context: .
     depends_on:
