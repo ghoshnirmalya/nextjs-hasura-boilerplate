@@ -2,7 +2,6 @@
   "name": "nextjs-hasura-boilerplate-frontend",
   "license": "MIT",
   "author": "nirmalya.email@gmail.com",
-  "version": "0.0.1",
   "scripts": {
     "build": "next build",
     "dev": "concurrently \"next dev\" \"yarn generate-graphql --watch\"",
