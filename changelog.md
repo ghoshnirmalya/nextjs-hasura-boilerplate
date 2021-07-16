@@ -1,3 +1,15 @@
+## [0.4.1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.4.0...0.4.1) (2021-07-16)
+
+
+### Bug Fixes
+
+* adds health-check for Postgres container ([82284c4](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/82284c48d098085f1f5bc233c77eaab7b6be4ea8))
+* heroku deployments ([65a6f9a](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/65a6f9a22c67c466af2db12f9a06697a9b8c2227))
+* local development ([bc5e9fb](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/bc5e9fbf309626385b2a865ee813a7324fd168ff))
+* makes the app work on M1 macs ([134c93f](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/134c93fecf0002b650917e7715f507268a9a49aa))
+* uses authentication on all pages ([8ac4f5c](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/8ac4f5cbfff5de71b117f3b1151011ddd90311da))
+* uses correct image for support ARM builds ([b199a6a](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/commit/b199a6a5cf0fa89008bfafb4ad12275f631da21f))
+
 # [0.4.0](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.3.4...0.4.0) (2021-01-14)
 
 ### Features
