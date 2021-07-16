@@ -1,9 +1,9 @@
 FROM fedormelexin/graphql-engine-arm64:v2.0.1.cli-migrations-v3
 
-# # Copy migrations directory
+# Copy migrations directory
 COPY ./migrations /hasura-migrations
 
-# # Copy metadata directory
+# Copy metadata directory
 COPY ./metadata /hasura-metadata
 
 # Enable the console
