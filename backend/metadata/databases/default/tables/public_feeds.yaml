@@ -1,0 +1,33 @@
+table:
+  name: feeds
+  schema: public
+object_relationships:
+- name: author
+  using:
+    manual_configuration:
+      column_mapping:
+        author_id: id
+      insertion_order: null
+      remote_table:
+        name: users
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - author_id
+    - body
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - body
+    - created_at
+    - updated_at
+    - author_id
+    - id
+    filter:
+      author_id:
+        _eq: X-Hasura-User-Id
+  role: user

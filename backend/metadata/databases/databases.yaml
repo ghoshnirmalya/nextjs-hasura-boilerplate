@@ -1,0 +1,13 @@
+- name: default
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url: postgresql://user:password@db:5432/database
+      isolation_level: read-committed
+      pool_settings:
+        connection_lifetime: 600
+        idle_timeout: 180
+        max_connections: 15
+        retries: 1
+      use_prepared_statements: true
+  tables: "!include default/tables/tables.yaml"
