@@ -2,8 +2,8 @@ version: "3"
 
 services:
   backend:
-    container_name: nextjs-hasura-boilerplate-backend
-    image: nextjs-hasura-boilerplate-backend
+    container_name: nhb-backend
+    image: nhb-backend
     build:
       context: .
     depends_on:
@@ -18,7 +18,7 @@ services:
     restart: always
 
   db:
-    container_name: nextjs-hasura-boilerplate-db
+    container_name: nhb-db
     image: postgres
     ports:
       - "5432:5432"
