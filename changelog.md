@@ -1,3 +1,5 @@
+## [0.4.2](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.4.1...0.4.2) (2021-07-19)
+
 ## [0.4.1](https://github.com/ghoshnirmalya/nextjs-hasura-boilerplate/compare/0.4.0...0.4.1) (2021-07-16)
 
 
