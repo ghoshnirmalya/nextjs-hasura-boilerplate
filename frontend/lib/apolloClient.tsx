@@ -9,7 +9,7 @@ import { SubscriptionClient } from "subscriptions-transport-ws";
 
 const createHttpLink = (token: string) => {
   const httpLink = new HttpLink({
-    uri: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/v1/graphql",
+    uri: "http://backend:8080/v1/graphql",
     credentials: "include",
     headers: { Authorization: `Bearer ${token}` },
     fetch,
@@ -20,7 +20,7 @@ const createHttpLink = (token: string) => {
 const createWSLink = (token: string) => {
   return new WebSocketLink(
     new SubscriptionClient(
-      process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8080/v1/graphql",
+      "ws://localhost:8080/v1/graphql",
       {
         lazy: true,
         reconnect: true,
