@@ -30,7 +30,7 @@
     "ws": "^7.5.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
+    "@babel/core": "^7.14.8",
     "@graphql-codegen/cli": "^1.21.7",
     "@graphql-codegen/introspection": "^1.18.2",
     "@graphql-codegen/typescript": "^1.22.0",
