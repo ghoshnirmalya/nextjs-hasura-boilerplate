@@ -18,10 +18,8 @@ import React, { FormEvent, useState } from "react";
 const MyAccountPageComponent = ({ user }) => {
   const [name, setName] = useState(user.name);
   const [session] = useSession();
-  const [
-    updateUser,
-    { loading: updateUserFetching, error: updateUserError },
-  ] = useUpdateUserMutation();
+  const [updateUser, { loading: updateUserFetching, error: updateUserError }] =
+    useUpdateUserMutation();
 
   const handleSubmit = () => {
     updateUser({
@@ -50,7 +48,7 @@ const MyAccountPageComponent = ({ user }) => {
     <Stack spacing={8}>
       <Heading>My Account</Heading>
       {errorNode()}
-      <Box shadow="sm" rounded="lg">
+      <Box shadow="lg" rounded="lg" p={4}>
         <Stack spacing={4}>
           <FormControl isRequired>
             <FormLabel htmlFor="name">Name</FormLabel>
@@ -69,6 +67,7 @@ const MyAccountPageComponent = ({ user }) => {
               loadingText="Saving..."
               onClick={handleSubmit}
               isLoading={updateUserFetching}
+              isDisabled={!name.trim()}
             >
               Save
             </Button>
