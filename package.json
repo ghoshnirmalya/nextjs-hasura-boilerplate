@@ -4,10 +4,8 @@
   "license": "MIT",
   "author": "Nirmalya Ghosh <nirmalya.email@gmail.com>",
   "scripts": {
-    "backend:dev": "cd backend && docker-compose up -d",
     "bootstrap": "node scripts/generate-keys.ts && yarn install && cd frontend && yarn install",
-    "dev": "npm run backend:dev && npm run frontend:dev",
-    "frontend:dev": "cd frontend && yarn dev",
+    "dev": "docker-compose up -d",
     "release": "release-it"
   },
   "devDependencies": {
