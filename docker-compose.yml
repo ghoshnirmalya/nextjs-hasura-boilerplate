@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  backend:
+    container_name: nhb-backend
+    image: nhb-backend
+    build:
+      context: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: ./backend/.env
+    volumes:
+      - ./backend/migrations:/hasura-migrations
+      - ./backend/metadata:/hasura-metadata
+    ports:
+      - "8080:8080"
+
+  db:
+    container_name: nhb-db
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    env_file: ./backend/.env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --dbname=database --username=user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    container_name: nhb-frontend
+    image: nhb-frontend
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+
+volumes:
+  db_data:
