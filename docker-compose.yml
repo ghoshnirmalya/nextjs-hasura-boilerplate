@@ -15,9 +15,6 @@ services:
       - ./backend/metadata:/hasura-metadata
     ports:
       - "8080:8080"
-    restart: always
-    networks:
-      - nhb-network
 
   db:
     container_name: nhb-db
@@ -32,8 +29,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - nhb-network
 
   frontend:
     container_name: nhb-frontend
@@ -50,26 +45,6 @@ services:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/.next
-    networks:
-      - nhb-network
-
-  nginx:
-    container_name: nhb-nginx
-    image: nhb-nginx
-    build:
-      context: ./nginx
-    ports:
-      - 80:80
-    depends_on:
-      - frontend
-      - backend
-      - db
-    networks:
-      - nhb-network
 
 volumes:
   db_data:
-
-networks:
-  nhb-network:
-    driver: bridge
