@@ -39,7 +39,7 @@
     "@graphql-codegen/typescript-resolvers": "^1.20.0",
     "@types/jsonwebtoken": "^8.5.4",
     "@types/next": "^9.0.0",
-    "@types/node": "^16.4.7",
+    "@types/node": "^16.4.8",
     "@types/pg": "^8.6.1",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
