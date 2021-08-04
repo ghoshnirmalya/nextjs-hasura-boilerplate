@@ -33,7 +33,7 @@
     "@babel/core": "^7.14.8",
     "@graphql-codegen/cli": "^1.21.8",
     "@graphql-codegen/introspection": "^2.0.0",
-    "@graphql-codegen/typescript": "^1.22.0",
+    "@graphql-codegen/typescript": "^2.0.0",
     "@graphql-codegen/typescript-operations": "^1.18.4",
     "@graphql-codegen/typescript-react-apollo": "^3.0.0",
     "@graphql-codegen/typescript-resolvers": "^1.20.0",
