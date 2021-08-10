@@ -14,7 +14,7 @@
     "@apollo/client": "^3.4.7",
     "@chakra-ui/icons": "^1.0.14",
     "@chakra-ui/react": "^1.6.6",
-    "@emotion/react": "^11.4.0",
+    "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "dayjs": "^1.10.6",
     "framer-motion": "^4.1.17",
