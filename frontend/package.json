@@ -11,7 +11,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.12",
+    "@apollo/client": "^3.4.13",
     "@chakra-ui/icons": "^1.0.15",
     "@chakra-ui/react": "^1.6.7",
     "@emotion/react": "^11.4.1",
