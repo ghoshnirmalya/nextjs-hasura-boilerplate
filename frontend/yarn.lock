@@ -1418,14 +1418,14 @@
     lodash "~4.17.0"
     tslib "~2.3.0"
 
-"@graphql-codegen/typescript-operations@^2.1.7":
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-2.1.7.tgz#8f11ea509d9fec6e7ae6bba78041f1b3c4c6fd9c"
-  integrity sha512-VdAm57gbklBmVUAu8gUgJO9HjQ03C/dKsRsB+MNz7GeiomX+x57c/QPcaEp8h/Zn3U5M7bC78ygDhcp8GNCp6g==
+"@graphql-codegen/typescript-operations@^2.1.8":
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-2.1.8.tgz#07f0df130a5f04844188cea1b7f1a45ca28e68ad"
+  integrity sha512-doUN4Eaitzkuo2UVPOGfFvs8YuTJvHHTAd3q19KjaFKId1nNbfiDvrop1ZrHJpH+Sa6BcOvOPWHnCcMTSu6mww==
   dependencies:
     "@graphql-codegen/plugin-helpers" "^2.2.0"
-    "@graphql-codegen/typescript" "^2.2.3"
-    "@graphql-codegen/visitor-plugin-common" "2.3.0"
+    "@graphql-codegen/typescript" "^2.2.4"
+    "@graphql-codegen/visitor-plugin-common" "2.4.0"
     auto-bind "~4.0.0"
     tslib "~2.3.0"
 
