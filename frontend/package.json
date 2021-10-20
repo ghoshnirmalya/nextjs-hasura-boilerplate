@@ -42,7 +42,7 @@
     "@types/node": "^16.11.1",
     "@types/pg": "^8.6.1",
     "@types/react": "^17.0.30",
-    "@types/react-dom": "^17.0.9",
+    "@types/react-dom": "^17.0.10",
     "concurrently": "^6.3.0",
     "dotenv": "^10.0.0",
     "graphql": "^15.6.1",
