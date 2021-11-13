@@ -810,13 +810,6 @@
     compute-scroll-into-view "1.0.14"
     copy-to-clipboard "3.3.1"
 
-"@chakra-ui/icon@1.1.13":
-  version "1.1.13"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/icon/-/icon-1.1.13.tgz#0b8222b6874f83a063b959dc106575800c2cd3c2"
-  integrity sha512-yVZr1YMd3YEd0toHKmLxNH4LlLQ60vzuaKYVOmAO9c/gxxPMNYM4Il260Q5W2lxOOzoimfQnZlNfTUPCwHHfUg==
-  dependencies:
-    "@chakra-ui/utils" "1.8.4"
-
 "@chakra-ui/icon@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@chakra-ui/icon/-/icon-1.2.1.tgz#b47c0016531da8bef81061d2b96a2d5282b07ff8"
@@ -824,13 +817,13 @@
   dependencies:
     "@chakra-ui/utils" "1.9.1"
 
-"@chakra-ui/icons@^1.0.17":
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/icons/-/icons-1.0.17.tgz#c6aa9a85522c0d90fa7c4861cc02c532f57a8621"
-  integrity sha512-eu+xyABLTi+W5986UCfaBw8gPnh3xTxBHE4tMZ3VIkUaj0qYJiVer85pAe01Uud5OxJ1Mvw3G+gIbjuJFDEUQg==
+"@chakra-ui/icons@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/icons/-/icons-1.1.1.tgz#e4b191fd38be999c4434ff2b1fb69a5eaf3cf226"
+  integrity sha512-/+u6euCOFw6J1DZW7NcVFtib4mygJBoqRdsKiU1Z3uiTC+zQTBzcCt54NQ+kK8rhuNzJ+odahnt/AbjBJgZ+5A==
   dependencies:
-    "@chakra-ui/icon" "1.1.13"
-    "@types/react" "^17.0.0"
+    "@chakra-ui/icon" "1.2.1"
+    "@types/react" "^17.0.15"
 
 "@chakra-ui/image@1.1.1":
   version "1.1.1"
@@ -1202,16 +1195,6 @@
   integrity sha512-s/VFucc6grNdP1bxw0oQLzy167gjAgyl/GiGH9nt54nioDEiSsvn70qKg7sjajNTvpoot+urQUdr4Qh+fIUFZQ==
   dependencies:
     "@chakra-ui/utils" "1.9.1"
-
-"@chakra-ui/utils@1.8.4":
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/utils/-/utils-1.8.4.tgz#0e0c93ce39435d678c49af945ccd7972f8624aa9"
-  integrity sha512-lMk+FD70zgI8Fn6Ee5h6T2FJdJLnYIYaRQI+Au5izjl8e3V2OZ/Tdi72LW9FnHlQyFZ5N24HGefZlNxOEDUjmw==
-  dependencies:
-    "@types/lodash.mergewith" "4.6.6"
-    css-box-model "1.2.1"
-    framesync "5.3.0"
-    lodash.mergewith "4.6.2"
 
 "@chakra-ui/utils@1.9.1", "@chakra-ui/utils@^1.9.1":
   version "1.9.1"
@@ -2070,7 +2053,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.0", "@types/react@^17.0.34":
+"@types/react@*", "@types/react@^17.0.15", "@types/react@^17.0.34":
   version "17.0.34"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.34.tgz#797b66d359b692e3f19991b6b07e4b0c706c0102"
   integrity sha512-46FEGrMjc2+8XhHXILr+3+/sTe3OfzSPU9YGKILLrUYbQ1CLQC9Daqo1KzENGXAWwrFwiY0l4ZbF20gRvgpWTg==
