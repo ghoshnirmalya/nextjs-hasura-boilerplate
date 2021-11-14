@@ -31,9 +31,9 @@ async function generateKeys() {
     // Construct the values of all the necessary keys
     const AUTH_PRIVATE_KEY = { type: "RS256", key: privateKey };
     const AUTH_PUBLIC_KEY = { type: "RS256", key: publicKey };
-    const frontendEnv = `${frontendEnvironmentVariables}AUTH_PRIVATE_KEY=${JSON.stringify(
+    const frontendEnv = `${frontendEnvironmentVariables}AUTH_PRIVATE_KEY='${JSON.stringify(
       AUTH_PRIVATE_KEY
-    )}`;
+    )}'`;
 
     // Write the contents into the .env file
     fs.writeFileSync("frontend/.env", frontendEnv);
@@ -45,9 +45,9 @@ async function generateKeys() {
     );
 
     // Construct the values of all the necessary keys
-    const backendEnv = `${backendEnvironmentVariables}HASURA_GRAPHQL_JWT_SECRET=${JSON.stringify(
+    const backendEnv = `${backendEnvironmentVariables}HASURA_GRAPHQL_JWT_SECRET='${JSON.stringify(
       AUTH_PUBLIC_KEY
-    )}`;
+    )}'`;
 
     // Write the contents into the .env file
     fs.writeFileSync("backend/.env", backendEnv);
