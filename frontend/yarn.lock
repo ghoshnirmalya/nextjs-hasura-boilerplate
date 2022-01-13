@@ -1887,10 +1887,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-stable-stringify/-/json-stable-stringify-1.0.32.tgz#121f6917c4389db3923640b2e68de5fa64dda88e"
   integrity sha512-q9Q6+eUEGwQkv4Sbst3J4PNgDOvpuVuKj79Hl/qnmBMEIPzB5QoFRUtjcgcg2xNUZyYUGXBk5wYIBKHt0A+Mxw==
 
-"@types/jsonwebtoken@^8.5.0", "@types/jsonwebtoken@^8.5.6":
-  version "8.5.6"
-  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.6.tgz#1913e5a61e70a192c5a444623da4901a7b1a9d42"
-  integrity sha512-+P3O/xC7nzVizIi5VbF34YtqSonFsdnbXBnWUCYRiKOi1f9gA4sEFvXkrGr/QVV23IbMYvcoerI7nnhDUiWXRQ==
+"@types/jsonwebtoken@^8.5.0", "@types/jsonwebtoken@^8.5.7":
+  version "8.5.7"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.7.tgz#e5dd6832215c48f61c8b79cb1747abc97a337367"
+  integrity sha512-CBHN+1unePowgS94ayLE7aVp7AfyhgG/3l2O+AjkhOMY4kAAfVI1OnbbLnOeDMAdTNLP5ZjJ3kdZanRtRQaK3Q==
   dependencies:
     "@types/node" "*"
 
