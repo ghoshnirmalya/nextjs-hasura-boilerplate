@@ -1288,10 +1288,10 @@
     ts-node "^9"
     tslib "^2"
 
-"@graphql-codegen/cli@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-2.5.0.tgz#a8d3be7b15159d2549af8f76bebba708231727b2"
-  integrity sha512-rgzk+Pl14ZQ84rWee1kuFYsRfPmiOqdq/Ix3ZcDawzkx0HuSHrHpNISI5RQ05oP4IHbwqm02o6ia3TKo3kV9SA==
+"@graphql-codegen/cli@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-2.6.0.tgz#bf912cfa2afb920bb82390c6e05e9e598bdbb6cd"
+  integrity sha512-2Bsf2XzwccVJSam8grrAROn3sk5mris8kx4cYEDvBHekEbn6I4xmBDeVjX6y6ajVfyZniJCAZdc7XxRHje8wYg==
   dependencies:
     "@graphql-codegen/core" "2.5.0"
     "@graphql-codegen/plugin-helpers" "^2.4.0"
