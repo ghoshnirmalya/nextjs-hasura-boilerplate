@@ -35,7 +35,7 @@
     "@graphql-codegen/introspection": "^2.1.1",
     "@graphql-codegen/typescript": "^2.4.4",
     "@graphql-codegen/typescript-operations": "^2.3.2",
-    "@graphql-codegen/typescript-react-apollo": "^3.2.7",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.8",
     "@graphql-codegen/typescript-resolvers": "^2.5.2",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/next": "^9.0.0",
