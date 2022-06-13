@@ -22,7 +22,7 @@
     "isomorphic-ws": "^4.0.1",
     "jsonwebtoken": "^8.5.1",
     "next": "^12.1.6",
-    "next-auth": "^3.29.3",
+    "next-auth": "^4.5.0",
     "pg": "^8.7.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
