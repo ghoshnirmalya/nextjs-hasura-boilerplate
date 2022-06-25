@@ -17,7 +17,7 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "dayjs": "^1.11.3",
-    "framer-motion": "^6.3.13",
+    "framer-motion": "^6.3.15",
     "isomorphic-unfetch": "^3.1.0",
     "isomorphic-ws": "^4.0.1",
     "jsonwebtoken": "^8.5.1",
