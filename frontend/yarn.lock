@@ -3595,9 +3595,9 @@ iterall@^1.2.1:
   integrity sha512-QZ9qOMdF+QLHxy1QIpUHUU1D5pS2CG2P69LF6L6CPjPYA/XMOmKV3PZpawHoAjHNyB0swdVTRxdYT4tbBbxqwg==
 
 jose@^1.27.2:
-  version "1.28.1"
-  resolved "https://registry.yarnpkg.com/jose/-/jose-1.28.1.tgz#34a0f851a534be59ffab82a6e8845f6874e8c128"
-  integrity sha512-6JK28rFu5ENp/yxMwM+iN7YeaInnY9B9Bggjkz5fuwLiJhbVrl2O4SJr65bdNBPl9y27fdC3Mymh+FVCvozLIg==
+  version "1.28.2"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-1.28.2.tgz#97f4aa608d0020ae5c1051a2a33247b957401e5a"
+  integrity sha512-wWy51U2MXxYi3g8zk2lsQ8M6O1lartpkxuq1TYexzPKYLgHLZkCjklaATP36I5BUoWjF2sInB9U1Qf18fBZxNA==
   dependencies:
     "@panva/asn1.js" "^1.0.0"
 
