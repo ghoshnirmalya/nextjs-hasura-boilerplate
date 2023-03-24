@@ -41,7 +41,7 @@
     "@types/next": "^9.0.0",
     "@types/node": "^18.7.23",
     "@types/pg": "^8.6.5",
-    "@types/react": "^18.0.21",
+    "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.6",
     "concurrently": "^7.4.0",
     "dotenv": "^16.0.3",
