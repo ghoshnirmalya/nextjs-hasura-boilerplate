@@ -48,7 +48,7 @@ It supports GraphQL Query, Mutation and Subscription out of the box.
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/)
+- [Node.js - ^12.19.0 || ^14.15.0 || ^16.13.0](https://nodejs.org/)
 - [npm](https://www.npmjs.com/)
 - [Docker](https://www.docker.com/)
 
